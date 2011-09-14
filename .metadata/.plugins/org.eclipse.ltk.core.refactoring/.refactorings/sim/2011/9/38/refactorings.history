@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy package &apos;isnork.sim&apos; to &apos;iSnorkeling/src&apos;&#x0A;- Original project: &apos;sim&apos;&#x0A;- Destination element: &apos;iSnorkeling/src&apos;&#x0A;- Original element: &apos;sim/src/isnork.sim&apos;" description="Copy package" destination="=iSnorkeling/src" element1="/src&lt;isnork.sim" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1315965213386" version="1.0"/>
-</session>
