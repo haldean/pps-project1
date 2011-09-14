@@ -2,3 +2,5 @@
 \#*\#
 *.class
 *.swo
+bin
+.metadata
