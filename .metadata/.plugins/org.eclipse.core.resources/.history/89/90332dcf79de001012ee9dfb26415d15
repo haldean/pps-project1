@@ -12,6 +12,7 @@ public class AwsmPlayer extends Player{
 	
 	String name;
 	private Direction nextMove;
+	private int mapWidth;
 	private int numDivers;
 	private int viewRadius;
 	private Set<SeaLifePrototype> species;
@@ -29,8 +30,7 @@ public class AwsmPlayer extends Player{
 	@Override
 	public void newGame(Set<SeaLifePrototype> seaLifePossibilities, int penalty,
 			int d, int r, int n) {
-		int mapWidth = d*2 + 1;
-		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers);
+		mapWidth = d*2 + 1;
 		viewRadius = r;
 		numDivers = n;
 		species = seaLifePossibilities;

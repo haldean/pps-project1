@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface Cartogram {
 
-	String update(Point2D myPosition, Set<Observation> whatYouSee,
+	void update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations, Set<iSnorkMessage> incomingMessages);
 
 }
