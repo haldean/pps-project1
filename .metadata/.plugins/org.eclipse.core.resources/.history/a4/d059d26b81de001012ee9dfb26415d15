@@ -39,8 +39,6 @@ public class WaterProofCartogram extends AbstractCartogram{
 			String msg = message.getMsg();
 			int sender = message.getSender();
 		}
-		
-		
 
 		return null;
 	}
