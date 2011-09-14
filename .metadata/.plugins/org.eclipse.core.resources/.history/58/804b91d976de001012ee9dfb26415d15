@@ -1,0 +1,49 @@
+import java.awt.geom.Point2D;
+import java.util.Set;
+
+import isnork.sim.GameObject.Direction;
+import isnork.sim.Observation;
+import isnork.sim.Player;
+import isnork.sim.SeaLifePrototype;
+import isnork.sim.iSnorkMessage;
+
+
+public class AwsmPlayer extends Player{
+	
+	String name;
+	private Direction nextMove;
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Reset defaults
+	 */
+	@Override
+	public void newGame(Set<SeaLifePrototype> seaLifePossibilites, int penalty,
+			int d, int r, int n) {
+		
+	}
+
+	/**
+	 * Process input, determine message to be sent
+	 */
+	@Override
+	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
+			Set<iSnorkMessage> incomingMessages,
+			Set<Observation> playerLocations) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * Move should be stored based on information in tick, then return it
+	 */
+	@Override
+	public Direction getMove() {
+		return nextMove;
+	}
+
+}

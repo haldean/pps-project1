@@ -1,0 +1,30 @@
+!SESSION 2011-09-13 18:45:54.577 -----------------------------------------------
+eclipse.buildId=M20100909-0800
+java.version=1.6.0_20
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/Moses/Projects/CurrentProjects/PPS/pps-project1 -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 4 274 2011-09-13 18:54:44.260
+!MESSAGE Could not set the project description for 'iSnorkeling' because the project description file (.project) is out of sync with the file system.
+
+!ENTRY org.eclipse.jdt.core 4 4 2011-09-13 18:54:58.362
+!MESSAGE Exception while updating project references
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Could not set the project description for 'iSnorkeling' because the project description file (.project) is out of sync with the file system.
+	at org.eclipse.core.internal.resources.Project.setDescription(Project.java:1202)
+	at org.eclipse.jdt.internal.core.ProjectReferenceChange$1.run(ProjectReferenceChange.java:107)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:1975)
+	at org.eclipse.jdt.internal.core.ProjectReferenceChange.updateProjectReferencesIfNecessary(ProjectReferenceChange.java:110)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.resourceChanged(DeltaProcessor.java:2003)
+	at org.eclipse.jdt.internal.core.DeltaProcessingState.resourceChanged(DeltaProcessingState.java:470)
+	at org.eclipse.core.internal.events.NotificationManager$2.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastBuildEvent(Workspace.java:311)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:140)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:242)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.resources 4 274 2011-09-13 18:54:58.373
+!MESSAGE Could not set the project description for 'iSnorkeling' because the project description file (.project) is out of sync with the file system.
