@@ -1,4 +1,5 @@
 package isnork.g3;
+import isnork.sim.GameObject.Direction;
 import isnork.sim.Observation;
 import isnork.sim.iSnorkMessage;
 
@@ -26,12 +27,9 @@ public class WaterProofCartogram extends AbstractCartogram{
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
 		for (Observation location : playerLocations) {
-			location.getDirection();
-			location.getLocation();
-			location.getId();
-			location.happiness();
-			location.isDangerous();
-			location.happinessD();
+			Point2D loc = location.getLocation();
+			int id = location.getId();
+			String name = location.getName();
 		}
 		
 		for (iSnorkMessage message : incomingMessages) {
@@ -40,7 +38,15 @@ public class WaterProofCartogram extends AbstractCartogram{
 			int sender = message.getSender();
 		}
 		
-		
+		for (Observation observation : whatYouSee) {
+			Direction dir = observation.getDirection();
+			Point2D loc = observation.getLocation();
+			observation.getId();
+			observation.happiness();
+			observation.isDangerous();
+			observation.happinessD();
+			observation.getName();
+		}
 
 		return null;
 	}

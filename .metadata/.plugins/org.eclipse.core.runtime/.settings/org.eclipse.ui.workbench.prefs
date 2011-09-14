@@ -1,3 +1,4 @@
-#Tue Sep 13 18:58:41 PDT 2011
+#Tue Sep 13 20:37:44 PDT 2011
+PLUGINS_NOT_ACTIVATED_ON_STARTUP=
 eclipse.preferences.version=1
-org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\n<org.eclipse.ui.commands>\n<activeKeyConfiguration keyConfigurationId\="org.eclipse.ui.emacsAcceleratorConfiguration"/>\n</org.eclipse.ui.commands>
+org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\n<org.eclipse.ui.commands>\n<activeKeyConfiguration keyConfigurationId\="org.eclipse.ui.emacsAcceleratorConfiguration"/>\n<keyBinding commandId\="org.eclipse.ui.edit.text.contentAssist.proposals" contextId\="org.eclipse.ui.contexts.dialogAndWindow" keyConfigurationId\="org.eclipse.ui.emacsAcceleratorConfiguration" keySequence\="CTRL+TAB"/>\n</org.eclipse.ui.commands>
