@@ -1,0 +1,356 @@
+package isnork.g3;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+
+import isnork.sim.GameConfig;
+import isnork.sim.Observation;
+import isnork.sim.Player;
+import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
+import isnork.sim.iSnorkMessage;
+import isnork.sim.GameObject.Direction;
+
+public class G3Player extends Player
+{
+	int id;
+	int tickCount;
+	private Direction direction;
+	private static final Logger log=Logger.getLogger(G3Player.class);
+
+	private boolean isDangerousCreatureNorth;
+	private boolean isDangerousCreatureSouth;
+	private boolean isDangerousCreatureWest;
+	private boolean isDangerousCreatureEast;
+	private boolean isDangerousCreatureNorthEast;
+	private boolean isDangerousCreatureNorthWest;
+	private boolean isDangerousCreatureSouthEast;
+	private boolean isDangerousCreatureSouthWest;
+	
+	private Direction getNewDirection()
+	{
+		int r=random.nextInt(100);
+		if (r<10||direction==null)
+		{
+			ArrayList<Direction> directions=Direction.allBut(direction);
+			direction=directions.get(random.nextInt(directions.size()));
+		}
+		return direction;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "G3 Player";
+	}
+
+	Point2D whereIAm=null;
+	int n=-1;
+
+	@Override
+	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
+		Set<iSnorkMessage> incomingMessages)
+	{
+		System.err.println("myPosition: " + myPosition.getX() + ", " + myPosition.getY());
+		setDangerousCreatureVariables(myPosition, whatYouSee);
+		tickCount++;
+		whereIAm=myPosition;
+		if (n%10==0)
+			return "s";
+		else
+			return null;
+	}
+
+	public void setDangerousCreatureVariables(Point2D myPosition, Set<Observation>whatYouSee)
+	{
+		Iterator myIter = whatYouSee.iterator();
+		while(myIter.hasNext())
+		{
+			Observation myObs = (Observation)myIter.next(); 
+			if(myObs.isDangerous())
+			{
+				Point2D creaturePoint = myObs.getLocation();
+				int changeX = (int)(creaturePoint.getX() - myPosition.getX());
+				int changeY = (int)(myPosition.getY() - creaturePoint.getY());
+				
+				int changeXPositive = Math.abs(changeX);
+				int changeYPositive = Math.abs(changeY);
+				
+				log.debug("changeX:" + changeX + " changeY: " + changeY);
+				double refAngle = 180/3.14159*Math.atan((double)changeYPositive/changeXPositive);
+				double angle;
+				log.debug("reference angle: " + refAngle);
+				
+				if(changeX == 0 && changeY > 0)
+				{
+					angle = 90;
+				}
+				else if(changeX == 0 && changeY < 0)
+				{
+					angle = 270;
+				}
+				else if(changeX > 0 && changeY == 0)
+				{
+					angle = 0;
+				}
+				else if(changeX < 0 && changeY == 0)
+				{
+					angle = 180;
+				}
+				else if(changeX > 0 && changeY > 0)
+				{	
+					//quadrant = I;
+					angle = refAngle;
+				}
+				else if(changeX < 0 && changeY > 0)
+				{
+					//quadrant = II;
+					angle = 180 - refAngle;
+				}
+				else if(changeX < 0 && changeY < 0)
+				{
+					//quadrant = III;
+					angle = 180 + refAngle;
+				}
+				else if(changeX == 0 && changeY == 0)
+				{
+					//Do nothing
+					angle = -1;
+				}
+				else
+				{
+					//quadrant = IV;
+					angle = 360 - refAngle;
+				}
+		
+				
+				log.error("angle: " + angle);
+				if(angle != -1)
+				{
+					if((angle >= 337.5 && angle <= 360) || (angle >= 0 && angle < 22.5))
+					{
+						isDangerousCreatureEast = true;
+						log.debug("dangerous creature to the east!");
+					}
+					else if(angle  >= 22.5 && angle < 67.5)
+					{
+						isDangerousCreatureNorthEast = true;
+						log.debug("dangerous creature to the northeast!");
+					}
+					else if(angle >= 67.5 && angle < 112.5)
+					{
+						isDangerousCreatureNorth = true;
+						log.debug("dangerous creature to the north!");
+					}
+					else if(angle >= 112.5 && angle < 157.5)
+					{
+						isDangerousCreatureNorthWest = true;
+						log.debug("dangerous creature to the northwest!");
+					}
+					else if(angle >= 157.5 && angle < 202.5)
+					{
+						isDangerousCreatureWest = true;
+						log.debug("dangerous creature to the west!");
+					}
+					else if(angle >= 202.5 && angle < 247.5)
+					{
+						isDangerousCreatureSouthWest = true;
+						log.debug("dangerous creature to the southwest!");
+					}
+					else if(angle >= 247.5 && angle < 292.5)
+					{
+						isDangerousCreatureSouth = true;
+						log.debug("dangerous creature to the south!");
+					}
+					else if(angle >= 292.5 && angle < 337.5)
+					{
+						isDangerousCreatureSouthEast = true;
+						log.debug("dangerous creature to the southeast!");
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public Direction getMove()
+	{
+		log.debug("tick="+tickCount+" position="+whereIAm);
+		Direction d = Direction.W;
+		if(tickCount >= 370)
+		{
+			d=moveAwayFromDanger(new Point2D.Double(0,0));
+			if (d==null)
+				d = moveToHome();
+		}
+		else
+		{
+			Direction randomMove=makeRandomMove();
+			d=moveAwayFromDanger(new Point2D.Double(randomMove.getDx(), randomMove.getDy()));
+			if (d==null)
+				d = randomMove;
+		}
+		return d;
+	}
+
+	public Direction makeRandomMove()
+	{
+		log.debug("make random move");
+		Direction d = getNewDirection();
+		Point2D.Double p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+		while (Math.abs(p.getX())>GameConfig.d||Math.abs(p.getY())>GameConfig.d)
+		{
+			d=getNewDirection();
+			p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+		}
+		return d;
+	}
+	
+	@Override
+	public void newGame(Set<SeaLifePrototype> seaLifePossibilites)
+	{
+		id=getId();
+		tickCount=0;
+		log.debug("new game "+getId());
+	}
+	
+	public double timeToDest(Point2D dest)
+	{
+		// minimal time to destination
+		double x1=whereIAm.getX();
+		double y1=whereIAm.getY();
+		double x2=dest.getX();
+		double y2=dest.getY();
+		double deltaX=Math.abs(x1-x2);
+		double deltaY=Math.abs(y1-y2);
+		double diagonal=Math.min(deltaX, deltaY);
+		double orthogonal=Math.abs(deltaX-deltaY);
+		return diagonal*3+orthogonal*2;
+	}
+	
+	public double timeToHome()
+	{
+		return timeToDest(new Point2D.Double(0, 0));
+	}
+	
+	public Direction moveToDest(Point2D dest)
+	{
+		double x1=whereIAm.getX();
+		double y1=whereIAm.getY();
+		double x2=dest.getX();
+		double y2=dest.getY();
+		double deltaX=Math.abs(x1-x2);
+		double deltaY=Math.abs(y1-y2);
+		// already on dest
+		if (deltaX==0 && deltaY==0)
+			return null;
+		// always perform diagonal moves after all orthogonal moves
+		boolean diag=(deltaX==deltaY);
+		if (diag)
+		{
+			if (x2>x1 && y2<y1)
+				return Direction.NE;
+			else if (x2<x1 && y2<y1)
+				return Direction.NW;
+			else if (x2<x1 && y2>y1)
+				return Direction.SW;
+			else if (x2>x1 && y2>y1)
+				return Direction.SE;
+		}
+		else
+		{
+			if (deltaX>deltaY)
+			{
+				if (x2>x1)
+					return Direction.E;
+				else if (x2<x1)
+					return Direction.W;
+			}
+			else if (deltaX<deltaY)
+			{
+				if (y2<y1)
+					return Direction.N;
+				else if (y2>y1)
+					return Direction.S;
+			}
+		}
+		return null;
+	}
+	
+	public Direction moveToHome()
+	{
+		log.debug("move home");
+		return moveToDest(new Point2D.Double(0, 0));
+	}
+	
+	public Direction moveAwayFromDanger(Point2D dest)
+	{
+		ArrayList<Direction> d=buildAllDirections();
+		if (isDangerousCreatureNorth)
+			d.remove(Direction.N);
+		if (isDangerousCreatureSouth)
+			d.remove(Direction.S);
+		if (isDangerousCreatureWest)
+			d.remove(Direction.W);
+		if (isDangerousCreatureEast)
+			d.remove(Direction.E);
+		if (isDangerousCreatureNorthEast)
+			d.remove(Direction.NE);
+		if (isDangerousCreatureNorthWest)
+			d.remove(Direction.NW);
+		if (isDangerousCreatureSouthEast)
+			d.remove(Direction.SE);
+		if (isDangerousCreatureSouthWest)
+			d.remove(Direction.SW);
+		
+		// if no dangerous creatures around
+		if (d.size()==8)
+			return null;
+		
+		Direction nextDirection=moveToDest(dest);
+		if (nextDirection==null)
+			return null;
+		if (d.isEmpty())
+			return nextDirection;
+		
+		double min=Double.MAX_VALUE;
+		Direction minDirection=nextDirection;
+		for (int i=0; i<d.size(); i++)
+		{
+			double temp=getDirectionDistance(d.get(i), nextDirection);
+			if (temp<min)
+			{
+				min=temp;
+				minDirection=d.get(i);				
+			}
+		}
+		log.debug(whereIAm+" moveAwayFromDanger "+minDirection);
+		
+		return minDirection;
+	}
+	
+	public ArrayList<Direction> buildAllDirections()
+	{
+		ArrayList<Direction> d=new ArrayList<Direction>();
+		d.add(Direction.E);
+		d.add(Direction.NE);
+		d.add(Direction.N);
+		d.add(Direction.NW);
+		d.add(Direction.W);
+		d.add(Direction.SW);
+		d.add(Direction.S);
+		d.add(Direction.SE);
+		return d;
+	}
+	
+	public double getDirectionDistance(Direction d1, Direction d2)
+	{
+		Point2D p1=new Point2D.Double(d1.getDx(), d1.getDy());
+		Point2D p2=new Point2D.Double(d2.getDx(), d2.getDy());
+		return p1.distance(p2);
+	}
+}

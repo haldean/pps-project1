@@ -1,0 +1,183 @@
+package isnork.g3;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+
+import isnork.sim.GameConfig;
+import isnork.sim.Observation;
+import isnork.sim.Player;
+import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
+import isnork.sim.iSnorkMessage;
+import isnork.sim.GameObject.Direction;
+
+public class G3Player extends Player
+{
+	int id;
+	int tickCount;
+	private Direction direction;
+	private static final Logger log=Logger.getLogger(G3Player.class);
+
+	private Direction getNewDirection()
+	{
+		int r=random.nextInt(100);
+		if (r<10||direction==null)
+		{
+			ArrayList<Direction> directions=Direction.allBut(direction);
+			direction=directions.get(random.nextInt(directions.size()));
+		}
+		return direction;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "G3 Player";
+	}
+
+	Point2D whereIAm=null;
+	int n=-1;
+
+	@Override
+	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
+		Set<iSnorkMessage> incomingMessages)
+	{
+		tickCount++;
+		whereIAm=myPosition;
+		if (n%10==0)
+			return "s";
+		else
+			return null;
+	}
+
+	@Override
+	public Direction getMove()
+	{
+		log.debug("tick="+tickCount+" position="+whereIAm);
+		Direction d = Direction.W;
+		Point2D p;
+		log.error(id + "My current position:" + whereIAm.getX() + ", " + whereIAm.getY());
+		if(tickCount >= 370)
+		{
+			
+			
+			if(whereIAm.getX() == 0 && whereIAm.getY() == 0)
+				return null;
+			if(whereIAm.getX() > 0)
+			{
+				d = Direction.W;
+				log.error("move west");
+				return d;
+			}
+			else if(whereIAm.getX() < 0)
+			{
+				d = Direction.E;
+				log.error("move east");
+				return d;
+			}
+			else if(whereIAm.getY() > 0)
+			{
+				d = Direction.N;
+				log.error("move north");
+				return d;
+			}
+			else if(whereIAm.getY() < 0)
+			{
+				d = Direction.S;
+				log.error("move south");
+				return d;
+			}			
+		}
+		else
+		{
+			log.debug("make random move");
+			d = getNewDirection();
+			p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+			while (Math.abs(p.getX())>GameConfig.d||Math.abs(p.getY())>GameConfig.d)
+			{
+				d=getNewDirection();
+				p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+			}
+		}
+		return d;
+	}
+
+	@Override
+	public void newGame(Set<SeaLifePrototype> seaLifePossibilites)
+	{
+		id=getId();
+		tickCount=0;
+		log.debug("new game "+getId());
+	}
+	
+	public double timeToDest(Point2D dest)
+	{
+		// minimal time to destination
+		double x1=whereIAm.getX();
+		double y1=whereIAm.getY();
+		double x2=dest.getX();
+		double y2=dest.getY();
+		double deltaX=Math.abs(x1-x2);
+		double deltaY=Math.abs(y1-y2);
+		double diagonal=Math.min(deltaX, deltaY);
+		double orthogonal=Math.abs(deltaX-deltaY);
+		return diagonal*3+orthogonal*2;
+	}
+	
+	public double timeToHome()
+	{
+		return timeToDest(new Point2D.Double(0, 0));
+	}
+	
+	public Direction moveToDest(Point2D dest)
+	{
+		double x1=whereIAm.getX();
+		double y1=whereIAm.getY();
+		double x2=dest.getX();
+		double y2=dest.getY();
+		double deltaX=Math.abs(x1-x2);
+		double deltaY=Math.abs(y1-y2);
+		// already on dest
+		if (deltaX==0 && deltaY==0)
+			return null;
+		// always perform diagonal moves after all orthogonal moves
+		boolean diag=(deltaX==deltaY);
+		if (diag)
+		{
+			if (x2>x1 && y2<y1)
+				return Direction.NE;
+			else if (x2<x1 && y2<y1)
+				return Direction.NW;
+			else if (x2<x1 && y2>y1)
+				return Direction.SW;
+			else if (x2>x1 && y2>y1)
+				return Direction.SE;
+		}
+		else
+		{
+			if (deltaX>deltaY)
+			{
+				if (x2>x1)
+					return Direction.E;
+				else if (x2<x1)
+					return Direction.W;
+			}
+			else if (deltaX<deltaY)
+			{
+				if (y2<y1)
+					return Direction.N;
+				else if (y2>y1)
+					return Direction.S;
+			}
+		}
+		return null;
+	}
+	
+	public Direction moveToHome()
+	{
+		return moveToDest(new Point2D.Double(0, 0));
+	}
+}

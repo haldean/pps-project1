@@ -1,0 +1,206 @@
+package isnork.g6;
+
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+
+import isnork.sim.GameEngine;
+import isnork.sim.Observation;
+import isnork.sim.GameObject.Direction;
+
+class Destination {
+
+	Point2D senderLocation; //this is actual location on board. Will have to minus d for actual usage
+	int happiness;
+	int timeLastUpdated;
+	String message;
+}
+
+public class Follower {
+
+	ArrayList<Destination> destinations = new ArrayList<Destination>();
+	int d;
+	int r;
+	Point2D whereIAm;
+	Board board;
+	Set<Observation> whatISee;
+	
+	HashMap<String, Integer> alreadySeen = new HashMap<String, Integer>(0);
+
+	private Logger log = Logger.getLogger(this.getClass());
+	
+	public Direction getNewDirection(Board board, Point2D myPosition, Set<Observation> whatISee, int d, int r) {
+		Direction bestDirection = null;
+		this.d = d;
+		this.r = r;
+		whereIAm = myPosition;
+		this.board = board;
+		this.whatISee = whatISee;
+		setUpDestinations(board);
+		if(destinations.size() > 0) {
+			bestDirection = pickNextDirection();
+		}
+		return bestDirection;
+	}
+	
+	/*if player has reached the location, he can remove the destination from list. */
+	public Direction pickNextDirection() {
+		
+		Direction minDirection = null;
+		GameEngine.println(" follower picked ");
+		
+		// for each observation, mark that creature as seen.
+		for(Observation o : whatISee) {
+			String letter = Message.getLetter(o.getName());
+			setSeen(letter);
+		}
+		
+		GameEngine.println("destination list size " + destinations.size());
+		//if I can already see the location, then remove it from the list because I dont need to chase it.
+		//Also, I can remove all other destinations that are within this range.
+		ArrayList<Destination> tempDest = new ArrayList<Destination>();
+		for(int i = 0; i < destinations.size(); i++) {
+			Point2D newp = Utilities.getConvertedToGame(destinations.get(i).senderLocation, d);
+			if( Utilities.distance(whereIAm, newp) > r) {
+				tempDest.add(destinations.get(i));
+				GameEngine.println(" destinations added to final :" + newp.toString());
+			}else {
+				//also mark on the board that it is unexplored. It will be explored again if 
+				//someone else sets it as interesting again. So it wont be picked by follower again
+				//until then
+				int x = (int) destinations.get(i).senderLocation.getX();
+				int y = (int) destinations.get(i).senderLocation.getY();
+				board.matrix[x][y].explorationStatus = ExplorationStatus.unexplored;
+			}
+		}
+		destinations = tempDest;
+		GameEngine.println("destination size after removing things I can see now" + destinations.size());
+
+		// Sounding off an idea: if a creature is not present at its location when someone gets there, 
+		// first check if it is still present in the destination list (spotted by someone else) at a later time. Else 
+		// add it to destination list (with same importance) and set destination as the location reachable in
+		// this amount of time by the creature. 
+
+		if(!destinations.isEmpty()) { 
+			//find the direction thats best for the first thing on our list.
+			GameEngine.println(" The number of items on my destination list : " + destinations.size());
+			Destination nextd = destinations.get(0);
+			int distance = 0, minDistance = 9999;
+			Direction newDirection;
+			for(int j = 0; j < 8; j++) {
+				newDirection = Explorer.convertIntToDirection(j);
+				int newx = (int) whereIAm.getX();
+				int newy = (int) whereIAm.getY();
+				newx = newx + newDirection.dx + d;
+				newy = newy + newDirection.dy + d ;
+				distance = (int) Utilities.distance(nextd.senderLocation, new Point2D.Double(newx, newy));
+				GameEngine.println("calculated distance to next destination is " + distance);
+				if(minDistance > distance) {
+					minDistance = distance;
+					minDirection = newDirection;
+				}
+			}
+			int newx, newy;
+			newx = (int) whereIAm.getX(); //doesnt need adjusting
+			newy = (int) whereIAm.getY();
+			GameEngine.println("my current location is " + newx + " " + newy);
+			newx = (int) nextd.senderLocation.getX() - d; //this one needs adjusting
+			newy = (int) nextd.senderLocation.getY() - d;
+			GameEngine.println(" chasing object with happiness : " + nextd.happiness +" " +  newx + " " + newy );
+			GameEngine.println("min Direction is " + minDirection.toString()+ "min distance is " + minDistance);
+		} 
+		printDestinations();
+		return minDirection;
+		//findPath(whereIAm, nextd.senderLocation);
+	}
+	
+	/* we might want to change already existing destinations based on new data*/
+	public void setUpDestinations(Board board) {
+		
+		if(destinations.size() > 99) {
+			return;
+		}
+		int age = 0;
+		int currentTime = InitialPlayer.getCurrentTime();
+		int importance = 0, tempImportance = 0, index = 0;;
+		for(int i = 0; i < board.matrix.length; i++) {
+			for(int j = 0 ; j < board.matrix[0].length; j++) {
+				if(board.matrix[i][j].explorationStatus != ExplorationStatus.unexplored) {
+					age = currentTime - board.matrix[i][j].time + 1;
+					if(age < d) { //else dont include in the destination
+						Destination dest = new Destination();
+						dest.happiness = Message.getHappiness(board.matrix[i][j].message);
+						dest.senderLocation = new Point2D.Double(i,j);
+						dest.timeLastUpdated = board.matrix[i][j].time;
+						int sendDistance = (int) Utilities.distance(whereIAm,dest.senderLocation) + 1; // + 1 to take care of 0 distances 
+						dest.message = board.matrix[i][j].message;
+						if(dest.happiness > 0) {
+							importance = dest.happiness / ( sendDistance * age ); //this distance
+							GameEngine.println("");
+							for(int k = 0; k < destinations.size(); k++) {
+								Destination temp = destinations.get(k);
+								if((int) temp.senderLocation.getX() == i && (int) temp.senderLocation.getY() == j) {
+									if(temp.message == null || dest.message == null || temp.message.endsWith(dest.message)) {
+										continue; //if the thing is already in list.
+									}
+								}
+								int distance = (int) Utilities.distance(whereIAm, dest.senderLocation) + 1; // + 1 to take care of 0 distance
+								tempImportance = temp.happiness /(distance *(currentTime- temp.timeLastUpdated + 1));
+								if(importance > tempImportance) {
+									index = k;
+									break;
+								}
+							}
+							if(!isDuplicationDestination(dest) && !testIfSeen(dest.message)) {
+								GameEngine.println(" adding new destination at " + index + "happiness " + dest.happiness );
+								destinations.add(index,dest);	
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	// check if this destination is already in the list
+	public boolean isDuplicationDestination(Destination dest) {
+		boolean isDuplicate = false;
+		int toInsertx = (int) dest.senderLocation.getX();
+		int toInserty = (int) dest.senderLocation.getY();
+		for(int i = 0; i < destinations.size(); i++ ) {
+			int x = (int) destinations.get(i).senderLocation.getX();
+			int y = (int) destinations.get(i).senderLocation.getY();
+			if(toInsertx == x && toInserty == y) {
+				isDuplicate = true;
+			}
+		}
+		return isDuplicate;
+	}
+	
+	public boolean testIfSeen(String letter) {
+		boolean isSeen = false;
+		if(alreadySeen.containsKey(letter)) {
+			if(alreadySeen.get(letter) > 3) {
+				isSeen = true;
+			}
+		}
+		return isSeen;
+	}
+	
+	public void setSeen(String letter) {
+		if(alreadySeen.containsKey(letter)) {
+			alreadySeen.put(letter, alreadySeen.get(letter) + 1);
+		}else {
+			alreadySeen.put(letter, 1);
+		}
+		log.info(" creature = " + letter + " seen " + alreadySeen.get(letter) + " times");
+	}
+	
+	public void printDestinations() {
+
+	}
+}

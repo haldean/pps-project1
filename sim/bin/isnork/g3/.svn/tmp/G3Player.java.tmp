@@ -1,0 +1,79 @@
+package isnork.g3;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+
+import isnork.sim.GameConfig;
+import isnork.sim.Observation;
+import isnork.sim.Player;
+import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
+import isnork.sim.iSnorkMessage;
+import isnork.sim.GameObject.Direction;
+
+public class G3Player extends Player
+{
+	int id;
+	int tickCount;
+	private Direction direction;
+	private static final Logger log=Logger.getLogger(G3Player.class);
+
+	private Direction getNewDirection()
+	{
+		int r=random.nextInt(100);
+		if (r<10||direction==null)
+		{
+			ArrayList<Direction> directions=Direction.allBut(direction);
+			direction=directions.get(random.nextInt(directions.size()));
+		}
+		return direction;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "G3 Player";
+	}
+
+	Point2D whereIAm=null;
+	int n=-1;
+
+	@Override
+	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
+		Set<iSnorkMessage> incomingMessages)
+	{
+		tickCount++;
+		whereIAm=myPosition;
+		if (n%10==0)
+			return "s";
+		else
+			return null;
+	}
+
+	@Override
+	public Direction getMove()
+	{
+		Direction d=Direction.NW;
+
+		Point2D p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+		while (Math.abs(p.getX())>GameConfig.d||Math.abs(p.getY())>GameConfig.d)
+		{
+			d=getNewDirection();
+			p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+		}
+		
+		log.debug("tick="+tickCount+" position="+whereIAm);
+		return d;
+	}
+
+	@Override
+	public void newGame(Set<SeaLifePrototype> seaLifePossibilites)
+	{
+		id=getId();
+		tickCount=0;
+		log.debug("new game "+getId());
+	}
+}

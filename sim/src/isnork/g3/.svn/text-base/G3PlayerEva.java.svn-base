@@ -1,0 +1,797 @@
+package isnork.g3;
+
+import java.awt.Point;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.apache.log4j.Logger;
+
+import isnork.g3.strategy.LineStrategy;
+import isnork.g3.strategy.LineStrategyPlayer;
+import isnork.sim.GameConfig;
+import isnork.sim.Observation;
+import isnork.sim.Player;
+import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
+import isnork.sim.iSnorkMessage;
+import isnork.sim.GameObject.Direction;
+//REMOVE SYSTEM.ERR
+
+public class G3PlayerEva extends Player
+{
+	private int id;
+	private int tickCount;
+	private int TOTAL_TICK=8*60;
+	private Direction direction;
+	private int d=-1, r=-1, n=-1;
+	Point2D whereIAm=null;
+	private LineStrategy lineStrategy;
+	
+	private ArrayList<Set<iSnorkMessage>> myIncomingMessages;
+	private ArrayList<iSnorkMessage> staticMessages=new ArrayList<iSnorkMessage>();
+	private TreeMap<Integer, iSnorkMessage> movingMessages=new TreeMap<Integer,iSnorkMessage>();
+	
+	private HashMap<String,Integer> broadcast=new  HashMap<String,Integer>();
+	
+	private Set<SeaLifePrototype> seaLifePossibilities;
+	private boolean goingAfterCreature = false;
+	private Point2D currentDest;
+	PrintMessages myPrintMessages = new PrintMessages(false, 100, id);
+	double numCreaturesWithHighValue = 0;
+	
+	private static final Logger log=Logger.getLogger(G3Player.class);
+
+	private boolean isDangerousCreatureNorth;
+	private boolean isDangerousCreatureSouth;
+	private boolean isDangerousCreatureWest;
+	private boolean isDangerousCreatureEast;
+	private boolean isDangerousCreatureNorthEast;
+	private boolean isDangerousCreatureNorthWest;
+	private boolean isDangerousCreatureSouthEast;
+	private boolean isDangerousCreatureSouthWest;
+	
+	private Communication myCommunication;
+	private EncodedCommunication ecm;
+	private boolean endGame;
+	
+	private Direction getNewDirection()
+	{
+		int r=random.nextInt(100);
+		if (r<10||direction==null)
+		{
+			ArrayList<Direction> directions=Direction.allBut(direction);
+			direction=directions.get(random.nextInt(directions.size()));
+		}
+		return direction;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "G3 Player Eva";
+	}
+	
+	public int getScore(String creatName) {
+		for(SeaLifePrototype slp: seaLifePossibilities) {
+			if(creatName != null)
+			{
+				if(slp.getName() != null)
+				{
+					if(slp.getName().equals(creatName))
+					{
+						return slp.getHappiness();
+					}
+				}
+			}
+		}
+		return -1;
+	}
+
+	public SeaLifePrototype getSLPCreature(String msg)
+	{
+		for (  SeaLifePrototype slp:this.seaLifePossibilities )
+		{
+			if(slp.getName().substring(0,1).toLowerCase().equals(msg))
+			{
+				return slp;
+			}
+		}
+		return null;
+	}
+	
+	public void refineLocation() {
+		
+		
+	}
+	
+	public boolean hasSeen(String creatureName) {
+		
+		return false;
+	}
+	
+	public void buildPath() {
+		
+		for(iSnorkMessage ism:this.staticMessages ) {
+			if(!this.hasSeen(ism.getMsg())){
+				
+			}
+		}
+	}
+	
+	@Override
+	public String tick(Point2D myPosition,Set<Observation> whatYouSee, Set<iSnorkMessage> incomingMessages,Set<Observation> playerLocations)
+	{
+		setDangerousCreatureVariables(myPosition, whatYouSee);
+		tickCount++;
+		whereIAm=myPosition;
+		myIncomingMessages.add(incomingMessages);
+		
+		for( iSnorkMessage ism : incomingMessages) {
+			
+			if(ism.getMsg()==null)
+				continue;
+			//System.err.println("Id "+this.getId()+ " Tick "+tickCount +" Message "+ism.getMsg()+" "+this.getSLPCreature(ism.getMsg()).getSpeed());
+			if(this.getSLPCreature(ism.getMsg()).getSpeed()==0){
+				if(!staticMessages.contains(ism))
+				staticMessages.add(ism);
+			}
+			else
+				movingMessages.put(tickCount,ism);
+			
+		}
+		
+		if(whatYouSee.isEmpty()) {
+			return null;
+		}
+		
+		myPrintMessages.print(id + "   ********");
+		Creature creaturePursuing = myCommunication.getCreaturePursuing();
+		if(creaturePursuing == null)
+		{
+			myPrintMessages.print(id + "   Not pursuing any creature right now");
+		}
+		else
+		{
+			myPrintMessages.print(id + "   The creature I'm pursuing is: " + creaturePursuing.getName());
+		}
+		
+		long max=Long.MIN_VALUE;
+		Observation happiestObs=null;
+		String initCreat=null;
+		//If we see nothing send a blank message
+		//For now broadcast the creature with the highest score
+		for(Observation obCreat:whatYouSee) {
+			if(this.getScore(obCreat.getName())>=max && !obCreat.getName().equals(this.getName())
+					//&& !this.broadcast.containsKey(obCreat.getName().substring(0, 1))
+					){
+				max=this.getScore(obCreat.getName());
+				happiestObs=obCreat;
+				myCommunication.sawCreature(obCreat);
+				myPrintMessages.print(id + "   I see a " + obCreat.getName());
+				if(creaturePursuing != null && currentDest != null)
+				{
+					if(obCreat.getName().equals(creaturePursuing.getName()) || currentDest.distance(whereIAm) == 0)
+					{
+						myPrintMessages.print(id + "    ****Found the creature the diver was looking for (or got to that area)!****");
+						goingAfterCreature = false;
+						myCommunication.setCreaturePursuingToNull();
+					}
+					else
+					{
+						myPrintMessages.print(id + "   Not the same creature");
+					}
+				}
+			}
+		//	myPrintMessages.print(id + "   ********");
+			//myPrintMessages.print(id + "Obcreat "+ " "+obCreat.getName());
+		}
+		
+		
+		//Message m=new Message(this.seaLifePossibilities.iterator().next(),1,1);
+		
+	//	System.err.println(" enc "+ecm.getEncodedString(m)+" "+ecm.getDecodedString("KXP").slp.getName());
+		
+		if(happiestObs==null) {
+			return null;
+		}
+			
+	
+		initCreat=happiestObs.getName().substring(0, 1);
+		//myPrintMessages.print(id + "Broadcasting initial "+initCreat+ " of creature " + happiestObs.getName()+" with happiness score "+
+		//		max);
+		this.broadcast.put(initCreat, this.whereIAm.hashCode());
+		return initCreat;
+	}
+	
+	public void setDangerousCreatureVariables(Point2D myPosition, Set<Observation>whatYouSee)
+	{
+		isDangerousCreatureNorth=false;
+		isDangerousCreatureSouth=false;
+		isDangerousCreatureWest=false;
+		isDangerousCreatureEast=false;
+		isDangerousCreatureNorthEast=false;
+		isDangerousCreatureNorthWest=false;
+		isDangerousCreatureSouthEast=false;
+		isDangerousCreatureSouthWest=false;
+		Iterator<Observation> myIter = whatYouSee.iterator();
+		while(myIter.hasNext())
+		{
+			Observation myObs = myIter.next(); 
+			if(myObs.isDangerous())
+			{
+				Point2D creaturePoint = myObs.getLocation();
+				int changeX = (int)(creaturePoint.getX() - myPosition.getX());
+				int changeY = (int)(myPosition.getY() - creaturePoint.getY());
+				
+				int changeXPositive = Math.abs(changeX);
+				int changeYPositive = Math.abs(changeY);
+			
+				double refAngle = 180/3.14159*Math.atan((double)changeYPositive/changeXPositive);
+				double angle;
+				
+				if(changeX == 0 && changeY > 0)
+				{
+					angle = 90;
+				}
+				else if(changeX == 0 && changeY < 0)
+				{
+					angle = 270;
+				}
+				else if(changeX > 0 && changeY == 0)
+				{
+					angle = 0;
+				}
+				else if(changeX < 0 && changeY == 0)
+				{
+					angle = 180;
+				}
+				else if(changeX > 0 && changeY > 0)
+				{	
+					//quadrant = I;
+					angle = refAngle;
+				}
+				else if(changeX < 0 && changeY > 0)
+				{
+					//quadrant = II;
+					angle = 180 - refAngle;
+				}
+				else if(changeX < 0 && changeY < 0)
+				{
+					//quadrant = III;
+					angle = 180 + refAngle;
+				}
+				else if(changeX == 0 && changeY == 0)
+				{
+					//Do nothing
+					angle = -1;
+				}
+				else
+				{
+					//quadrant = IV;
+					angle = 360 - refAngle;
+				}
+		
+				if(angle != -1)
+				{
+					if((angle >= 337.5 && angle <= 360) || (angle >= 0 && angle < 22.5))
+					{
+						isDangerousCreatureEast = true;
+						myPrintMessages.print(id + "dangerous creature to the east!");
+					}
+					else if(angle  >= 22.5 && angle < 67.5)
+					{
+						isDangerousCreatureNorthEast = true;
+						myPrintMessages.print(id + "dangerous creature to the northeast!");
+					}
+					else if(angle >= 67.5 && angle < 112.5)
+					{
+						isDangerousCreatureNorth = true;
+						myPrintMessages.print(id + "dangerous creature to the north!");
+					}
+					else if(angle >= 112.5 && angle < 157.5)
+					{
+						isDangerousCreatureNorthWest = true;
+						myPrintMessages.print(id + "dangerous creature to the northwest!");
+					}
+					else if(angle >= 157.5 && angle < 202.5)
+					{
+						isDangerousCreatureWest = true;
+						myPrintMessages.print(id + "dangerous creature to the west!");
+					}
+					else if(angle >= 202.5 && angle < 247.5)
+					{
+						isDangerousCreatureSouthWest = true;
+						myPrintMessages.print(id + "dangerous creature to the southwest!");
+					}
+					else if(angle >= 247.5 && angle < 292.5)
+					{
+						isDangerousCreatureSouth = true;
+						myPrintMessages.print(id + "dangerous creature to the south!");
+					}
+					else if(angle >= 292.5 && angle < 337.5)
+					{
+						isDangerousCreatureSouthEast = true;
+						myPrintMessages.print(id + "dangerous creature to the southeast!");
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public Direction getMove()
+	{
+		myPrintMessages.print("\n------------------------"); 
+		myPrintMessages.print(id + "getMove() just called: tick="+tickCount+" position="+whereIAm);
+		Direction d = Direction.W;
+		int timeLeft =TOTAL_TICK-tickCount;
+		
+		if(timeLeft <= 2.5*timeToHome() && timeLeft >= timeToHome())
+		{
+			
+			endGame = true;	
+		}
+		
+		if(endGame == true)
+		{
+			//buildPath
+			System.err.println("Id " +this.getId()+ " Creatures not seen "+this.staticMessages.size());
+			if (timeLeft <= 2*timeToHome())
+			{
+				myPrintMessages.print(id + "final end game strategy, just go home and don't take into account dangerous creatures");
+				d = moveToHome1();
+			}
+			else
+			{
+				
+				myPrintMessages.print(id + "END GAME STRATEGY: MOVE TOWARDS HOME IN A WAY THAT AVOIDS DANGEROUS CREATURES");
+				//d=moveAwayFromDanger(new Point2D.Double(0,0));
+				//if (d==null)
+					d = moveToHome();
+			}
+		} 
+		else
+		{
+			LineStrategyPlayer lsPlayer=lineStrategy.getPlayer(-id);
+			Point2D p=lsPlayer.getCurrentPoint();
+			if (whereIAm.getX()==p.getX() && whereIAm.getY()==p.getY())
+			{
+				lsPlayer.switchToNextPoint();
+				p=lsPlayer.getCurrentPoint();
+			}			
+			
+			
+			
+			//Point2D myDestination = myCommunication.findDestinationPointBasedOnIncomingMessages(myIncomingMessages, whereIAm);
+			
+			/*if(myDestination.getX() != -99999)
+			{
+				d=moveAwayFromDanger(myDestination);
+				if(d == null)
+				{
+					myPrintMessages.print("no need to avoid danger to get to pt where another snorkeler found something");
+				}
+				else
+				{
+					myPrintMessages.print("will avoid danger on our way to the snorkler");
+				}
+			}
+			else
+			{
+				if(goingAfterCreature)
+				{
+					myPrintMessages.print("Going after the creature.");
+					d=moveAwayFromDanger(currentDest);
+					if(d == null)
+					{
+						myPrintMessages.print("**no need to avoid danger to go after pt where snorkler once saw something;");
+					}
+					else
+					{
+						myPrintMessages.print("**Will avoid danger on our way to pt where snorkler was");
+					}
+				}
+				else
+				{
+					d=moveAwayFromDanger(p);
+					if(d == null)
+					{
+						myPrintMessages.print("no need to avoid danger to go towards line");
+					}
+					else
+					{
+						myPrintMessages.print("will avoid danger on way to line");
+					}
+				}
+			}
+			
+			if(myDestination.getX() != -99999)
+			{
+				currentDest = myDestination;
+				goingAfterCreature = true;
+				myPrintMessages.print("goingAfterCreature WAS JUST SET TO TRUE!!!");
+			}
+			
+			//myPrintMessages.print(id + "The destination point should be: " + myDestination);
+			//Direction randomMove=makeRandomMove();
+			//d=moveAwayFromDanger(new Point2D.Double(randomMove.getDx() + whereIAm.getX(), randomMove.getDy() + whereIAm.getY()));
+
+			if (d==null)
+			{
+				if(myDestination.getX() != -99999)
+				{
+					myPrintMessages.print(id + "Move towards destination point of: " + myDestination);
+					d = moveToDest(myDestination);
+				}
+				else if(goingAfterCreature)
+				{
+					myPrintMessages.print(id + "Even though the diver who initially saw a creature doesn't see it anymore, still move towards destination point of: " + currentDest);
+					d = moveToDest(currentDest);
+				}
+				else //Not going after a creature
+				{
+					myPrintMessages.print(id + "make move to go in the line");
+					d = moveToDest(p);
+				}
+				
+			}
+			else
+			{
+				myPrintMessages.print(id + "now moving away from danger");
+			}*/
+		}
+		//myPrintMessages.print(id + "earlyGame: " + earlyGame + " and endGame: " + endGame + "\n");
+		return d;
+	}
+
+	public Direction makeRandomMove()
+	{
+		Direction d = getNewDirection();
+		Point2D.Double p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+		while (Math.abs(p.getX())>GameConfig.d||Math.abs(p.getY())>GameConfig.d)
+		{
+			d=getNewDirection();
+			p=new Point2D.Double(whereIAm.getX()+d.dx, whereIAm.getY()+d.dy);
+		}
+		return d;
+	}
+	
+	@Override
+	public void newGame(Set<SeaLifePrototype> seaLifePossibilites, int penalty, int d, int r, int n)
+	{
+		this.seaLifePossibilities = seaLifePossibilites;
+		ecm=new EncodedCommunication(this.seaLifePossibilities,r);
+		ecm.buildTree();
+		
+		id=getId();
+		tickCount=0;
+		myPrintMessages.print(id + "new game "+getId());
+		this.d=d;
+		this.r=r;
+		this.n=n;
+		this.myIncomingMessages = new ArrayList<Set<iSnorkMessage>>();
+		endGame = false;
+		lineStrategy=new LineStrategy(d, r, n);
+		myCommunication = new Communication(d, r, n, id);
+		myCommunication.createCreatureObjects(seaLifePossibilities);
+	}
+	
+	public double timeToDest(Point2D dest)
+	{
+		// minimal time to destination
+		double x1=whereIAm.getX();
+		double y1=whereIAm.getY();
+		double x2=dest.getX();
+		double y2=dest.getY();
+		double deltaX=Math.abs(x1-x2);
+		double deltaY=Math.abs(y1-y2);
+		double diagonal=Math.min(deltaX, deltaY);
+		double orthogonal=Math.abs(deltaX-deltaY);
+		return diagonal*3+orthogonal*2;
+	}
+	
+	public double timeToHome()
+	{
+		return timeToDest(new Point2D.Double(0, 0));
+	}
+	
+	public Direction moveToDest(Point2D dest)
+	{
+		double x1=whereIAm.getX();
+		double y1=whereIAm.getY();
+		double x2=dest.getX();
+		double y2=dest.getY();
+		double deltaX=Math.abs(x1-x2);
+		double deltaY=Math.abs(y1-y2);
+		// already on dest
+		if (deltaX==0 && deltaY==0)
+			return null;
+		// always perform diagonal moves after all orthogonal moves
+		boolean diag=(deltaX==deltaY);
+		if (diag)
+		{
+			if (x2>x1 && y2<y1)
+				return Direction.NE;
+			else if (x2<x1 && y2<y1)
+				return Direction.NW;
+			else if (x2<x1 && y2>y1)
+				return Direction.SW;
+			else if (x2>x1 && y2>y1)
+				return Direction.SE;
+		}
+		else
+		{
+			if (deltaX>deltaY)
+			{
+				if (x2>x1)
+					return Direction.E;
+				else if (x2<x1)
+					return Direction.W;
+			}
+			else if (deltaX<deltaY)
+			{
+				if (y2<y1)
+					return Direction.N;
+				else if (y2>y1)
+					return Direction.S;
+			}
+		}
+		return null;
+	}
+	
+	public Direction moveToHome()
+	{
+		myPrintMessages.print(id + "move home");
+		
+		//if(this.)
+		Direction d;
+		
+		Collections.sort(this.staticMessages,new MessageComparator(this.seaLifePossibilities));
+		for(iSnorkMessage ism: this.staticMessages)  {
+			
+			
+			if(
+					this.whereIAm.distance(ism.getLocation())<(4*r) && 
+			//		!myCommunication.hasSeenCreature(ism.getMsg())
+			 (!this.getSLPCreature(ism.getMsg()).isDangerous())
+					
+			&& 
+			(this.whereIAm.distance(new Point(0,0) )   > (new Point(0,0)).distance(ism.getLocation()) 
+			)
+			){
+				if((d=this.moveAwayFromDanger(ism.getLocation()))!=null)
+					return d;
+				System.err.println("Going after "+ism.getMsg()+" while getting back for home");
+				this.goingAfterCreature=true;
+				this.currentDest=ism.getLocation();
+				return moveToDest(ism.getLocation());
+			}
+			
+		}
+
+		if((d=this.moveAwayFromDanger(new Point2D.Double(0, 0)))!=null)
+			return d;
+		return moveToDest(new Point2D.Double(0, 0));
+	}
+	
+	
+	public Direction moveToHome1()
+	{
+		myPrintMessages.print(id + "move home");
+		
+		return moveToDest(new Point2D.Double(0, 0));
+	}
+	
+	public Direction moveAwayFromDanger(Point2D dest)
+	{
+		ArrayList<Direction> d=buildAllDirections();
+		// check wall
+		d=checkWall(d);
+		
+		// delete the adjacent 2 directions to the dangerous direction 
+		//myPrintMessages.print(id + "Now checking dangerous directions");
+		d=checkDangerousDirection4(d); 
+		//myPrintMessages.print(id + "Finished check of dangerous directions");
+        		
+		// if no dangerous creatures around
+		if (d.size()==8)
+		{
+			//myPrintMessages.print(id + "No dangerous creatures are around!");
+			return null;
+		}
+		
+		
+		if(d.isEmpty())
+		{
+			myPrintMessages.print(id + "Can't go in near opposite direction of all dangerous creatures that are currently around.  Now trying to only remove directions that neighbor the dangerous directions");
+			d = checkDangerousDirection3(checkWall(buildAllDirections()));
+		}
+		
+		// if empty, build again, delete the dangerous direction
+		if (d.isEmpty())
+		{
+			myPrintMessages.print(id + "No direction is safe!, Only remove directions where there is a creature (not the neighboring ones)");
+			d=checkDangerousDirection1(checkWall(buildAllDirections()));
+		}
+		
+		Direction nextDirection=moveToDest(dest);
+		if (nextDirection==null)
+			return null;
+		if (d.isEmpty())
+			return nextDirection;
+		
+		log.debug("Intended destination: " + dest.getX() + ", " +  dest.getY());
+		
+		double min=Double.MAX_VALUE;
+		Direction minDirection=nextDirection;
+		for (int i=0; i<d.size(); i++)
+		{
+			Point2D.Double pointAfterMove = new Point2D.Double(d.get(i).getDx() +whereIAm.getX(), d.get(i).getDy() + whereIAm.getY());
+			double distance = pointAfterMove.distance(dest);
+			if (distance<min)
+			{
+				min=distance;
+				minDirection=d.get(i);
+			}
+		}
+		myPrintMessages.print(id + "" + whereIAm+" moveAwayFromDanger "+minDirection);
+		
+		return minDirection;
+	}
+	
+	public ArrayList<Direction> buildAllDirections()
+	{
+		ArrayList<Direction> d=new ArrayList<Direction>();
+		d.add(Direction.E);
+		d.add(Direction.NE);
+		d.add(Direction.N);
+		d.add(Direction.NW);
+		d.add(Direction.W);
+		d.add(Direction.SW);
+		d.add(Direction.S);
+		d.add(Direction.SE);
+		return d;
+	}
+	
+	public ArrayList<Direction> checkDangerousDirection1(ArrayList<Direction> d)
+	{
+        if (isDangerousCreatureNorth)
+                d.remove(Direction.N);
+        if (isDangerousCreatureSouth)
+                d.remove(Direction.S);
+        if (isDangerousCreatureWest)
+                d.remove(Direction.W);
+        if (isDangerousCreatureEast)
+                d.remove(Direction.E);
+        if (isDangerousCreatureNorthEast)
+                d.remove(Direction.NE);
+        if (isDangerousCreatureNorthWest)
+                d.remove(Direction.NW);
+        if (isDangerousCreatureSouthEast)
+                d.remove(Direction.SE);
+        if (isDangerousCreatureSouthWest)
+                d.remove(Direction.SW);
+        return d;
+	}
+	
+	public ArrayList<Direction> checkDangerousDirection3(ArrayList<Direction> d)
+	{
+		if (isDangerousCreatureNorth)
+		{
+			d.remove(Direction.N); d.remove(Direction.NW); d.remove(Direction.NE);
+			myPrintMessages.print(id + "Dangerous creature to the north, don't move N, NW, or NE");
+		}
+		if (isDangerousCreatureSouth)
+		{
+			d.remove(Direction.S); d.remove(Direction.SW); d.remove(Direction.SE);
+			myPrintMessages.print(id + "Dangerous creature to the south, don't move S, SW, or SE");
+		}
+		if (isDangerousCreatureWest)
+		{
+			d.remove(Direction.W); d.remove(Direction.NW); d.remove(Direction.SW);
+			myPrintMessages.print(id + "Dangerous creature to the west, don't move W, NW, or SW");
+		}			
+		if (isDangerousCreatureEast)
+		{
+			d.remove(Direction.E); d.remove(Direction.NE); d.remove(Direction.SE);
+			myPrintMessages.print(id + "Dangerous creature to the east, don't move E, NE, or SE");
+		}			
+		if (isDangerousCreatureNorthEast)
+		{
+			d.remove(Direction.NE); d.remove(Direction.N); d.remove(Direction.E);
+			myPrintMessages.print(id + "Dangerous creature to the northeast, don't move NE, N, or E");
+		}			
+		if (isDangerousCreatureNorthWest)
+		{
+			d.remove(Direction.NW); d.remove(Direction.N); d.remove(Direction.W);
+			myPrintMessages.print(id + "Dangerous creature to the northwest, don't move NW, N, or W");
+		}			
+		if (isDangerousCreatureSouthEast)
+		{
+			d.remove(Direction.SE); d.remove(Direction.S); d.remove(Direction.E);
+			myPrintMessages.print(id + "Dangerous creature to the southeast, don't move SE, S, or E");
+		}
+		if (isDangerousCreatureSouthWest)
+		{
+			d.remove(Direction.SW); d.remove(Direction.S); d.remove(Direction.W);
+			myPrintMessages.print(id + "Dangerous creature to the southwest, don't move SW, S, or W");
+		}
+		return d;
+	}
+	
+	public ArrayList<Direction> checkDangerousDirection4(ArrayList<Direction> d)
+	{
+		if (isDangerousCreatureNorth)
+		{
+			d.remove(Direction.N); d.remove(Direction.NW); d.remove(Direction.NE); d.remove(Direction.E); d.remove(Direction.W);
+			myPrintMessages.print(id + "Dangerous creature to the north");
+		}
+		if (isDangerousCreatureSouth)
+		{
+			d.remove(Direction.S); d.remove(Direction.SW); d.remove(Direction.SE); d.remove(Direction.W); d.remove(Direction.E);
+			myPrintMessages.print(id + "Dangerous creature to the south");
+		}
+		if (isDangerousCreatureWest)
+		{
+			d.remove(Direction.W); d.remove(Direction.NW); d.remove(Direction.SW); d.remove(Direction.N); d.remove(Direction.S);
+			myPrintMessages.print(id + "Dangerous creature to the west");
+		}			
+		if (isDangerousCreatureEast)
+		{
+			d.remove(Direction.E); d.remove(Direction.NE); d.remove(Direction.SE); d.remove(Direction.N); d.remove(Direction.S);
+			myPrintMessages.print(id + "Dangerous creature to the east");
+		}			
+		if (isDangerousCreatureNorthEast)
+		{
+			d.remove(Direction.NE); d.remove(Direction.N); d.remove(Direction.E); d.remove(Direction.NW); d.remove(Direction.SE);
+			myPrintMessages.print(id + "Dangerous creature to the northeast");
+		}			
+		if (isDangerousCreatureNorthWest)
+		{
+			d.remove(Direction.NW); d.remove(Direction.N); d.remove(Direction.W); d.remove(Direction.SW); d.remove(Direction.NE);
+			myPrintMessages.print(id + "Dangerous creature to the northwest");
+		}			
+		if (isDangerousCreatureSouthEast)
+		{
+			d.remove(Direction.SE); d.remove(Direction.S); d.remove(Direction.E); d.remove(Direction.SW); d.remove(Direction.NE);
+			myPrintMessages.print(id + "Dangerous creature to the southeast");
+		}
+		if (isDangerousCreatureSouthWest)
+		{
+			d.remove(Direction.SW); d.remove(Direction.S); d.remove(Direction.W); d.remove(Direction.NW); d.remove(Direction.SE);
+			myPrintMessages.print(id + "Dangerous creature to the southwest");
+		}
+		return d;
+	}
+	
+	public ArrayList<Direction> checkWall(ArrayList<Direction> d)
+	{
+		if (whereIAm.getY()==-GameConfig.d)
+		{
+			d.remove(Direction.N); d.remove(Direction.NW); d.remove(Direction.NE);
+			myPrintMessages.print(id + "wall to the north, don't move N, NW, or NE");
+		}
+		if (whereIAm.getY()==GameConfig.d)
+		{
+			d.remove(Direction.S); d.remove(Direction.SW); d.remove(Direction.SE);
+			myPrintMessages.print(id + "Wall to the south, don't move S, SW, or SE");
+		}
+		if (whereIAm.getX()==-GameConfig.d)
+		{
+			d.remove(Direction.W); d.remove(Direction.NW); d.remove(Direction.SW);
+			myPrintMessages.print(id + "Wall to the west, don't move W, NW, or SW");
+		}
+		if (whereIAm.getX()==GameConfig.d)
+		{
+			d.remove(Direction.E); d.remove(Direction.NE); d.remove(Direction.SE);
+			myPrintMessages.print(id + "Wall to the east, don't move E, NE, or SE");
+		}
+		return d;
+	}
+}

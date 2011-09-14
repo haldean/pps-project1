@@ -1,0 +1,6904 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 0</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 1</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 2</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 3</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 4</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 5</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 6</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 7</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 8</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 9</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 10</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 11</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 12</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 13</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 14</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 15</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 16</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 17</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 18</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 19</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 20</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 21</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 22</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 23</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 24</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 25</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 26</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 27</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 28</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 29</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 30</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 31</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 32</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 33</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 34</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 35</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 36</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 37</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 38</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 39</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 40</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 41</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 42</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 43</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 44</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 45</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 46</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 47</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 48</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 49</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 50</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 51</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 52</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 53</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 54</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 55</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 56</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 57</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 58</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 59</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 60</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 61</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 62</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 63</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 64</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 65</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 66</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 67</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 68</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 69</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 70</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 71</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 72</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 73</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 74</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 75</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 76</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 77</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 78</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 79</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 80</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 81</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 82</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 83</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 84</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 85</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 86</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 87</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 88</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 89</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 90</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 91</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 92</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 93</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 94</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 95</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 96</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 97</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 98</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 99</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 100</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 101</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 102</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 103</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 104</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 105</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 106</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 107</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 108</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 109</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 110</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 111</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 112</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 113</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 114</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 115</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 116</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 117</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 118</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 119</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 120</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 121</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 122</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 123</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 124</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 125</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 126</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 127</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 128</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 129</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 130</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 131</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 132</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 133</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 134</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 135</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 136</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 137</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 138</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 139</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 140</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 141</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 142</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 143</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 144</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 145</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 146</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 147</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 148</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 149</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 150</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 151</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 152</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 153</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 154</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 155</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 156</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 157</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 158</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 159</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 160</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 161</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 162</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 163</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 164</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 165</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 166</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 167</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 168</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 169</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 170</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 171</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 172</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 173</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 174</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 175</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 176</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 177</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 178</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 179</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 180</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 181</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 182</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 183</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 184</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 185</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 186</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 187</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 188</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 189</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 190</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 191</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 192</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 193</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 194</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 195</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 196</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 197</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 198</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 199</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 200</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 201</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 202</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 203</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 204</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 205</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 206</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 207</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 208</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 209</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 210</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 211</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 212</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 213</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 214</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 215</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 216</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 217</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 218</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 219</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 220</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 221</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 222</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 223</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 224</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 225</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 226</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 227</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 228</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 229</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 230</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 231</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 232</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 233</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 234</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 235</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 236</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 237</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 238</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 239</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 240</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 241</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 242</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 243</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 244</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 245</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 246</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 247</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 248</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 249</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 250</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 251</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 252</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 253</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 254</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 255</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 256</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 257</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 258</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 259</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 260</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 261</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 262</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 263</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 264</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 265</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 266</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 267</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 268</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 269</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 270</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 271</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 272</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 273</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 274</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 275</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 276</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 277</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 278</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 279</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 280</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 281</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 282</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 283</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 284</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 285</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 286</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 287</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 288</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 289</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 290</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 291</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 292</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 293</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>true</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>shark.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 294</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 295</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 296</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 297</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 298</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+ <object class="isnork.sim.SeaLifePrototype"> 
+  <void property="dangerous"> 
+   <boolean>false</boolean> 
+  </void> 
+  <void property="filename"> 
+   <string>treasure.png</string> 
+  </void> 
+  <void property="happiness"> 
+   <int>2</int> 
+  </void> 
+  <void property="maxCount"> 
+   <int>2</int> 
+  </void> 
+  <void property="minCount"> 
+   <int>1</int> 
+  </void> 
+  <void property="name"> 
+   <string>Thing 299</string> 
+  </void> 
+  <void property="speed"> 
+   <int>1</int> 
+  </void> 
+ </object>
+</java>

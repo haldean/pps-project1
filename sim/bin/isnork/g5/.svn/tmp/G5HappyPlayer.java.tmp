@@ -1,0 +1,670 @@
+package isnork.g5;
+
+import isnork.sim.GameConfig;
+import isnork.sim.GameObject.Direction;
+import isnork.sim.Observation;
+import isnork.sim.Player;
+import isnork.sim.SeaLifePrototype;
+import isnork.sim.iSnorkMessage;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Set;
+
+public class G5HappyPlayer extends Player {
+
+	private Direction direction;
+	private int id;
+	Point2D whereIAm = null;
+	int n = -1;
+	int elapsedTImeInMinutes = 0;
+	final int smallBoardDimension = 20;
+	final int maxDistanceSnorkelerTravelsBasedOnMessage = 15; // for which he
+																// spends 28
+																// minutes for
+																// best route
+	ArrayList<Observation> whatYouSee = new ArrayList<Observation>();
+	Set<iSnorkMessage> messagesReceived;
+	Set<Observation> myCopyOfSnorkelerLocations;
+	private ArrayList<SeaLifePrototype> seenCreatures = new ArrayList<SeaLifePrototype>();
+	// int currentRound = 0;
+	int indexChosenCreature = -1;
+	Observation chosenCreature = new Observation();
+	SeaLifePrototype prevchosenCreature = new SeaLifePrototype();
+	Direction prevChosenDirection;
+	iSnorkMessage prevMessage;
+	
+	boolean messagenotDecided = true;
+	boolean messageSent = false;
+	final double timeToStartChangingPosition = 150; // Change position of
+													// snorkelers every 2 and a
+													// half hrs
+	boolean positionChanged = false;
+
+	private final int timeToStartSpiral = 6;
+	
+	
+	private double distanceFromBoat;
+	private int spiralRadius = 8;
+	private int changeToSpiralRadius = 5;
+	private final int timeToCompleteFirstRevolution = 128; // spiral radius - 8
+															// -> 16*(4 sides)*2
+															// mins
+	private final int timeToCompleteSecondRevolution = 336; // spiral radius -
+															// 13 - adding time
+															// for first and
+															// second revolution
+	private int gameBoardRadius;
+	private int spiralBoundary;
+	private boolean timeToStartDownwardSpiral = false;
+	private boolean firstRevolutionCompleted = false;
+	private boolean secondRevolutionCompleted = false;
+	private double timeToCompleteNthRevolution;
+	private boolean nthRevolutionCompleted = false;
+
+	@Override
+	public String getName() 
+	{
+		return "G5HappyPlayer";
+	}
+
+	@Override
+	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
+			Set<iSnorkMessage> incomingMessages,
+			Set<Observation> playerLocations) {
+		// currentRound++;
+
+		String message = null;
+		SeaLifePrototype temporaryCreature;
+
+		messagesReceived = incomingMessages;
+		myCopyOfSnorkelerLocations = playerLocations;
+		whereIAm = myPosition;
+		this.whatYouSee.clear();
+		for (Observation i : whatYouSee) {
+			this.whatYouSee.add(i);
+			temporaryCreature=StaticIsnork.lookUpObservation(i);
+			if(!seenCreatures.contains(temporaryCreature))
+			{
+				seenCreatures.add(temporaryCreature);
+			}
+		}
+		// get player id at the first round.
+		if (elapsedTImeInMinutes == 0) {
+			for (Observation i : playerLocations) {
+				if (i.getLocation() == whereIAm) {
+					id = i.getId();
+					break;
+				}
+			}
+		}
+
+		n++;
+
+		int tempVar3 = (StaticIsnork.NUM_IMP_CREATURE < StaticIsnork.seaLifePossibilites
+				.size()) ? StaticIsnork.NUM_IMP_CREATURE
+				: StaticIsnork.seaLifePossibilites.size();
+		// If even number of round, send msg about creature
+		Object whatUSee[] = this.whatYouSee.toArray();
+		Observation tempVar = new Observation();
+		SeaLifePrototype tempCreature = new SeaLifePrototype();
+
+		int j = 0, index = 0;
+		int maxHappiness = 0;
+		chosenCreature = null;
+		// FIND CREATURE WITH MAX HAPPINESS IN OBSERVATION
+	
+		
+		for (j = 0; j < this.whatYouSee.size(); j++) {
+			tempVar = (Observation) whatUSee[j];
+			if(tempVar.getName()!=null){
+			tempCreature = StaticIsnork.lookUpObservation(tempVar); }
+			if (tempCreature.getHappiness() > maxHappiness) {
+				maxHappiness = tempVar.happiness();
+				chosenCreature = tempVar;
+			}
+			
+		}
+
+		// FIND HIS INDEX IN THE PRIORITY LIST
+		if (chosenCreature != null)
+			indexChosenCreature = StaticIsnork.lookUpIndex(chosenCreature);
+
+		if (messageSent == false) {
+			if (indexChosenCreature != -1 && chosenCreature != null) {
+				//System.out.println("Creature:" + chosenCreature.getName());
+				//System.out.println("Creature Index:" + indexChosenCreature);
+				message = StaticIsnork.getCreatureMessage(indexChosenCreature);
+				messageSent = true;
+			}
+
+		} else if (messageSent == true) {
+			// If odd number of round, send msg about its direction
+			if (chosenCreature != null && chosenCreature.getDirection() != null) {
+				System.out
+						.println("Direction:" + chosenCreature.getDirection());
+				message = StaticIsnork.getDirectionMessage(chosenCreature
+						.getDirection());
+				messageSent = false;
+			} else {
+				message = null;
+				messageSent = false;
+			}
+		}
+
+		// if(n % 10 == 0) {
+		// if (elapsedTImeInMinutes < timeToStartReturnRoute)
+		elapsedTImeInMinutes++;
+		//System.out.println("Snorkeler " + this.getId() + " returned a message "				+ message);
+
+		return message;
+		// }
+		// else
+		// return null;
+	}
+
+	@Override
+	public void newGame(Set<SeaLifePrototype> seaLifePossibilites, int penalty,
+			int d, int r, int n) {
+		// TODO Auto-generated method stub
+		StaticIsnork.d = d;
+		StaticIsnork.r = r;
+		StaticIsnork.n = n;
+		StaticIsnork.penalty = penalty;
+		StaticIsnork.seaLifePossibilites = seaLifePossibilites;
+		StaticIsnork.setPriorityCreatures();
+		StaticIsnork.printPrior();
+		id = this.getId();
+	}
+
+	Direction d = null;
+	int returnFlag = 0;
+
+	@Override
+	public Direction getMove() {
+		// int timeWhenTeamIsSpreadOut = 80;
+		int minTimeToReturn = (int) (whereIAm
+				.distance(StaticIsnork.locationOfBoat) * 2);
+		int timeToReturn = StaticIsnork.totalTimeAvailable
+				- (int) (1.8 * minTimeToReturn);
+		Direction d = getNewDirection();
+		// TODO: Fix the following -
+		// Only if snorkelers are nicely spread out, we respond to messages.
+		// We are therefore, wasting the first many messages
+
+		Move m = new Move(StaticIsnork.seaLifePossibilites, whatYouSee,
+				whereIAm);
+		//anyRelevantMessage(messagesReceived);
+		
+		if (m.dangerFlag == 0 && elapsedTImeInMinutes < timeToReturn) {
+			// TODO: Add message responding functionality
+			
+			if(anyRelevantMessage(messagesReceived))
+			{
+				d=actBasedOnIncomingMessages(messagesReceived);
+			}
+			else
+			{
+			System.out.println(id+"I am spiralling !!");
+			if (firstRevolutionCompleted == false){
+				//System.out.println(id+"I am spiralling !!_2");
+				timeToCompleteNthRevolution = timeToCompleteFirstRevolution;}
+			else {
+				//System.out.println(id+"I am spiralling !!_3");
+				timeToCompleteNthRevolution = timeToCompleteSecondRevolution;
+
+			}
+
+		//	distanceFromBoat = whereIAm.distance(StaticIsnork.getPositionofboat());
+
+			if (elapsedTImeInMinutes >= timeToStartSpiral) {
+				//System.out.println(id+"I am spiralling !!_4");
+				if (elapsedTImeInMinutes > timeToCompleteNthRevolution
+						&& whereIAm.getX() < spiralBoundary
+						&& whereIAm.getY() < spiralBoundary) {
+					//System.out.println(id+"I am spiralling !!_5");
+					if (firstRevolutionCompleted == false)
+						firstRevolutionCompleted = true;
+					else {
+						System.out.println("second revolution completed");
+						secondRevolutionCompleted = true;
+					}
+
+					spiralRadius = spiralRadius + changeToSpiralRadius;
+
+				}
+				
+				// d = getNewDirection(d);
+				if (secondRevolutionCompleted == false)
+					d = getDirectionInSpiralPath();
+				//else d = null;
+			}
+			// System.out.println("snorker: "+ this.getId()
+			// +"no dangerous, random move: "+ d);
+			} 
+		}
+		else if (elapsedTImeInMinutes < timeToReturn) {
+			d = m.escapeMove(random);
+		//	System.out.println("snorker: " + this.getId() + " escape move: "					+ d);
+		}
+
+		if (elapsedTImeInMinutes >= timeToReturn) {
+			returnFlag = 1;
+		}
+		if (returnFlag == 1) {
+			d = towardsBoat();
+			//System.out.println("returning, direction is: " + d);
+		}
+		try {
+			Point2D p = new Point2D.Double(whereIAm.getX() + d.dx,
+					whereIAm.getY() + d.dy);
+			int round = 0;
+			while (Math.abs(p.getX()) > GameConfig.d
+					|| Math.abs(p.getY()) > GameConfig.d) {
+				d = m.escapeMove(random);
+				p = new Point2D.Double(whereIAm.getX() + d.dx, whereIAm.getY()
+						+ d.dy);
+				round++;
+				if (round > 100) {
+					while (Math.abs(p.getX()) > GameConfig.d
+							|| Math.abs(p.getY()) > GameConfig.d) {
+						d = m.randomMove(random);
+						p = new Point2D.Double(whereIAm.getX() + d.dx,
+								whereIAm.getY() + d.dy);
+					}
+					break;
+				}
+			}
+		}
+
+		catch (Exception e) {
+			// System.out.println("direction is null for snorkeler " +
+			// this.getId());
+			d = null;
+		}
+		return d;
+	}
+
+	private Direction getNewDirection(Direction d) {
+		int r = random.nextInt(100);
+		direction = d;
+		if (r < 10 || direction == null) {
+			ArrayList<Direction> directions = Direction.allBut(direction);
+			direction = directions.get(random.nextInt(directions.size()));
+		}
+		return direction;
+	}
+
+	@SuppressWarnings("unused")
+	private Direction getNewDirection() {
+		int r = random.nextInt(100);
+		if (r < 10 || direction == null) {
+			ArrayList<Direction> directions = Direction.allBut(direction);
+			direction = directions.get(random.nextInt(directions.size()));
+		}
+		return direction;
+	}
+
+	public Direction towardsBoat() {
+
+		Direction direction = null;
+
+		if (whereIAm.getY() == StaticIsnork.locationOfBoat.getY()) {
+			if (whereIAm.getX() < StaticIsnork.locationOfBoat.getX())
+				direction = Direction.E;
+			else if (whereIAm.getX() > StaticIsnork.locationOfBoat.getX())
+				direction = Direction.W;
+
+		}
+
+		if (whereIAm.getX() == StaticIsnork.locationOfBoat.getX()) {
+			if (whereIAm.getY() < StaticIsnork.locationOfBoat.getY())
+				direction = Direction.S;
+			else if (whereIAm.getY() > StaticIsnork.locationOfBoat.getY())
+				direction = Direction.N;
+		}
+
+		if (whereIAm.getY() < StaticIsnork.locationOfBoat.getY()
+				&& whereIAm.getX() < StaticIsnork.locationOfBoat.getX())
+			direction = Direction.SE;
+		else if (whereIAm.getY() > StaticIsnork.locationOfBoat.getY()
+				&& whereIAm.getX() < StaticIsnork.locationOfBoat.getX())
+			direction = Direction.NE;
+		else if (whereIAm.getY() < StaticIsnork.locationOfBoat.getY()
+				&& whereIAm.getX() > StaticIsnork.locationOfBoat.getX())
+			direction = Direction.SW;
+		else if (whereIAm.getY() > StaticIsnork.locationOfBoat.getY()
+				&& whereIAm.getX() > StaticIsnork.locationOfBoat.getX())
+			direction = Direction.NW;
+
+		//System.out.println("original direction: " + direction);
+		direction = checkForDangerousCreatures(whereIAm, direction);
+		//System.out.println("afterward direction: " + direction);
+
+		/*
+		 * if (whereIAm.getX() != 0 && whereIAm.getY() != 0)
+		 * System.out.println("direction in towardsBoat fn" + direction);
+		 */
+
+		return direction;
+
+	}
+
+	public Direction checkForDangerousCreatures(Point2D whereIAm,
+			Direction direction) {
+
+		// check whereIAm
+		// if dangerous creature is in sight, avoid
+		// else
+
+		Direction d = direction;
+
+		Move m = new Move(StaticIsnork.seaLifePossibilites, whatYouSee,
+				whereIAm);
+		if (m.dangerFlag == 0)
+			d = direction;
+		else {
+			System.out
+					.println("dangerous creature in vicinity; danger flag is 1 ");
+			d = m.escapeMove(random);
+			if (direction != null) {
+				int round = 0;
+				while (d != direction || d != m.getLeft(direction)
+						|| d != m.getRight(direction)) {
+					d = m.escapeMove(random);
+					round++;
+					if (round > 10)
+						break;
+				}
+			}
+		}
+		return d;
+
+	}
+
+	public Direction actBasedOnIncomingMessages(Set<iSnorkMessage> incomingMessages) {
+
+		Direction direction = null;
+
+		int tooSmallDistance = 4; // TODO: Should this number be 'r'?
+		double minimumDistanceToTravel = maxDistanceSnorkelerTravelsBasedOnMessage; // initialize
+																					// to
+																					// max
+																					// distance
+																					// he
+																					// can
+																					// travel
+		double squareRootOfTwo = 1.414;
+		// initialize Point to a point that lies diagonally from whereIAm at a
+		// distance of minimumDistanceToTravel
+		// the following location will never be used - only for the sake of
+		// initialization
+		Point2D locationOfSnorkelerWithMinDistance = new Point2D.Double(
+				whereIAm.getX() + minimumDistanceToTravel / squareRootOfTwo,
+				whereIAm.getY() + minimumDistanceToTravel / squareRootOfTwo);
+
+		// TODO: Some snorkelers don't enter this loop. Test and find out why.
+		// TODO: Fix this - WHen snorkelers are too close, they keep exchanging
+		// messages and don't move out.
+		double distanceFromSender = 0;
+		Direction directionOfCreature;
+		int indexOfCreatureFromPriorityList;
+		SeaLifePrototype creature;
+		SeaLifePrototype chosenCreature;
+		int maxHappiness=0;
+		
+		if(incomingMessages==null){
+			direction=null;
+		}
+		else{
+		for (iSnorkMessage message : incomingMessages) 
+		{
+			
+		if(message.getSender() != this.getId())	{
+			
+			if(StaticIsnork.isMessageCreatureType(message.getMsg()))
+			{
+				indexOfCreatureFromPriorityList=StaticIsnork.getCreaturefromMessage(message.getMsg());
+				creature=StaticIsnork.lookUpCreature(indexOfCreatureFromPriorityList);
+				System.out.println(id+" "+ creature.getName());
+				if(maxHappiness<creature.getHappiness())
+				{
+					distanceFromSender=whereIAm.distance(message.getLocation());
+					
+					if (distanceFromSender < minimumDistanceToTravel&& distanceFromSender > 0) {
+						if(prevchosenCreature.getHappiness()<creature.getHappiness()){
+						maxHappiness=creature.getHappiness();
+						chosenCreature=creature;
+						minimumDistanceToTravel = distanceFromSender;
+						locationOfSnorkelerWithMinDistance = message.getLocation();
+						prevchosenCreature=chosenCreature;
+						prevMessage=message;
+						System.out.println(id+ "I have chosen a creature"+chosenCreature.getName());
+						}
+						else
+						{
+							minimumDistanceToTravel=whereIAm.distance(prevMessage.getLocation());
+							System.out.println(id+ "I'll stick to the prev guy"+prevchosenCreature.getName());
+						}
+					}
+				}
+			}
+			else if(StaticIsnork.isMessageDirectionType(message.getMsg()))
+			{
+				directionOfCreature=StaticIsnork.getDirectionfromMessage(message.getMsg());
+				System.out.println(id+" " +directionOfCreature);
+			}
+			else
+			{}
+			
+			}
+		
+		}
+			
+		
+
+		if (minimumDistanceToTravel > maxDistanceSnorkelerTravelsBasedOnMessage)
+		{
+			System.out.println(id+" " +"its too far, I wont go");
+			return null;
+		}
+		
+		// move to closest sender
+
+		// System.out.println("snorkeler " + this.getId() +
+		// " traveling to location " + locationOfSnorkelerWithMinDistance.getX()
+		// + ", " + locationOfSnorkelerWithMinDistance.getY());
+
+		if (whereIAm.getY() == locationOfSnorkelerWithMinDistance.getY()) {
+			if (whereIAm.getX() < locationOfSnorkelerWithMinDistance.getX())
+				direction = Direction.E;
+			else if (whereIAm.getX() > locationOfSnorkelerWithMinDistance
+					.getX())
+				direction = Direction.W;
+
+		}
+
+		if (whereIAm.getX() == locationOfSnorkelerWithMinDistance.getX()) {
+			if (whereIAm.getY() < locationOfSnorkelerWithMinDistance.getY())
+				direction = Direction.S;
+			else if (whereIAm.getY() > locationOfSnorkelerWithMinDistance
+					.getY())
+				direction = Direction.N;
+		}
+
+		// Direction = null when whereIAm.getX() = 0 and whereIAm.getY() = 0
+
+		if (whereIAm.getY() < locationOfSnorkelerWithMinDistance.getY()
+				&& whereIAm.getX() != locationOfSnorkelerWithMinDistance.getX())
+			direction = Direction.S;
+		else if (whereIAm.getY() > locationOfSnorkelerWithMinDistance.getY()
+				&& whereIAm.getX() != locationOfSnorkelerWithMinDistance.getX())
+			direction = Direction.N;
+
+		direction = checkForDangerousCreatures(whereIAm, direction);
+		}
+
+		return direction;
+		
+
+	}
+
+	public boolean isItTimeToStartChangingPosition() {
+
+		if (elapsedTImeInMinutes >= timeToStartChangingPosition
+				&& positionChanged == false) {
+			return true;
+		} else
+			return false;
+
+	}
+
+	public int targetPosition() {
+		// This function is called when it's time for the snorkeler to wander to
+		// a
+		// different section of the board. During this time, the snorkeler
+		// should respond to messages
+		// coming from the target Quadrant returned from this function
+
+		// Snorkler is made to switch to a different quadrant, instead of any
+		// distant position
+		// for the reason outlined below:
+		// The random movement of the snorkelers usually constrains them within
+		// the same quadrant or
+		// sometimes, the neighboring quadrant. So, it's extremely unlikely that
+		// after 2 and a half hrs,
+		// a snorkeler has strolled from its initial position to the opposite
+		// quadrant. Therefore,
+		// this function determines the current quadrant of the snorkeler and
+		// returns the opposite
+		// quadrant.
+
+		// This function returns 1 for NE Quadrant; 2 for NW quadrant; 3 for SW
+		// quadrant and 4 for SE quadrant
+
+		positionChanged = true;
+
+		if (whereIAm.getX() > 0 && whereIAm.getY() < 0) /* Current Quadrant is 1 */
+			return 3;
+		else if (whereIAm.getX() < 0 && whereIAm.getY() < 0) /*
+															 * Current Quadrant
+															 * is 2
+															 */
+			return 4;
+		else if (whereIAm.getX() < 0 && whereIAm.getY() > 0) /*
+															 * Current Quadrant
+															 * is 3
+															 */
+			return 1;
+		else
+			/*
+			 * if (whereIAm.getX() > 0 && whereIAm.getY() > 0) Current Quadrant
+			 * is 4
+			 */return 2;
+
+	}
+	public boolean anyRelevantMessage(Set<iSnorkMessage> messagesReceived)
+	{	
+		boolean retVal=false;
+		int indexOfCreatureFromPriorityList=0;
+		SeaLifePrototype creature;
+		double distanceFromSender=0;
+		
+		for (iSnorkMessage message : messagesReceived) 
+		{
+			if(StaticIsnork.isMessageCreatureType(message.getMsg()))
+			{
+				indexOfCreatureFromPriorityList=StaticIsnork.getCreaturefromMessage(message.getMsg());
+				creature=StaticIsnork.lookUpCreature(indexOfCreatureFromPriorityList);
+				distanceFromSender=whereIAm.distance(message.getLocation());
+				if(!isCreatureAlreadySeen(creature) && distanceFromSender<maxDistanceSnorkelerTravelsBasedOnMessage)
+				{
+					retVal=true;
+				}
+			}
+		}
+		
+		return retVal;
+	}
+	
+	public boolean isCreatureAlreadySeen(SeaLifePrototype creature)
+	{
+		boolean retVal=false;
+		for(SeaLifePrototype c:		seenCreatures)
+		{
+			if(creature==c)
+			{
+				retVal=true;
+			}
+		}
+		return retVal;
+	}
+	
+	public Direction getDirectionInSpiralPath() {
+		
+		Direction directionInSpiral = null;
+		
+		double spiralRadiusLowBound = -1 * spiralRadius;
+		double spiralRadiusHighBound = spiralRadius;
+		
+		
+
+	/*	
+	boolean b1 = whereIAm.getX() == spiralRadiusHighBound;
+	boolean b2 = whereIAm.getY() < spiralRadiusHighBound;
+	boolean b3 = whereIAm.getY() >= spiralRadiusLowBound;	
+		
+	
+	System.out.println("snork " + this.getId() + " in position " + whereIAm);
+	System.out.println("spiralRadiusHighBound " + spiralRadiusHighBound);
+	System.out.println("whereIAm.getX() == spiralRadiusHighBound " + b1 + " for snork " + this.getId());
+	System.out.println("whereIAm.getY() < spiralRadiusHighBound;" + b2 + " for snork " + this.getId());
+	System.out.println("whereIAm.getY() >= spiralRadiusLowBound" + b3 + " for snork " + this.getId());
+	*/	
+		
+	
+	//System.out.println("spiralRadiusHighBound " + spiralRadiusHighBound + " snork " + this.getId());
+		
+		if (whereIAm.getX() == spiralRadiusLowBound && whereIAm.getY() <= spiralRadiusHighBound && whereIAm.getY() > spiralRadiusLowBound)
+			directionInSpiral = Direction.N;
+		else if (whereIAm.getX() == spiralRadiusHighBound && whereIAm.getY() < spiralRadiusHighBound && whereIAm.getY() >= spiralRadiusLowBound)
+			directionInSpiral = Direction.S;
+		else if (whereIAm.getY() == spiralRadiusLowBound && whereIAm.getX() < spiralRadiusHighBound && whereIAm.getX() >= spiralRadiusLowBound)
+			directionInSpiral = Direction.E;
+		else if (whereIAm.getY() == spiralRadiusHighBound && whereIAm.getX() <= spiralRadiusHighBound && whereIAm.getX() > spiralRadiusLowBound)
+			directionInSpiral = Direction.W;
+		else if (whereIAm.getY() == 0 && whereIAm.getX() > spiralRadiusLowBound && whereIAm.getX() < spiralRadiusHighBound) directionInSpiral = Direction.E; 
+		else if (whereIAm.getX() == 0 && whereIAm.getY() > spiralRadiusLowBound && whereIAm.getY() < spiralRadiusHighBound) directionInSpiral = Direction.N;
+		
+		else if (whereIAm.getX() > spiralRadiusHighBound) directionInSpiral = Direction.W;
+		else if (whereIAm.getX() < spiralRadiusLowBound) directionInSpiral = Direction.E;
+		else if (whereIAm.getY() > spiralRadiusHighBound) directionInSpiral = Direction.N;
+		else if (whereIAm.getY() < spiralRadiusLowBound) directionInSpiral = Direction.S;
+		
+		
+		else if (whereIAm.getX() > 0) {// System.out.println ("snork " + this.getId() + " moving east from " + whereIAm); 
+											directionInSpiral = Direction.E; }
+		else if (whereIAm.getX() < 0) { //System.out.println ("snork " + this.getId() + " moving west from " + whereIAm); 
+										directionInSpiral =  Direction.W; }
+		
+		
+		
+		else {
+			directionInSpiral = null; 
+			
+			//HERE'S WHERE YOU WILL CALL TOWARDSBOAT TO RETURN SNORKS TO BOAT
+			//I HAVE SET DIRECTIONINSPIRAL TO NULL FOR NOW
+			//System.out.println("direction in spiral is null for snork " + this.getId());
+		}
+		
+		
+		
+		
+		
+		return directionInSpiral;
+		
+	}
+
+	
+
+}

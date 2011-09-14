@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/189/trunk/src/isnork/g3/strategy
+END
+SpiralStrategyType.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/176/trunk/src/isnork/g3/strategy/SpiralStrategyType.java
+END
+SquareStrategyPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/120/trunk/src/isnork/g3/strategy/SquareStrategyPlayer.java
+END
+SquareStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/146/trunk/src/isnork/g3/strategy/SquareStrategy.java
+END
+LineStrategyPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/119/trunk/src/isnork/g3/strategy/LineStrategyPlayer.java
+END
+LineStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/119/trunk/src/isnork/g3/strategy/LineStrategy.java
+END
+SpiralStrategyPlayer.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/146/trunk/src/isnork/g3/strategy/SpiralStrategyPlayer.java
+END
+SpiralStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/189/trunk/src/isnork/g3/strategy/SpiralStrategy.java
+END

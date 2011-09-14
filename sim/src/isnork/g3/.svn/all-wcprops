@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/202/trunk/src/isnork/g3
+END
+CreatureToTrack.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/132/trunk/src/isnork/g3/CreatureToTrack.java
+END
+CreatureLocation.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/163/trunk/src/isnork/g3/CreatureLocation.java
+END
+Communication.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/172/trunk/src/isnork/g3/Communication.java
+END
+G3Player_David_Spiral.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/92/trunk/src/isnork/g3/G3Player_David_Spiral.java
+END
+Creature.java
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/186/trunk/src/isnork/g3/Creature.java
+END
+MessageComparator.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/69/trunk/src/isnork/g3/MessageComparator.java
+END
+Test.java
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/104/trunk/src/isnork/g3/Test.java
+END
+SpecificCreatureWithUniqueId.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/164/trunk/src/isnork/g3/SpecificCreatureWithUniqueId.java
+END
+DirectionProbability.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/70/trunk/src/isnork/g3/DirectionProbability.java
+END
+DangerousCreature.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/125/trunk/src/isnork/g3/DangerousCreature.java
+END
+G3PlayerEva.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/127/trunk/src/isnork/g3/G3PlayerEva.java
+END
+WhatEachPersonHasSeen.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/156/trunk/src/isnork/g3/WhatEachPersonHasSeen.java
+END
+G3Player_Old.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/127/trunk/src/isnork/g3/G3Player_Old.java
+END
+PrintMessages.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/61/trunk/src/isnork/g3/PrintMessages.java
+END
+SLPComparator.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/46/trunk/src/isnork/g3/SLPComparator.java
+END
+G3Player.java
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/203/trunk/src/isnork/g3/G3Player.java
+END
+EncodedCommunication.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/167/trunk/src/isnork/g3/EncodedCommunication.java
+END
+G3Player_David.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/92/trunk/src/isnork/g3/G3Player_David.java
+END

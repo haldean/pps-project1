@@ -1,0 +1,55 @@
+package isnork.g5;
+
+import isnork.sim.SeaLifePrototype;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class ScanInformation {
+	Set<SeaLifePrototype> seaLifePossibilites = new HashSet<SeaLifePrototype>();
+	private double happyness =0;
+	private double penalty =0;
+	private double moveDangerousNum =0;
+	public ScanInformation(Set<SeaLifePrototype> a)
+	{
+		seaLifePossibilites=a;
+		
+		for(SeaLifePrototype i: seaLifePossibilites)
+		{
+			int num = Math.min(Math.round((i.getMinCount()+i.getMaxCount())/2),3);
+			if (num == 1)
+			{
+				happyness+= i.getHappinessD();
+			}
+			else if(num ==2)
+			{
+				happyness +=1.5* i.getHappinessD();
+			}else if (num ==3)
+			{
+				happyness += 1.75* i.getHappinessD();
+			}
+			
+			if (i.isDangerous() == true && i.getSpeed()!=0)
+			{
+				penalty +=2 * i.getHappinessD()*(i.getMinCount()+i.getMaxCount())/2;
+				moveDangerousNum +=(i.getMinCount()+i.getMaxCount())/2;
+			}
+		}
+	}
+	
+	public double getHappyness()
+	{
+		return happyness;
+	}
+	
+	public double getPenalty()
+	{
+		return penalty;
+	}
+	public double getMoveDangerNum()
+	{
+		System.out.println("num of dangerous creature: "+moveDangerousNum);
+		return moveDangerousNum;
+	}
+
+}
