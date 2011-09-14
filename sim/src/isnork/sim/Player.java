@@ -38,7 +38,9 @@ public abstract class Player {
 		//Do nothing is OK! You'll need the random though :)
 		random = r;
 	}
-	public abstract void newGame(Set<SeaLifePrototype> seaLifePossibilites, int penalty, int d, int r, int n);
+	
+	public abstract void newGame(Set<SeaLifePrototype> seaLifePossibilites, 
+			int penalty, int d, int r, int n);
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
