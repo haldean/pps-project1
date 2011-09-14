@@ -11,8 +11,4 @@ public interface Cartogram {
 	String update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations, Set<iSnorkMessage> incomingMessages);
 
-	String getMessage();
-
-	void getNextDirection();
-
 }

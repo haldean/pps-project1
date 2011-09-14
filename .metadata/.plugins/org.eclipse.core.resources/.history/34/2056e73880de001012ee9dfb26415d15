@@ -43,16 +43,4 @@ public class WaterProofCartogram extends AbstractCartogram{
 		return null;
 	}
 
-	@Override
-	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void getNextDirection() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -47,9 +47,7 @@ public class AwsmPlayer extends Player{
 	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<iSnorkMessage> incomingMessages,
 			Set<Observation> playerLocations) {
-		carto.update(myPosition,whatYouSee,playerLocations,incomingMessages); 
-		carto.getNextDirection();
-		return carto.getMessage();
+		return carto.update(myPosition,whatYouSee,playerLocations,incomingMessages); 
 	}
 
 	/**
