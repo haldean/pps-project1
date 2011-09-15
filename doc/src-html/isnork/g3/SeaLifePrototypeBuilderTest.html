@@ -1,0 +1,125 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package isnork.g3;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import static org.junit.Assert.assertEquals;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import static org.junit.Assert.assertFalse;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import org.junit.Test;<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>    import isnork.sim.SeaLifePrototype;<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>    <a name="line.10"></a>
+<FONT color="green">011</FONT>    public class SeaLifePrototypeBuilderTest {<a name="line.11"></a>
+<FONT color="green">012</FONT>    <a name="line.12"></a>
+<FONT color="green">013</FONT>            @Test<a name="line.13"></a>
+<FONT color="green">014</FONT>            public void testProperties(){<a name="line.14"></a>
+<FONT color="green">015</FONT>                    boolean dangerous = true;<a name="line.15"></a>
+<FONT color="green">016</FONT>                    int happiness = 10;<a name="line.16"></a>
+<FONT color="green">017</FONT>                    int max = 20;<a name="line.17"></a>
+<FONT color="green">018</FONT>                    int min = 3;<a name="line.18"></a>
+<FONT color="green">019</FONT>                    SeaLifePrototype builderCharmander = new SeaLifePrototypeBuilder("charmander")<a name="line.19"></a>
+<FONT color="green">020</FONT>                            .dangerous(dangerous)<a name="line.20"></a>
+<FONT color="green">021</FONT>                            .happiness(happiness)<a name="line.21"></a>
+<FONT color="green">022</FONT>                            .maxCount(max)<a name="line.22"></a>
+<FONT color="green">023</FONT>                            .minCount(min)<a name="line.23"></a>
+<FONT color="green">024</FONT>                            .create();<a name="line.24"></a>
+<FONT color="green">025</FONT>                    <a name="line.25"></a>
+<FONT color="green">026</FONT>                    SeaLifePrototype nonBuilderCharmander = new SeaLifePrototype();<a name="line.26"></a>
+<FONT color="green">027</FONT>                    nonBuilderCharmander.setDangerous(dangerous);<a name="line.27"></a>
+<FONT color="green">028</FONT>                    nonBuilderCharmander.setHappiness(happiness);<a name="line.28"></a>
+<FONT color="green">029</FONT>                    nonBuilderCharmander.setMaxCount(max);<a name="line.29"></a>
+<FONT color="green">030</FONT>                    nonBuilderCharmander.setMinCount(min);<a name="line.30"></a>
+<FONT color="green">031</FONT>                    nonBuilderCharmander.setName("charmander");<a name="line.31"></a>
+<FONT color="green">032</FONT>                    <a name="line.32"></a>
+<FONT color="green">033</FONT>                    assertEquals(nonBuilderCharmander.isDangerous(), builderCharmander.isDangerous());<a name="line.33"></a>
+<FONT color="green">034</FONT>                    assertEquals(nonBuilderCharmander.getHappiness(), builderCharmander.getHappiness());<a name="line.34"></a>
+<FONT color="green">035</FONT>                    assertEquals(nonBuilderCharmander.getMaxCount(), builderCharmander.getMaxCount());<a name="line.35"></a>
+<FONT color="green">036</FONT>                    assertEquals(nonBuilderCharmander.getMinCount(), builderCharmander.getMinCount());<a name="line.36"></a>
+<FONT color="green">037</FONT>                    assertEquals(nonBuilderCharmander.getName(), builderCharmander.getName());<a name="line.37"></a>
+<FONT color="green">038</FONT>            }<a name="line.38"></a>
+<FONT color="green">039</FONT>    <a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>            @Test<a name="line.41"></a>
+<FONT color="green">042</FONT>            public void testDoubleCreation(){<a name="line.42"></a>
+<FONT color="green">043</FONT>                    SeaLifePrototypeBuilder builder = new SeaLifePrototypeBuilder("charmander");<a name="line.43"></a>
+<FONT color="green">044</FONT>                    SeaLifePrototype firstCharmander = builder.create();<a name="line.44"></a>
+<FONT color="green">045</FONT>                    SeaLifePrototype secondCharmander = builder.create();<a name="line.45"></a>
+<FONT color="green">046</FONT>                    <a name="line.46"></a>
+<FONT color="green">047</FONT>                    assertFalse(firstCharmander == secondCharmander);               <a name="line.47"></a>
+<FONT color="green">048</FONT>            }<a name="line.48"></a>
+<FONT color="green">049</FONT>            <a name="line.49"></a>
+<FONT color="green">050</FONT>            @Test<a name="line.50"></a>
+<FONT color="green">051</FONT>            public void testDoubleCreationModification(){<a name="line.51"></a>
+<FONT color="green">052</FONT>                    SeaLifePrototypeBuilder builder = new SeaLifePrototypeBuilder("charmander");<a name="line.52"></a>
+<FONT color="green">053</FONT>                    SeaLifePrototype charmander = builder.name("charmander").create();<a name="line.53"></a>
+<FONT color="green">054</FONT>                    SeaLifePrototype squirtle = builder.name("squirtle").create();<a name="line.54"></a>
+<FONT color="green">055</FONT>                    <a name="line.55"></a>
+<FONT color="green">056</FONT>                    assertEquals("charmander", charmander.getName());               <a name="line.56"></a>
+<FONT color="green">057</FONT>                    assertEquals("squirtle", squirtle.getName());           <a name="line.57"></a>
+<FONT color="green">058</FONT>            }<a name="line.58"></a>
+<FONT color="green">059</FONT>    }<a name="line.59"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

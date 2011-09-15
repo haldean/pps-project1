@@ -1,0 +1,139 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /*<a name="line.1"></a>
+<FONT color="green">002</FONT>     * To change this template, choose Tools | Templates<a name="line.2"></a>
+<FONT color="green">003</FONT>     * and open the template in the editor.<a name="line.3"></a>
+<FONT color="green">004</FONT>     */<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    package isnork.sim;<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>    import java.io.BufferedReader;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import java.io.DataInputStream;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import java.io.File;<a name="line.10"></a>
+<FONT color="green">011</FONT>    import java.io.FileInputStream;<a name="line.11"></a>
+<FONT color="green">012</FONT>    import java.io.FileNotFoundException;<a name="line.12"></a>
+<FONT color="green">013</FONT>    import java.io.FileReader;<a name="line.13"></a>
+<FONT color="green">014</FONT>    import java.io.IOException;<a name="line.14"></a>
+<FONT color="green">015</FONT>    import java.io.InputStreamReader;<a name="line.15"></a>
+<FONT color="green">016</FONT>    import java.util.ArrayList;<a name="line.16"></a>
+<FONT color="green">017</FONT>    import java.util.Random;<a name="line.17"></a>
+<FONT color="green">018</FONT>    import java.util.logging.Level;<a name="line.18"></a>
+<FONT color="green">019</FONT>    import java.util.logging.Logger;<a name="line.19"></a>
+<FONT color="green">020</FONT>    <a name="line.20"></a>
+<FONT color="green">021</FONT>    /**<a name="line.21"></a>
+<FONT color="green">022</FONT>     *<a name="line.22"></a>
+<FONT color="green">023</FONT>     * @author Satyajeet<a name="line.23"></a>
+<FONT color="green">024</FONT>     */<a name="line.24"></a>
+<FONT color="green">025</FONT>    public class IOController {<a name="line.25"></a>
+<FONT color="green">026</FONT>    <a name="line.26"></a>
+<FONT color="green">027</FONT>        public ArrayList&lt;String&gt; getPlayerList()<a name="line.27"></a>
+<FONT color="green">028</FONT>        {<a name="line.28"></a>
+<FONT color="green">029</FONT>            ArrayList&lt;String&gt; PlayerNames = new ArrayList&lt;String&gt;();<a name="line.29"></a>
+<FONT color="green">030</FONT>    <a name="line.30"></a>
+<FONT color="green">031</FONT>            try{<a name="line.31"></a>
+<FONT color="green">032</FONT>                // Open the file that is the first<a name="line.32"></a>
+<FONT color="green">033</FONT>                // command line parameter<a name="line.33"></a>
+<FONT color="green">034</FONT>                FileInputStream fstream = new FileInputStream("Game.playerlist");<a name="line.34"></a>
+<FONT color="green">035</FONT>                // Get the object of DataInputStream<a name="line.35"></a>
+<FONT color="green">036</FONT>                DataInputStream in = new DataInputStream(fstream);<a name="line.36"></a>
+<FONT color="green">037</FONT>                BufferedReader br = new BufferedReader(new InputStreamReader(in));<a name="line.37"></a>
+<FONT color="green">038</FONT>                String strLine;<a name="line.38"></a>
+<FONT color="green">039</FONT>                //Read File Line By Line<a name="line.39"></a>
+<FONT color="green">040</FONT>                while ((strLine = br.readLine()) != null)   {<a name="line.40"></a>
+<FONT color="green">041</FONT>                  // Print the content on the console<a name="line.41"></a>
+<FONT color="green">042</FONT>                  //GameEngine.println (strLine);<a name="line.42"></a>
+<FONT color="green">043</FONT>                  PlayerNames.add(strLine);<a name="line.43"></a>
+<FONT color="green">044</FONT>                }<a name="line.44"></a>
+<FONT color="green">045</FONT>                //Close the input stream<a name="line.45"></a>
+<FONT color="green">046</FONT>                in.close();<a name="line.46"></a>
+<FONT color="green">047</FONT>                }catch (Exception e){//Catch exception if any<a name="line.47"></a>
+<FONT color="green">048</FONT>                  GameEngine.println("Error: " + e.getMessage());<a name="line.48"></a>
+<FONT color="green">049</FONT>                }<a name="line.49"></a>
+<FONT color="green">050</FONT>    <a name="line.50"></a>
+<FONT color="green">051</FONT>    <a name="line.51"></a>
+<FONT color="green">052</FONT>    <a name="line.52"></a>
+<FONT color="green">053</FONT>            return PlayerNames;<a name="line.53"></a>
+<FONT color="green">054</FONT>        }<a name="line.54"></a>
+<FONT color="green">055</FONT>    <a name="line.55"></a>
+<FONT color="green">056</FONT>        public Player getPObject(String playername)<a name="line.56"></a>
+<FONT color="green">057</FONT>        {<a name="line.57"></a>
+<FONT color="green">058</FONT>            Player myplayer = null;<a name="line.58"></a>
+<FONT color="green">059</FONT>            try {<a name="line.59"></a>
+<FONT color="green">060</FONT>                Class&lt;Player&gt; pc_object = (Class&lt;Player&gt;) Class.forName(playername);<a name="line.60"></a>
+<FONT color="green">061</FONT>                 myplayer = (Player) pc_object.newInstance();<a name="line.61"></a>
+<FONT color="green">062</FONT>    <a name="line.62"></a>
+<FONT color="green">063</FONT>            } catch (InstantiationException ex) {<a name="line.63"></a>
+<FONT color="green">064</FONT>                GameEngine.println("Player CLass " + playername + " could not be instantiated!");<a name="line.64"></a>
+<FONT color="green">065</FONT>            } catch (IllegalAccessException ex) {<a name="line.65"></a>
+<FONT color="green">066</FONT>                GameEngine.println("Player CLass " + playername + " Illegal Access!");<a name="line.66"></a>
+<FONT color="green">067</FONT>            } catch (ClassNotFoundException ex) {<a name="line.67"></a>
+<FONT color="green">068</FONT>                GameEngine.println("Player CLass " + playername + " was not found!");<a name="line.68"></a>
+<FONT color="green">069</FONT>            }<a name="line.69"></a>
+<FONT color="green">070</FONT>             return myplayer;<a name="line.70"></a>
+<FONT color="green">071</FONT>        }<a name="line.71"></a>
+<FONT color="green">072</FONT>    <a name="line.72"></a>
+<FONT color="green">073</FONT>    }<a name="line.73"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>
