@@ -16,11 +16,11 @@ public class AwwsimPlayer extends Player{
 	private Direction nextMove;
 	private int numDivers;
 	private int viewRadius;
-	private Set<SeaLifePrototype> species;
-	private int penalty;
+//	private int penalty;
 	private Cartogram carto;
-  private int ticks = 0;
-  private Point2D currentLocation;
+	private int ticks = 0;
+	private Point2D currentLocation;
+//	private AbstractPokedex dex;
 
 	@Override
 	public String getName() {
@@ -37,8 +37,14 @@ public class AwwsimPlayer extends Player{
 		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers);
 		viewRadius = r;
 		numDivers = n;
-		species = seaLifePossibilities;
-		this.penalty = penalty;
+
+//		TODO add these back in when we need them
+//		commented them out because they were triggering warnings on 
+//		dead code which made me nervous
+
+//		dex = new WaterProofPokedex(seaLifePossibilities);
+//		this.penalty = penalty;
+
 		//TODO analysis on species precomputation
 		//TODO swimming strategy precomputation
 	}
