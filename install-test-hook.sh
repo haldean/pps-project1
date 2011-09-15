@@ -1,3 +1,4 @@
 #!/bin/sh
-echo "#!/bin/sh\n./runtests.sh" > .git/hooks/pre-commit
+echo '#!/bin/sh
+./runtests.sh' > .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
