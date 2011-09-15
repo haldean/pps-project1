@@ -4,3 +4,4 @@
 *.swo
 bin
 .metadata
+doc/
