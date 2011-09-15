@@ -1,26 +1,22 @@
 package isnork.g3;
+import isnork.sim.GameObject.Direction;
 import isnork.sim.Observation;
 import isnork.sim.iSnorkMessage;
 
 import java.awt.geom.Point2D;
 import java.util.Set;
 
-public class WaterProofCartogram extends AbstractCartogram{
-
-//	private final int mapWidth;
-//	private final int viewRadius;
-//	private final int numDivers;
-//	private final WaterProofSquare[][] mapStructure;
+public class WaterProofCartogram implements Cartogram {
+  private final int sideLength;
+	private final int viewRadius;
+	private final int numDivers;
+	private final Square[][] mapStructure;
 
 	public WaterProofCartogram(int mapWidth, int viewRadius, int numDivers) {
-//		TODO add these back in when we need them
-//		commented them out because they were triggering warnings on 
-//		dead code which made me nervous
-
-//		this.mapWidth = mapWidth;
-//		this.viewRadius = viewRadius;
-//		this.numDivers = numDivers;
-//		this.mapStructure = new WaterProofSquare[mapWidth][mapWidth];
+		this.sideLength = mapWidth;
+		this.viewRadius = viewRadius;
+		this.numDivers = numDivers;
+		this.mapStructure = new WaterProofSquare[sideLength][sideLength];
 	}
 
 	@Override
@@ -54,14 +50,11 @@ public class WaterProofCartogram extends AbstractCartogram{
 
 	@Override
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+    return "";
 	}
 
 	@Override
-	public void getNextDirection() {
-		// TODO Auto-generated method stub
-		
+	public Direction getNextDirection() {
+    return null;
 	}
-
 }
