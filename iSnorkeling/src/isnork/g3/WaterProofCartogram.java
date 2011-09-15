@@ -18,7 +18,7 @@ public class WaterProofCartogram implements Cartogram {
 	private Random random;
 	private int ticks;
 	private static final int MAX_TICKS_PER_ROUND = 60 * 8;
-
+	
 	public WaterProofCartogram(int mapWidth, int viewRadius, int numDivers) {
 		this.sideLength = mapWidth;
 		this.viewRadius = viewRadius;
@@ -66,44 +66,50 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public Direction getNextDirection() {
-		if (ticks < MAX_TICKS_PER_ROUND - 100) {
+		return randomWalk();
+	}
+
+	private Direction randomWalk() {
+		if (ticks < MAX_TICKS_PER_ROUND - 3 * sideLength) {
 			Direction[] dirs = Direction.values();
 			return dirs[random.nextInt(dirs.length)];
 		} else {
-			// Move towards boat
-			int deltaX = 0;
-			int deltaY = 0;
-			if (currentLocation.getX() < 0)
-				deltaX = 1;
-			else if (currentLocation.getX() > 0)
-				deltaX = -1;
+			return returnBoat();
+		}
+	}
 
-			if (currentLocation.getY() < 0)
-				deltaY = 1;
-			else if (currentLocation.getY() > 0)
-				deltaY = -1;
+	private Direction returnBoat() {
+		// Move towards boat
+		String direc = "";
 
-			if (deltaX > 0 && deltaY == 0) {
-				return Direction.E;
-			} else if (deltaX > 0 && deltaY > 0) {
-				return Direction.NE;
-			} else if (deltaX > 0 && deltaY < 0) {
-				return Direction.SE;
-			} else if (deltaX == 0 && deltaY == 0) {
-				return Direction.STAYPUT;
-			} else if (deltaX == 0 && deltaY < 0) {
-				return Direction.N;
-			} else if (deltaX == 0 && deltaY > 0) {
-				return Direction.S;
-			} else if (deltaX < 0 && deltaY == 0) {
-				return Direction.W;
-			} else if (deltaX < 0 && deltaY > 0) {
-				return Direction.NW;
-			} else if (deltaX < 0 && deltaY < 0) {
-				return Direction.NE;
-			} else {
-				throw new RuntimeException("I HAVE NO IDEA");
-			}
+		if (currentLocation.getY() < 0)
+			direc = direc.concat("S");
+		else if (currentLocation.getY() > 0)
+			direc = direc.concat("N");
+
+		if (currentLocation.getX() < 0)
+			direc = direc.concat("E");
+		else if (currentLocation.getX() > 0)
+			direc = direc.concat("W");
+
+		if (direc.equals("W")) {
+			return Direction.W;
+		} else if (direc.equals("E")) {
+			return Direction.E;
+		} else if (direc.equals("N")) {
+			return Direction.N;
+		} else if (direc.equals("S")) {
+			return Direction.S;
+		} else if (direc.equals("NE")) {
+			return Direction.NE;
+		} else if (direc.equals("SE")) {
+			return Direction.SE;
+		} else if (direc.equals("NW")) {
+			return Direction.NW;
+		} else if (direc.equals("SW")) {
+			return Direction.SW;
+		} else {
+			return Direction.STAYPUT;
 		}
 	}
 }
