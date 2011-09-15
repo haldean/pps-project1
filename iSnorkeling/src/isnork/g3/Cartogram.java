@@ -11,18 +11,20 @@ import java.util.Set;
 public interface Cartogram {
   /**
    * Update the map with the provided metrics for this tick.
-   * @return Unknown.
    */
-	String update(Point2D myPosition, Set<Observation> whatYouSee,
-			Set<Observation> playerLocations, Set<iSnorkMessage> incomingMessages);
+	void update(Point2D myPosition, Set<Observation> whatYouSee,
+			Set<Observation> playerLocations, 
+			Set<iSnorkMessage> incomingMessages);
 
   /**
-   * Unknown.
+   * Fetches the message that the diver should send.  
+   * Must be called after update.
    */
 	String getMessage();
 
   /**
-   * Get the next move that the diver should make.
+   * Gets the next move that the diver should make.  
+   * Must be called after update.
    */
 	Direction getNextDirection();
 
