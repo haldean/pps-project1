@@ -8,24 +8,25 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 import java.util.Set;
 
-public class WaterProofCartogram implements Cartogram {
-	private final int sideLength;
-	private final int viewRadius;
-	private final int numDivers;
-	private final Square[][] mapStructure;
-	
+/**
+ * Snapshot of old wpCartogram in case we ever want to reuse the old code
+ * 
+ * @author Moses
+ * 
+ */
+
+public class RandomCartogram implements Cartogram {
 	private Point2D currentLocation;
 	private Random random;
 	private int ticks;
 	private static final int MAX_TICKS_PER_ROUND = 60 * 8;
-	
-	public WaterProofCartogram(int mapWidth, int viewRadius, int numDivers) {
-		this.sideLength = mapWidth;
-		this.viewRadius = viewRadius;
-		this.numDivers = numDivers;
-		this.mapStructure = new WaterProofSquare[sideLength][sideLength];
+	private final int mapWidth;
+
+	public RandomCartogram(int mapWidth, int viewRadius, int numDivers) {
 		this.random = new Random();
 		ticks = 0;
+
+		this.mapWidth = mapWidth;
 	}
 
 	@Override
@@ -61,15 +62,17 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public String getMessage() {
-    return "";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Direction getNextDirection() {
 		return randomWalk();
 	}
+
 	private Direction randomWalk() {
-		if (ticks < MAX_TICKS_PER_ROUND - 3 * sideLength) {
+		if (ticks < MAX_TICKS_PER_ROUND - 3 * mapWidth) {
 			Direction[] dirs = Direction.values();
 			return dirs[random.nextInt(dirs.length)];
 		} else {
@@ -79,18 +82,11 @@ public class WaterProofCartogram implements Cartogram {
 
 	private Direction returnBoat() {
 		// Move towards boat
-		String direc = "";
+		String direc = getDirection();
+		return parseDirection(direc);
+	}
 
-		if (currentLocation.getY() < 0)
-			direc = direc.concat("S");
-		else if (currentLocation.getY() > 0)
-			direc = direc.concat("N");
-
-		if (currentLocation.getX() < 0)
-			direc = direc.concat("E");
-		else if (currentLocation.getX() > 0)
-			direc = direc.concat("W");
-
+	private Direction parseDirection(String direc) {
 		if (direc.equals("W")) {
 			return Direction.W;
 		} else if (direc.equals("E")) {
@@ -110,6 +106,20 @@ public class WaterProofCartogram implements Cartogram {
 		} else {
 			return Direction.STAYPUT;
 		}
+	}
+
+	private String getDirection() {
+		String direc = "";
+		if (currentLocation.getY() < 0)
+			direc = direc.concat("S");
+		else if (currentLocation.getY() > 0)
+			direc = direc.concat("N");
+
+		if (currentLocation.getX() < 0)
+			direc = direc.concat("E");
+		else if (currentLocation.getX() > 0)
+			direc = direc.concat("W");
+		return direc;
 	}
 
 }
