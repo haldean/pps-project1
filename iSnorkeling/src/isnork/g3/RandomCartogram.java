@@ -30,7 +30,7 @@ public class RandomCartogram implements Cartogram {
 	}
 
 	@Override
-	public String update(Point2D myPosition, Set<Observation> whatYouSee,
+	public void update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
 		ticks++;
@@ -56,8 +56,6 @@ public class RandomCartogram implements Cartogram {
 			observation.happinessD();
 			observation.getName();
 		}
-
-		return null;
 	}
 
 	@Override
