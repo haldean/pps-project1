@@ -13,7 +13,7 @@ public class AwwsimPlayer extends Player{
   private static final int MAX_TICKS_PER_ROUND = 60 * 8;
 	
 	String name;
-	private Direction nextMove;
+//	private Direction nextMove;
 	private int numDivers;
 	private int viewRadius;
 //	private int penalty;
