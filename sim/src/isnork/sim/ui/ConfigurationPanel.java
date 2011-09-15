@@ -73,6 +73,7 @@ public final class ConfigurationPanel extends JPanel implements ChangeListener,
 	private JSlider speedSlider;
 	protected JLabel interactiveHelp;
 
+  @SuppressWarnings("unchecked")
 	public ConfigurationPanel(GameConfig config) {
 		this.config = config;
 
@@ -184,6 +185,7 @@ public final class ConfigurationPanel extends JPanel implements ChangeListener,
 		 throw new RuntimeException("Unknown State Changed Event!!");
 	}
 
+  @SuppressWarnings("unchecked")
 	public void itemStateChanged(ItemEvent arg0) {
 		if (arg0.getSource().equals(playerBox)
 				&& arg0.getStateChange() == ItemEvent.SELECTED) {

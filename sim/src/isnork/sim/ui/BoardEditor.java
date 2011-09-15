@@ -50,7 +50,10 @@ import javax.swing.filechooser.FileFilter;
 
 public final class BoardEditor extends JPanel implements ItemListener,
 		ChangeListener, ActionListener {
+  private static final long serialVersionUID = 120489L;
+
 	class BoardEditingPanel extends JPanel {
+    private static final long serialVersionUID = 235029L;
 		ArrayList<SeaLifePrototype> b;
 		JPanel sealifeList;
 		JScrollPane s;
@@ -268,7 +271,6 @@ public final class BoardEditor extends JPanel implements ItemListener,
 		}
 	}
 
-	private static final long serialVersionUID = 1L;
 	JSpinner heightSpinner;
 	JSpinner widthSpinner;
 	JButton resetButton;

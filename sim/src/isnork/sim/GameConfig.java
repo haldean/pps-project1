@@ -134,6 +134,7 @@ public class GameConfig {
 		readPlayers();
 	}
 
+  @SuppressWarnings("unchecked")
 	private void readPlayers() {
 		try {
 			File f = new File("playerClasses.txt");

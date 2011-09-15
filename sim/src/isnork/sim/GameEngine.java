@@ -387,6 +387,8 @@ public Player getCurPlayer() {
 		}
 	}
 	public static HashMap<Integer,Class<Player>> playerList;
+
+  @SuppressWarnings("unchecked")
 	public static final void main(String[] args) {
 		
 		if (args.length < 1 || args.length > 7) {

@@ -11,6 +11,9 @@ import javax.swing.JList;
 
 public class ClassRenderer extends DefaultListCellRenderer
 {
+  private static final long serialVersionUID = 25123L;
+
+  @SuppressWarnings("unchecked")
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
 	{
 		try
@@ -19,7 +22,7 @@ public class ClassRenderer extends DefaultListCellRenderer
 			if (value instanceof Class)
 			{
 				Class<Player> p = (Class<Player>) value;
-				Player pl = ((Player) p.newInstance());
+				Player pl = p.newInstance();
 				String strPlayer = pl.getName();
 				if (strPlayer != null)
 				{
