@@ -2,8 +2,11 @@ package isnork.g3;
 
 import isnork.sim.SeaLife;
 import isnork.sim.Player;
-import java.util.Set;
+
 import com.google.common.collect.*;
+
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Records what creatures, divers, the danger, and happiness of a square
@@ -51,10 +54,12 @@ public class WaterProofSquare implements Square {
     happiness = 0.;
     divers.clear();
 
-    for (SeaLifeExpectation creature : creatures) {
-      SeaLife seaLife = creature.getSeaLife();
-      if (true /* TODO(haldean): NO. */) {
-        creatures.remove(creature);
+    Square.SeaLifeExpectation creature;
+    for (Iterator<Square.SeaLifeExpectation> iter = creatures.iterator();
+         iter.hasNext();) {
+      SeaLife seaLife = iter.next().getSeaLife();
+      if (seaLife.getSpeed() > 0) {
+        iter.remove();
       } else {
         happiness += seaLife.getHappiness();
         if (seaLife.isDangerous()) {
