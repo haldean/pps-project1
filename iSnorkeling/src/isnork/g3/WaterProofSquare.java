@@ -14,35 +14,35 @@ public class WaterProofSquare extends AbstractSquare{
 	private double danger = 0.0;
 	private double happiness = 0.0;
 
-	void addCreature(SeaLife creature) {
+	public void addCreature(SeaLife creature) {
 		creatures.add(creature);
 	}
 
-	Set<SeaLife> getCreatures() {
+	public Set<SeaLife> getCreatures() {
 		return creatures;
 	}
 
-	void addDiver(Player diver) {
+	public void addDiver(Player diver) {
 		divers.add(diver);
 	}
 
-	Set<Player> getDivers() {
+	public Set<Player> getDivers() {
 		return divers;
 	}
 
-	void setDanger(double danger) {
+	public void setDanger(double danger) {
 		this.danger = danger;
 	}
 
-	double getDanger() {
+	public double getDanger() {
 		return danger;
 	}
 
-	void setHappiness(double happiness) {
+	public void setHappiness(double happiness) {
 		this.happiness = happiness;
 	}
 
-	double getHappiness() {
+	public double getHappiness() {
 		return happiness;
 	}
 
