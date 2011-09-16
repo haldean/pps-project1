@@ -18,7 +18,7 @@ public class WaterProofSquareTest {
      * Love,
      * Will
      */
-    SeaLifePrototype proto = new SeaLifePrototype();
+	SeaLifePrototype proto = new SeaLifePrototype();
     proto.setDangerous(false);
     proto.setHappiness(10);
     proto.setSpeed(canMove ? 1 : 0);

@@ -5,8 +5,12 @@ import isnork.sim.Observation;
 import isnork.sim.iSnorkMessage;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import com.google.common.collect.Lists;
 
 public class WaterProofCartogram implements Cartogram {
 	private final int sideLength;
@@ -59,13 +63,97 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public String getMessage() {
-    return "";
+		return "";
 	}
 
 	@Override
 	public Direction getNextDirection() {
-		return randomWalk();
+		return greedyHillClimb();
 	}
+
+	private Direction greedyHillClimb() {
+		/*
+		 * Iterate over all possible new squares you can hit next.  
+		 * For you to move in a diagonal direction, you need to be 1.5* as good as ortho
+		 * To stay in the same square, you only need to be .5 * as good as ortho
+		 */
+		
+		double x = (int) this.currentLocation.getX();
+		double y = (int) this.currentLocation.getY();
+
+		List<DirectionValue> lst = Lists.newArrayListWithCapacity(8);
+
+		lst.add(new DirectionValue(Direction.STAYPUT, getExpectedHappinessForCoords(x, y) * 6.0));
+		
+		lst.add(new DirectionValue(Direction.E, getExpectedHappinessForCoords(x + 1, y) * 3.0));
+		lst.add(new DirectionValue(Direction.W, getExpectedHappinessForCoords(x - 1, y) * 3.0));
+		
+		lst.add(new DirectionValue(Direction.S, getExpectedHappinessForCoords(x, y + 1) * 3.0));
+		lst.add(new DirectionValue(Direction.N, getExpectedHappinessForCoords(x, y - 1) * 3.0));
+		
+		lst.add(new DirectionValue(Direction.SE, getExpectedHappinessForCoords(x + 1, y + 1) * 2.0));
+		lst.add(new DirectionValue(Direction.SW, getExpectedHappinessForCoords(x - 1, y + 1) * 2.0));
+		
+		lst.add(new DirectionValue(Direction.NE, getExpectedHappinessForCoords(x + 1, y - 1) * 2.0));
+		lst.add(new DirectionValue(Direction.NW, getExpectedHappinessForCoords(x - 1, y - 1) * 2.0));
+		
+		DirectionValue max = lst.get(0);
+		for (DirectionValue dv : lst) {
+			if (dv.getDub() > max.getDub()){
+				max = dv;
+			}
+		}
+		
+		return max.getDir();
+	}
+
+	private double getExpectedHappinessForCoords(double x, double y) {
+		if (isInvalidCoords(x, y)){
+			return Double.MIN_VALUE;
+		}
+		
+		int minX = (int) x - viewRadius;
+		minX = ((minX < -sideLength / 2) ? minX : -sideLength / 2) + sideLength / 2;
+		
+		int minY = (int) y - viewRadius;
+		minY = ((minY < -sideLength / 2) ? minY : -sideLength / 2) + sideLength / 2;
+
+		int maxX = (int) x + viewRadius;
+		maxX = ((maxX > sideLength / 2) ? maxX : sideLength / 2) + sideLength / 2;
+
+		int maxY = (int) y + viewRadius;
+		maxY = ((maxY > sideLength / 2) ? maxY : sideLength / 2) + sideLength / 2;
+		
+		double expectedHappiness = 0.0;
+		for (int xCoord = minX; xCoord < maxX; xCoord++){
+			for (int yCoord = minY; yCoord < maxY; yCoord++){
+				if (((x + sideLength / 2) * (x + sideLength / 2) +
+						(y + sideLength / 2) * (y + sideLength / 2)) < viewRadius){
+					expectedHappiness += mapStructure[xCoord][yCoord].getExpectedHappiness();
+				}
+			}
+		}
+		return expectedHappiness;
+	}
+
+	private boolean isInvalidCoords(double x, double y) {
+		if ( x < -sideLength / 2 ){
+			return true;
+		}
+		else if ( x > sideLength / 2 ){
+			return true;			
+		}
+		else if ( y < -sideLength / 2 ){
+			return true;
+		}
+		else if ( y > sideLength / 2 ){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	private Direction randomWalk() {
 		if (ticks < MAX_TICKS_PER_ROUND - 3 * sideLength) {
 			Direction[] dirs = Direction.values();
