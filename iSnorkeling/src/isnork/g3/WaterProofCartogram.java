@@ -230,7 +230,9 @@ public class WaterProofCartogram implements Cartogram {
 	}
 	
 	private Direction unOptimizedHeatmapGetNextDirection(){
-		if (Math.abs(currentLocation.getX()) < (MAX_TICKS_PER_ROUND - ticks)) {
+		int tickLeeway = MAX_TICKS_PER_ROUND - 3 * ticks;
+		if (Math.abs(currentLocation.getX()) < tickLeeway &&
+				Math.abs(currentLocation.getY()) < tickLeeway) {
 			return greedyHillClimb();
 		} else {
 			return returnBoat();
