@@ -14,7 +14,6 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.awt.geom.Point2D;
-import java.util.List;
 
 public class WaterProofCartogramTest {
   private SeaLife getSeaLife(final boolean canMove) {
