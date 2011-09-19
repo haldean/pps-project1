@@ -87,4 +87,8 @@ public class SeaLifePrototypeCounter {
 	public int getCaptured() {
 		return captured;
 	}
+
+	public boolean isMoving() {
+		return delegate.getSpeed() > 0;
+	}
 }

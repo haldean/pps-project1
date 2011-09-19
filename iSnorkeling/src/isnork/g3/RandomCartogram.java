@@ -70,7 +70,7 @@ public class RandomCartogram implements Cartogram {
 	}
 
 	private Direction randomWalk() {
-		if (ticks < MAX_TICKS_PER_ROUND - 3 * mapWidth) {
+		if (ticks < MAX_TICKS_PER_ROUND - 2 * mapWidth) {
 			Direction[] dirs = Direction.values();
 			return dirs[random.nextInt(dirs.length)];
 		} else {
