@@ -37,11 +37,13 @@ public class PokedexTest {
 		int happiness = 7;
 		int max = 3;
 		int min = 2;
+		boolean stationary = false;
 		SeaLifePrototype charmander = new SeaLifePrototypeBuilder("charmander")
 			.dangerous(danger)
 			.happiness(happiness)
 			.minCount(min)
 			.maxCount(max)
+			.moving(stationary)
 			.create();
 		
 		WaterProofPokedex dex = new WaterProofPokedex(ImmutableSet.of(charmander));
@@ -50,6 +52,7 @@ public class PokedexTest {
 		assertTrue((min == dex.getMinCount("charmander")));
 		assertTrue((happiness == dex.getHappiness("charmander")));
 		assertTrue((danger == dex.isDangerous("charmander")));
+		assertTrue((stationary == dex.isMoving("charmander")));
 	}
 
 	
@@ -59,11 +62,14 @@ public class PokedexTest {
 		int happiness = 7;
 		int max = 3;
 		int min = 2;
+		boolean stationary = true;
+
 		SeaLifePrototype charmander = new SeaLifePrototypeBuilder("charmander")
 			.dangerous(danger)
 			.happiness(happiness)
 			.minCount(min)
 			.maxCount(max)
+			.moving(stationary)
 			.create();
 		
 		SeaLifePrototype squirtle = new SeaLifePrototypeBuilder("squirtle")
@@ -71,6 +77,7 @@ public class PokedexTest {
 			.happiness(happiness * 2)
 			.minCount(min * 2)
 			.maxCount(max * 2)
+			.moving(!stationary)
 			.create();
 		
 		WaterProofPokedex dex = new WaterProofPokedex(ImmutableSet.of(charmander, squirtle));
@@ -79,12 +86,13 @@ public class PokedexTest {
 		assertTrue((min == dex.getMinCount("charmander")));
 		assertTrue((happiness == dex.getHappiness("charmander")));
 		assertTrue((danger == dex.isDangerous("charmander")));
-
+		assertTrue((stationary == dex.isMoving("charmander")));
 	
 		assertTrue((max * 2 == dex.getMaxCount("squirtle")));
 		assertTrue((min * 2 == dex.getMinCount("squirtle")));
 		assertTrue((happiness * 2 == dex.getHappiness("squirtle")));
 		assertTrue((!danger == dex.isDangerous("squirtle")));
+		assertTrue((!stationary == dex.isMoving("squirtle")));
 	}
 	
 	@Test

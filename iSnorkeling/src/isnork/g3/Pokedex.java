@@ -18,7 +18,14 @@ public interface Pokedex {
 	 * @return
 	 */
 	public boolean isDangerous(String name);
-	
+
+	/**
+	 * Fetches whether the creature with this name is dangerous
+	 * @param name
+	 * @return
+	 */
+	public boolean isMoving(String name);
+
 	/**
 	 * Provides the mincount for the creature with this name
 	 * @param name

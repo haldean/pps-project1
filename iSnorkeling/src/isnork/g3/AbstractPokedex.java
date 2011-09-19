@@ -69,5 +69,10 @@ public abstract class AbstractPokedex implements Pokedex {
 	public int getPersonalSeenCount(String name){
 		return map.get(name).getCaptured();
 	}
+	
+	@Override
+	public boolean isMoving(String name){
+		return map.get(name).isMoving();
+	}
 
 }
