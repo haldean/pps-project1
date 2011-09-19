@@ -96,7 +96,6 @@ public class WaterProofCartogram implements Cartogram {
 	public void update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
-		System.out.println("start update");
 		ticks++;
 		currentLocation = myPosition;
 
@@ -131,9 +130,9 @@ public class WaterProofCartogram implements Cartogram {
       }
 	}
 
-	if(!whatYouSee.isEmpty()) {
-		observe(whatYouSee);
-	}
+		if(!whatYouSee.isEmpty()) {
+			observe(whatYouSee);
+		}
     updateMovingCreatures();
 	}
 
@@ -221,8 +220,6 @@ public class WaterProofCartogram implements Cartogram {
 				currentLocation.getY());
 
 		Direction dir = getMaxDirection(lst);
-		System.out.println("Direction X: " + DIRECTION_MAP.get(dir).getX() +
-				" Y: " + DIRECTION_MAP.get(dir).getY());
 		return dir;
 	}
 
@@ -230,7 +227,6 @@ public class WaterProofCartogram implements Cartogram {
 		DirectionValue max = lst.get(0);
 
 		for (DirectionValue dv : lst) {
-			System.out.println(dv.getDub() + "");
 			if (dv.getDub() > max.getDub()) {
 				max = dv;
 			}
@@ -273,34 +269,38 @@ public class WaterProofCartogram implements Cartogram {
 		}
 
 		int minX = (int) x - viewRadius;
-		minX = ((minX < -sideLength / 2) ? minX : -sideLength / 2) + sideLength
+		minX = ((minX > -sideLength / 2) ? minX : -sideLength / 2) + sideLength
 				/ 2;
 
 		int minY = (int) y - viewRadius;
-		minY = ((minY < -sideLength / 2) ? minY : -sideLength / 2) + sideLength
+		minY = ((minY > -sideLength / 2) ? minY : -sideLength / 2) + sideLength
 				/ 2;
 
 		int maxX = (int) x + viewRadius;
-		maxX = ((maxX > sideLength / 2) ? maxX : sideLength / 2) + sideLength
+		maxX = ((maxX < sideLength / 2) ? maxX : sideLength / 2) + sideLength
 				/ 2;
 
 		int maxY = (int) y + viewRadius;
-		maxY = ((maxY > sideLength / 2) ? maxY : sideLength / 2) + sideLength
+		maxY = ((maxY < sideLength / 2) ? maxY : sideLength / 2) + sideLength
 				/ 2;
 
 		double expectedHappiness = 0.0;
 		for (int xCoord = minX; xCoord < maxX; xCoord++) {
 			for (int yCoord = minY; yCoord < maxY; yCoord++) {
-				System.out.println("x: " + xCoord + " y: " + yCoord);
-				if (Math.sqrt((xCoord + sideLength / 2) * (xCoord + sideLength / 2) + (yCoord + sideLength / 2)
-						* (yCoord + sideLength / 2)) < viewRadius) {
-					System.out.println("FUCK");
+				double sqrt = Math.sqrt(square((xCoord - (x + sideLength / 2)) + 
+						square(yCoord - (y + sideLength / 2))));
+
+				if (sqrt < viewRadius) {
 					expectedHappiness += mapStructure[xCoord][yCoord]
 							.getExpectedHappiness();
 				}
 			}
 		}
 		return expectedHappiness;
+	}
+	
+	private final static double square(double x){
+		return x * x;
 	}
 
 	private double getExpectedDangerForCoords(double x, double y) {
@@ -359,10 +359,8 @@ public class WaterProofCartogram implements Cartogram {
 		int tickLeeway = MAX_TICKS_PER_ROUND - 3 * ticks;
 		if (Math.abs(currentLocation.getX()) < tickLeeway
 				&& Math.abs(currentLocation.getY()) < tickLeeway) {
-			System.out.println("CLIMB");
 			return greedyHillClimb();
 		} else {
-			System.out.println("RETURN");
 			return returnBoat();
 		}
 	}

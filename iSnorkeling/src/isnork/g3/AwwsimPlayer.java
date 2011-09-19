@@ -32,9 +32,10 @@ public class AwwsimPlayer extends Player {
 			int penalty, int d, int r, int n) {
 		int mapWidth = d * 2 + 1;
 		dex = new WaterProofPokedex(seaLifePossibilities);
-		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
 		viewRadius = r;
 		numDivers = n;
+
+		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
 
 		// TODO add these back in when we need them
 		// commented them out because they were triggering warnings on
