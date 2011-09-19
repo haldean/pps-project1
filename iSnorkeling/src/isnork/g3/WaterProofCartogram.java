@@ -23,7 +23,7 @@ public class WaterProofCartogram implements Cartogram {
 	private final int sideLength;
 	private final int viewRadius;
 	private final int numDivers;
-  private final Pokedex dex;
+  	private final Pokedex dex;
 	private final Square[][] mapStructure;
 	private final static Map<Direction, Coord> DIRECTION_MAP = ImmutableMap.<Direction, Coord>builder()
 	.put(Direction.E, new Coord(1, 0))
@@ -59,12 +59,12 @@ public class WaterProofCartogram implements Cartogram {
 	private Point2D currentLocation;
 	private Random random;
 	private int ticks;
-  private List<CreatureRecord> movingCreatures;
+  	private List<CreatureRecord> movingCreatures;
 	private static final int MAX_TICKS_PER_ROUND = 60 * 8;
 
-  /* Tunes how quickly to forget we've seen a creature. The higher this number,
-   * the sooner a creature will be removed from the map after viewing. */
-  private static final double MAX_DECAY = 0.25;
+  	/* Tunes how quickly to forget we've seen a creature. The higher this number,
+  	 * the sooner a creature will be removed from the map after viewing. */
+  	private static final double MAX_DECAY = 0.25;
 
 	private static final double DANGER_RADIUS = 2;
 	
@@ -108,7 +108,7 @@ public class WaterProofCartogram implements Cartogram {
 		}
     */
 
-		for (Observation observation : whatYouSee) {
+	for (Observation observation : whatYouSee) {
       /* Note: this should not be happening on the diver's observations, but
        * based on the other divers' observations. This is here to show how to
        * properly update the map. TODO(haldean, hans): make this work with comm
