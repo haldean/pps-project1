@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     PokedexTest.class,
     SeaLifePrototypeBuilderTest.class,
-    WaterProofSquareTest.class
+    WaterProofSquareTest.class,
+    WaterProofTranscoderTest.class
     })
 public class AllTests {}
