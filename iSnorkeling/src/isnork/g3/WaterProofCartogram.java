@@ -79,15 +79,15 @@ public class WaterProofCartogram implements Cartogram {
 		this.viewRadius = viewRadius;
 		this.numDivers = numDivers;
 		this.mapStructure = new WaterProofSquare[sideLength][sideLength];
-    for (int i=0; i<sideLength; i++) {
-      for (int j=0; j<sideLength; j++) {
-        this.mapStructure[i][j] = new WaterProofSquare();
-      }
-    }
+    	for (int i=0; i<sideLength; i++) {
+      		for (int j=0; j<sideLength; j++) {
+       	 		this.mapStructure[i][j] = new WaterProofSquare();
+      		}
+    	}
 
 		this.random = new Random();
-    this.movingCreatures = Lists.newArrayList();
-    this.dex = dex;
+    	this.movingCreatures = Lists.newArrayList();
+    	this.dex = dex;
 		ticks = 0;
 		xcoder = new WaterProofTranscoder(dex.getSpeciesRanking(), sideLength);
 		messageQueue = new LinkedList<String>();
@@ -133,7 +133,6 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	if(!whatYouSee.isEmpty()) {
-		System.out.println(whatYouSee.toString());
 		observe(whatYouSee);
 	}
     updateMovingCreatures();
