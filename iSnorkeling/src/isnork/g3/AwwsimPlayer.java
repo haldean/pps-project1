@@ -53,10 +53,14 @@ public class AwwsimPlayer extends Player {
 	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<iSnorkMessage> incomingMessages,
 			Set<Observation> playerLocations) {
-    System.out.println("carto update is go");
-		carto.update(myPosition, whatYouSee, playerLocations, incomingMessages);
-    System.out.println("carto update is done");
-		nextMove = carto.getNextDirection();
+    try {
+      System.out.println("carto update is go");
+      carto.update(myPosition, whatYouSee, playerLocations, incomingMessages);
+      System.out.println("carto update is done");
+      nextMove = carto.getNextDirection();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 		return carto.getMessage();
 	}
 

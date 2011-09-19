@@ -36,6 +36,12 @@ public class WaterProofCartogram implements Cartogram {
 		this.viewRadius = viewRadius;
 		this.numDivers = numDivers;
 		this.mapStructure = new WaterProofSquare[sideLength][sideLength];
+    for (int i=0; i<sideLength; i++) {
+      for (int j=0; j<sideLength; j++) {
+        this.mapStructure[i][j] = new WaterProofSquare();
+      }
+    }
+
 		this.random = new Random();
     this.movingCreatures = Lists.newArrayList();
     this.dex = dex;
@@ -65,31 +71,34 @@ public class WaterProofCartogram implements Cartogram {
     */
 
 		for (Observation observation : whatYouSee) {
-      System.out.println("obvs");
       /* Note: this should not be happening on the diver's observations, but
        * based on the other divers' observations. This is here to show how to
        * properly update the map. TODO(haldean, hans): make this work with comm
        * stuff. */
+      if (observation.getName() == null) {
+        continue;
+      }
       SeaLifePrototype seaLife = dex.get(observation.getName());
-      System.out.println(seaLife);
       if (seaLife.getSpeed() > 0) {
-        System.out.println("it moves");
         movingCreatures.add(new CreatureRecord(
               observation.getLocation(), seaLife));
       } else {
-        System.out.println("no moves");
         squareFor(observation.getLocation()).addCreature(seaLife, 1.);
       }
 		}
 
-    System.out.println("update moving");
     updateMovingCreatures();
-    System.out.println("end update");
     System.out.println(this.toString());
 	}
 
   private Square squareFor(Point2D location) {
-    return mapStructure[(int) location.getX()][(int) location.getY()];
+    return squareFor((int) location.getX(), (int) location.getY());
+  }
+
+  private Square squareFor(int x, int y) {
+    x += (sideLength / 2);
+    y += (sideLength / 2);
+    return mapStructure[x][y];
   }
 
   private void updateMovingCreatures() {
@@ -110,7 +119,7 @@ public class WaterProofCartogram implements Cartogram {
       for (int dx = -r; dx <= r; dx++) {
         for (int dy = -r; dy <= r; dy++) {
           if (Math.sqrt(dx * dx + dy * dy) <= r) {
-            Square thisSquare = mapStructure[x][y];
+            Square thisSquare = squareFor(x + dx, y + dy);
             thisSquare.addCreature(record.seaLife, certainty);
           }
         }
