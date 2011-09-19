@@ -259,38 +259,38 @@ public class WaterProofCartogram implements Cartogram {
 		return getExpectedHappinessForCoords(coord.getX(), coord.getY());
 	}
 
-	private double getExpectedHappinessForCoords(double x, double y) {
-		if (x == 0 && y == 0){
+	private double getExpectedHappinessForCoords(double unadjustedX, double unadjustedY) {
+		if (unadjustedX == 0 && unadjustedY == 0){
 			return 0;
 		}
 		
-		if (isInvalidCoords(x, y)) {
+		if (isInvalidCoords(unadjustedX, unadjustedY)) {
 			return Double.MIN_VALUE;
 		}
+		
+		double x = unadjustedX + sideLength / 2;
+		double y = unadjustedY + sideLength / 2;
 
 		int minX = (int) x - viewRadius;
-		minX = ((minX > -sideLength / 2) ? minX : -sideLength / 2) + sideLength
-				/ 2;
+		minX = ((minX > 0) ? minX : 0);
 
 		int minY = (int) y - viewRadius;
-		minY = ((minY > -sideLength / 2) ? minY : -sideLength / 2) + sideLength
-				/ 2;
+		minY = ((minY > 0) ? minY : 0);
 
 		int maxX = (int) x + viewRadius;
-		maxX = ((maxX < sideLength / 2) ? maxX : sideLength / 2) + sideLength
-				/ 2;
+		maxX = ((maxX < sideLength) ? maxX : sideLength);
 
 		int maxY = (int) y + viewRadius;
-		maxY = ((maxY < sideLength / 2) ? maxY : sideLength / 2) + sideLength
-				/ 2;
+		maxY = ((maxY < sideLength) ? maxY : sideLength);
 
 		double expectedHappiness = 0.0;
 		for (int xCoord = minX; xCoord < maxX; xCoord++) {
 			for (int yCoord = minY; yCoord < maxY; yCoord++) {
-				double sqrt = Math.sqrt(square((xCoord - (x + sideLength / 2)) + 
-						square(yCoord - (y + sideLength / 2))));
+				double sqrt = Math.sqrt(square((xCoord - x) + 
+						square(yCoord - y)));
 
 				if (sqrt < viewRadius) {
+					System.out.println(sqrt);
 					expectedHappiness += mapStructure[xCoord][yCoord]
 							.getExpectedHappiness();
 				}
