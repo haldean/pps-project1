@@ -25,22 +25,24 @@ public class WaterProofCartogram implements Cartogram {
 	private final int numDivers;
   private final Pokedex dex;
 	private final Square[][] mapStructure;
-	private final static Map<Direction, Coord> DIRECTION_MAP = ImmutableMap.<Direction, Coord>builder()
-	.put(Direction.E, new Coord(1, 0))
-	.put(Direction.W, new Coord(-1, 0))
-		
-	.put(Direction.S, new Coord(0, 1))
-	.put(Direction.N, new Coord(0, -1))
-		
-	.put(Direction.SE, new Coord(1, 1))
-	.put(Direction.SW, new Coord(- 1, 1))
-		
-	.put(Direction.NE, new Coord(1, -1))
-	.put(Direction.NW, new Coord(-1, -1))
-	.put(Direction.STAYPUT, new Coord(0, 0))
-	.build();
+	private final static Map<Direction, Coord> DIRECTION_MAP =
+    ImmutableMap.<Direction, Coord>builder()
+    .put(Direction.E, new Coord(1, 0))
+    .put(Direction.W, new Coord(-1, 0))
+
+    .put(Direction.S, new Coord(0, 1))
+    .put(Direction.N, new Coord(0, -1))
+
+    .put(Direction.SE, new Coord(1, 1))
+    .put(Direction.SW, new Coord(- 1, 1))
+
+    .put(Direction.NE, new Coord(1, -1))
+    .put(Direction.NW, new Coord(-1, -1))
+    .put(Direction.STAYPUT, new Coord(0, 0))
+    .build();
 	
-	private final static Map<Direction, Coord> orthoDirectionMap = ImmutableMap.<Direction, Coord>builder()
+	private final static Map<Direction, Coord> orthoDirectionMap =
+    ImmutableMap.<Direction, Coord>builder()
 		.put(Direction.E, new Coord(1, 0))
 		.put(Direction.W, new Coord(-1, 0))
 			
@@ -48,7 +50,8 @@ public class WaterProofCartogram implements Cartogram {
 		.put(Direction.N, new Coord(0, -1))
 		.build();
 	
-	private final static Map<Direction, Coord> diagDirectionMap = ImmutableMap.<Direction, Coord>builder()
+	private final static Map<Direction, Coord> diagDirectionMap =
+    ImmutableMap.<Direction, Coord>builder()
 		.put(Direction.SE, new Coord(1, 1))
 		.put(Direction.SW, new Coord(- 1, 1))
 			
@@ -281,7 +284,6 @@ public class WaterProofCartogram implements Cartogram {
 		return expectedHappiness;
 	}
 
-
 	private boolean isInvalidCoords(double x, double y) {
 		if ( x < -sideLength / 2 ){
 			return true;
@@ -394,6 +396,18 @@ public class WaterProofCartogram implements Cartogram {
         output.append("\t");
       }
       output.append("\n");
+    }
+
+    output.append("\nWe got shit at:\n");
+    for (int i=0; i<mapStructure.length; i++) {
+        for (int j=0; j<mapStructure[i].length; j++) {
+            if (mapStructure[i][j].getCreatures().size() > 0) {
+                output.append(i - (sideLength / 2));
+                output.append(", ");
+                output.append(j - (sideLength / 2));
+                output.append("\n");
+            }
+        }
     }
     return output.toString();
   }
