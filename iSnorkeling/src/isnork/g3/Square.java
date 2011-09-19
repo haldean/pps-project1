@@ -3,11 +3,11 @@ package isnork.g3;
 import java.util.Set;
 
 import isnork.sim.Player;
-import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
 
 public interface Square {
   public interface SeaLifeExpectation {
-    SeaLife getSeaLife();
+    SeaLifePrototype getSeaLife();
     double getCertainty();
   }
 
@@ -17,7 +17,7 @@ public interface Square {
    * @param certainty The probability the creature is on the square, as a
    * number from 0 to 1. Stationary creatures should have a certainty of 1.
    */
-	void addCreature(SeaLife creature, double certainty);
+	void addCreature(SeaLifePrototype creature, double certainty);
 
   /**
    * Get the creatures thought to be on this square, along with the certainty of

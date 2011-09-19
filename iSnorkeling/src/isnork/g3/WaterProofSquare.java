@@ -1,6 +1,6 @@
 package isnork.g3;
 
-import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
 import isnork.sim.Player;
 
 import com.google.common.collect.*;
@@ -17,8 +17,10 @@ public class WaterProofSquare implements Square {
 	private double danger = 0.0;
 	private double happiness = 0.0;
 
-	public void addCreature(SeaLife creature, double certainty) {
+	public void addCreature(SeaLifePrototype creature, double certainty) {
 		creatures.add(new ExpectedCreature(creature, certainty));
+    happiness += creature.getHappiness();
+    danger += creature.isDangerous() ? 2 * creature.getHappiness() : 0;
 	}
 
 	public Set<Square.SeaLifeExpectation> getCreatures() {
@@ -34,7 +36,8 @@ public class WaterProofSquare implements Square {
 	}
 
 	public void setExpectedDanger(double danger) {
-		this.danger = danger;
+    throw new RuntimeException(
+        "WaterProofSquare can calculate it's own danger, thank you.");
 	}
 
 	public double getExpectedDanger() {
@@ -42,7 +45,8 @@ public class WaterProofSquare implements Square {
 	}
 
 	public void setExpectedHappiness(double happiness) {
-		this.happiness = happiness;
+    throw new RuntimeException(
+        "WaterProofSquare can calculate it's own happiness, thank you.");
 	}
 
 	public double getExpectedHappiness() {
@@ -57,7 +61,7 @@ public class WaterProofSquare implements Square {
     Square.SeaLifeExpectation creature;
     for (Iterator<Square.SeaLifeExpectation> iter = creatures.iterator();
          iter.hasNext();) {
-      SeaLife seaLife = iter.next().getSeaLife();
+      SeaLifePrototype seaLife = iter.next().getSeaLife();
       if (seaLife.getSpeed() > 0) {
         iter.remove();
       } else {
@@ -70,15 +74,15 @@ public class WaterProofSquare implements Square {
   }
 
   public class ExpectedCreature implements Square.SeaLifeExpectation {
-    private SeaLife creature;
+    private SeaLifePrototype creature;
     private double certainty;
 
-    public ExpectedCreature(SeaLife creature, double certainty) {
+    public ExpectedCreature(SeaLifePrototype creature, double certainty) {
       this.creature = creature;
       this.certainty = certainty;
     }
 
-    public SeaLife getSeaLife() {
+    public SeaLifePrototype getSeaLife() {
       return creature;
     }
 

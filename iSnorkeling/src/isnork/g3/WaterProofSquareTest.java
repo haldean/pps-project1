@@ -11,13 +11,6 @@ import java.util.List;
 
 public class WaterProofSquareTest {
   private SeaLife getSeaLife(final boolean canMove) {
-    /* Dear whoever wrote this awful simulator,
-     *
-     * I hate you for many things. But I hate you most for this.
-     *
-     * Love,
-     * Will
-     */
     SeaLifePrototype proto = new SeaLifePrototype();
     proto.setDangerous(false);
     proto.setHappiness(10);

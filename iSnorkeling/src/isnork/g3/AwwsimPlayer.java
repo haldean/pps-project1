@@ -17,7 +17,7 @@ public class AwwsimPlayer extends Player {
 	// private int penalty;
 	private Cartogram carto;
 
-	// private AbstractPokedex dex;
+	private AbstractPokedex dex;
 
 	@Override
 	public String getName() {
@@ -31,7 +31,8 @@ public class AwwsimPlayer extends Player {
 	public void newGame(Set<SeaLifePrototype> seaLifePossibilities,
 			int penalty, int d, int r, int n) {
 		int mapWidth = d * 2 + 1;
-		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers);
+		dex = new WaterProofPokedex(seaLifePossibilities);
+		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
 		viewRadius = r;
 		numDivers = n;
 
@@ -39,7 +40,6 @@ public class AwwsimPlayer extends Player {
 		// commented them out because they were triggering warnings on
 		// dead code which made me nervous
 
-		// dex = new WaterProofPokedex(seaLifePossibilities);
 		// this.penalty = penalty;
 
 		// TODO analysis on species precomputation
@@ -53,7 +53,9 @@ public class AwwsimPlayer extends Player {
 	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<iSnorkMessage> incomingMessages,
 			Set<Observation> playerLocations) {
+    System.out.println("carto update is go");
 		carto.update(myPosition, whatYouSee, playerLocations, incomingMessages);
+    System.out.println("carto update is done");
 		nextMove = carto.getNextDirection();
 		return carto.getMessage();
 	}
