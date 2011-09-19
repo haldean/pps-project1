@@ -5,8 +5,6 @@ import isnork.sim.Observation;
 import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
 
-import com.google.common.collect.Lists;
-
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.List;
@@ -14,12 +12,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.Queue;
+import java.util.LinkedList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
+import com.google.common.primitives.Doubles;
+import com.google.common.collect.ImmutableSortedSet;
 
 public class WaterProofCartogram implements Cartogram {
+	private Transcoder xcoder;
+	private Queue<String> messageQueue;
 	private final int sideLength;
 	private final int viewRadius;
 	private final int numDivers;
@@ -84,6 +89,8 @@ public class WaterProofCartogram implements Cartogram {
     this.movingCreatures = Lists.newArrayList();
     this.dex = dex;
 		ticks = 0;
+		xcoder = new WaterProofTranscoder(dex.getSpeciesRanking(), sideLength);
+		messageQueue = new LinkedList<String>();
 	}
 
 	@Override
@@ -103,7 +110,7 @@ public class WaterProofCartogram implements Cartogram {
 
 		for (iSnorkMessage message : incomingMessages) {
 			message.getLocation();
-			message.getMsg();
+			message.getMsg(); // these need to be collected and decoded
 			message.getSender();
 		}
     */
@@ -123,10 +130,34 @@ public class WaterProofCartogram implements Cartogram {
       } else {
         squareFor(observation.getLocation()).addCreature(seaLife, 1.);
       }
-		}
+	}
 
+	if(!whatYouSee.isEmpty()) {
+		System.out.println(whatYouSee.toString());
+		observe(whatYouSee);
+	}
     updateMovingCreatures();
-    System.out.println(this.toString());
+	}
+
+	private void observe(Set<Observation> observations) {
+		// pick highest value creature
+		Ordering<Observation> happiness = new Ordering<Observation>() {
+			public int compare(Observation left, Observation right) {
+				return Doubles.compare(left.happinessD(), right.happinessD());
+			}
+		};
+		ImmutableSortedSet<Observation> sortedObservations =
+			ImmutableSortedSet.orderedBy(happiness).addAll(observations).build();
+		Observation bestSeen = sortedObservations.first();
+
+		// record in pokedex
+		dex.personallySawCreature(bestSeen.getName());
+		
+		// encode
+		List<String> messagesToSend = xcoder.encode(bestSeen.getName(), bestSeen.getId(), bestSeen.getLocation());
+
+		//TODO: add messages to queue
+		messageQueue.addAll(messagesToSend);
 	}
 
   private Square squareFor(Point2D location) {
@@ -167,7 +198,12 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public String getMessage() {
-    return "";
+		// return next message in queue
+		String message = messageQueue.poll();
+		if(" ".equals(message)) {
+			return null;
+		}
+		return message;
 	}
 
 	@Override

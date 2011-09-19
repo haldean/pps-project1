@@ -8,6 +8,7 @@ import isnork.sim.iSnorkMessage;
 
 import static org.junit.Assert.*;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -32,12 +33,15 @@ public class WaterProofCartogramTest {
     Pokedex dex = EasyMock.createMock(Pokedex.class);
     EasyMock.expect(dex.get(EasyMock.isA(String.class)))
       .andReturn(getSeaLife(true));
+    EasyMock.expect(dex.getSpeciesRanking()).andReturn(ImmutableMap.of(0, "Moving Creature"));
+    dex.personallySawCreature("hello");
+    EasyMock.expectLastCall().once();
     EasyMock.replay(dex);
     return dex;
   }
 
   @Test public void updateSucceedsOnEmptyMap() {
-    Cartogram map = new WaterProofCartogram(20, 5, 20, getPokedex());   
+    Cartogram map = new WaterProofCartogram(20, 5, 20, getPokedex());
     map.update(
         new Point2D.Double(0., 0.), Sets.<Observation>newHashSet(),
         Sets.<Observation>newHashSet(), Sets.<iSnorkMessage>newHashSet());

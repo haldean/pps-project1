@@ -44,7 +44,12 @@ public class WaterProofTranscoder implements Transcoder {
 	}
 
 	@Override
-	public List<String> encode(String name, String id, Point2D.Double location) {
+	public List<String> encode(String name, int id, Point2D location) {
+		return encode(name, String.valueOf(id), location);
+	}
+
+	@Override
+	public List<String> encode(String name, String id, Point2D location) {
 		StringBuilder messageBuilder = new StringBuilder();
 		messageBuilder.append(getMappedSpecies(name));
 		messageBuilder.append(getMappedID(id));
@@ -71,7 +76,7 @@ public class WaterProofTranscoder implements Transcoder {
 		if(!IDMapping.inverse().containsKey(idSubString)) {
 			IDMapping.put(IDfromAlpha(idSubString), idSubString);
 		}
-		recordedCreature.setId(Integer.parseInt(IDMapping.inverse().get(idSubString)));
+		recordedCreature.setId(getUnmappedID(idSubString));
 
 		recordedCreature.setLocation(getUnmappedLocation(msg.substring(3,5)));
 
@@ -90,6 +95,13 @@ public class WaterProofTranscoder implements Transcoder {
 		return IDMapping.get(ID);
 	}
 
+	private int getUnmappedID(String encodedID) {
+		if(!IDMapping.inverse().containsKey(encodedID)) {
+			IDMapping.put(IDfromAlpha(encodedID), encodedID);
+		}
+		return Integer.parseInt(IDMapping.inverse().get(encodedID));
+	}
+
 	//this conversion is from 2010:g1
 	private String getMappedLocation(Point2D location) {
 		char x = (char)(scale * (location.getX() + dim) + 'a');
@@ -98,7 +110,7 @@ public class WaterProofTranscoder implements Transcoder {
 	}
 
 	//this conversion is from 2010:g1
-	private Point2D.Double getUnmappedLocation(String encodedLocation) {
+	private Point2D getUnmappedLocation(String encodedLocation) {
 		double x = Math.ceil((double)(encodedLocation.charAt(0) - 'a') / scale - dim);
 		double y = Math.ceil((double)(encodedLocation.charAt(1) - 'a') / scale - dim);
 		return new Point2D.Double(x, y);

@@ -11,7 +11,8 @@ public interface Transcoder {
 	 * Encodes the species, ID, and location of an observation to a 5-character message.
 	 * A ' ' indicates an empty message.
 	 */
-	public List<String> encode(String name, String id, Point2D.Double location);
+	public List<String> encode(String name, String id, Point2D location);
+	public List<String> encode(String name, int id, Point2D location);
 
 	/**
 	 * Decodes a 5-character message and returns a reconstructed Observation.
