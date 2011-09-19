@@ -155,6 +155,10 @@ public class WaterProofCartogram implements Cartogram {
 		messageQueue.addAll(messagesToSend);
 	}
 
+	private Square squareFor(Point2D location) {
+    	return squareFor((int) location.getX(), (int) location.getY());
+  	}
+
 	private Square squareFor(int x, int y) {
 		if (Math.abs(x) > sideLength / 2 || Math.abs(y) > sideLength / 2){
 			return null;
