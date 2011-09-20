@@ -2,6 +2,7 @@ package isnork.g3;
 
 import isnork.sim.GameObject.Direction;
 import isnork.sim.Observation;
+import isnork.sim.SeaLife;
 import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
 
@@ -99,40 +100,35 @@ public class WaterProofCartogram implements Cartogram {
 		currentLocation = myPosition;
 
 		
-		 //for (Observation location : playerLocations) {
-		 //location.getLocation(); location.getId(); location.getName(); }
-		 //
-		 //messenger.addReceivedMessages(incomingMessages);
-         // update heatmap with:
-         //messenger.getDiscovered();
+		//for (Observation location : playerLocations) {
+		//location.getLocation(); location.getId(); location.getName(); }
+		
+		messenger.addReceivedMessages(incomingMessages);
+        // get discovered creatures based on received messages:
+        Set<SeaLife> discoveredCreatures = messenger.getDiscovered();
 		 
 
-		for (Observation observation : whatYouSee) {
-			/*
-			 * Note: this should not be happening on the diver's observations,
-			 * but based on the other divers' observations. This is here to show
-			 * how to properly update the map. TODO(haldean, hans): make this
-			 * work with comm stuff.
-			 */
-			if (observation.getName() == null) {
+		for (SeaLife creature : discoveredCreatures) {
+			if (creature.getName() == null) {
 				continue;
 			}
-			SeaLifePrototype seaLife = dex.get(observation.getName());
+			SeaLifePrototype seaLife = dex.get(creature.getName());
+            //System.out.println("Other divers found a "+creature.getName()+" "+seaLife.getHappinessD()+" at "+creature.getLocation());
 			if (seaLife.getSpeed() > 0) {
-				movingCreatures.add(new CreatureRecord(observation
+				movingCreatures.add(new CreatureRecord(creature
 						.getLocation(), seaLife));
 			} else {
-				squareFor(observation.getLocation()).addCreature(seaLife, 1.);
+				squareFor(creature.getLocation()).addCreature(seaLife, 1.);
 			}
 		}
 
 		if (!whatYouSee.isEmpty()) {
-			observe(whatYouSee);
+			communicate(whatYouSee);
 		}
 		updateMovingCreatures();
 	}
 
-	private void observe(Set<Observation> observations) {
+	private void communicate(Set<Observation> observations) {
 		// pick highest value creature
 		Ordering<Observation> happiness = new Ordering<Observation>() {
 			public int compare(Observation left, Observation right) {
@@ -143,7 +139,11 @@ public class WaterProofCartogram implements Cartogram {
 				.orderedBy(happiness).addAll(observations).build();
 		Observation bestSeen = sortedObservations.first();
 
-		messenger.addOutboundMessage(bestSeen);
+        //do not observe other divers
+        if(bestSeen.getId() > 0) {
+            //System.out.println("bestSeen: "+bestSeen.getName()+" "+bestSeen.getId()+" "+bestSeen.getLocation());
+            messenger.addOutboundMessage(bestSeen);
+        }		
 	}
 
 	private Square squareFor(Point2D location) {
@@ -188,8 +188,7 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public String getMessage() {
-		//TOOD: return Messenger.getNext()
-		return "";
+		return messenger.sendNext();
 	}
 
 	@Override

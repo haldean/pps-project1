@@ -21,33 +21,37 @@ public class WaterProofMessenger implements Messenger {
     private Set<SeaLife> discovered;
 
     private class iSnorkBuffer {
-        Point2D location = null;
-        StringBuilder message = new StringBuilder();
-        int messageLength;
+        private Point2D location = null;
+        private StringBuilder message = new StringBuilder();
+        private int messageLength;
 
-        boolean hasLocation() {
+        public boolean hasLocation() {
             return location != null;
         }
 
-        void setLocation(Point2D location) {
+        public void setLocation(Point2D location) {
             this.location = location;
         }
 
-        void add(String c) {
+        public void add(String c) {
             message.append(c);
         }
 
-        boolean isComplete() {
+        public boolean isComplete() {
             if(message.length() == xcoder.getMessageLength()) {
                 return true;
             }
             return false;
         }
 
-        String getMessage() {
+        public String getMessage() {
             String retMsg = message.toString();
             message = new StringBuilder();
             return retMsg;
+        }
+
+        public String toString() {
+            return message.toString();
         }
     }
 
@@ -56,8 +60,9 @@ public class WaterProofMessenger implements Messenger {
         outboundMessages = new LinkedList<String>();
         receivedMessages = Maps.newHashMap();
         for(int i=0; i<numDivers; i++) {
-            receivedMessages.put(i, new iSnorkBuffer());
+            receivedMessages.put(-i, new iSnorkBuffer());
         }
+        //System.out.println("received:\n"+receivedMessages.toString());
         discovered = Sets.newHashSet();
     }
 
@@ -65,21 +70,29 @@ public class WaterProofMessenger implements Messenger {
     public void addReceivedMessages(Set<iSnorkMessage> incomingMessages) {
         for(iSnorkMessage in : incomingMessages) {
             iSnorkBuffer msgBuffer = receivedMessages.get(in.getSender());
-
+            if(msgBuffer == null) {
+                System.out.println("msg from "+in.getSender()+" is null");
+            }
             if(!msgBuffer.hasLocation()) {
                 msgBuffer.setLocation(in.getLocation());
             }
+            //System.out.println("rcvd msg: "+in.getMsg());
             msgBuffer.add(in.getMsg());
             
             if(msgBuffer.isComplete()) {
                 discovered.add(xcoder.decode(msgBuffer.getMessage()));
             }
         }
+        //System.out.println("\nreceived: "+receivedMessages.toString());
     }
 
     @Override
     public void addOutboundMessage(Observation seen) {
         List<String> messagesToSend = xcoder.encode(seen.getName(), seen.getId(), seen.getLocation());
+        if(messagesToSend == null) {
+            return;
+        }
+        //System.out.println("to send: "+messagesToSend.toString());
         outboundMessages.addAll(messagesToSend);
     }
 
@@ -87,12 +100,15 @@ public class WaterProofMessenger implements Messenger {
     public Set<SeaLife> getDiscovered() {
         Set<SeaLife> discoveredCreatures = Sets.newHashSet(discovered);
         discovered = Sets.newHashSet();
+        //System.out.println("Discovered: "+discoveredCreatures.toString());
         return discoveredCreatures;
     }
 
     @Override
     public String sendNext() {
         // return next message-char in queue
-        return outboundMessages.poll();
+        String msg = outboundMessages.poll();
+        //System.out.println("next: "+msg);
+        return msg;
     }
 }

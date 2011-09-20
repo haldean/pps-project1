@@ -35,9 +35,11 @@ public class WaterProofTranscoder implements Transcoder {
 
     public WaterProofTranscoder(Map<Integer, String> speciesRanking, int sideLength) {
         speciesMapping = HashBiMap.create(26);
-        for(int i=0; i<26; i++) {
+        for(int i=0; i<speciesRanking.size() && i<26; i++) {
             speciesMapping.put(speciesRanking.get(i), Character.toString((char) (i + 'a')));
         }
+
+        //System.out.println("Species map:\n"+speciesMapping.toString()+"\n\n");
 
         //TODO: get members-per-species info from Pokedex
         IDMapping = HashBiMap.create(676);
@@ -61,8 +63,12 @@ public class WaterProofTranscoder implements Transcoder {
     @Override
     public List<String> encode(String name, String id, Point2D location) {
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append(getMappedSpecies(name));
-        System.out.println("Mapped species: "+messageBuilder.toString());
+        String mappedSpecies = getMappedSpecies(name);
+        if(mappedSpecies == null) {
+            //System.out.println(name+" is not a top species");
+            return null;
+        }
+        messageBuilder.append(mappedSpecies);
         messageBuilder.append(getMappedID(id));
         messageBuilder.append(getMappedLocation(location));
         String completeMessage = messageBuilder.toString();
@@ -96,7 +102,8 @@ public class WaterProofTranscoder implements Transcoder {
     }
 
     private String getMappedSpecies(String species) {
-        System.out.println("species: "+species);
+        //System.out.println("Mapped species: "+species+" -> "+speciesMapping.get(species));
+        //System.out.println("species: "+species);
         return speciesMapping.get(species);
     }
 

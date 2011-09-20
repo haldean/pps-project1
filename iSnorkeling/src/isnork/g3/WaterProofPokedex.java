@@ -23,8 +23,8 @@ public class WaterProofPokedex extends AbstractPokedex{
 				return Doubles.compare(left.getHappinessD(), right.getHappinessD());
 			}
 		};
-		ImmutableSortedSet<SeaLifePrototype> sortedSpecies = ImmutableSortedSet.orderedBy(happiness).build();
-		
+		ImmutableSortedSet<SeaLifePrototype> sortedSpecies = ImmutableSortedSet.orderedBy(happiness).addAll(species).build();
+		//System.out.println("sortedSpecies:\n"+sortedSpecies.toString());
 		int i = 0;
 		for(SeaLifePrototype aSpecies : sortedSpecies) {
 			speciesRanking.put(i++, aSpecies.getName());
