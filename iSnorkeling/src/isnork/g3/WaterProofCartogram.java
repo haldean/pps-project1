@@ -24,7 +24,7 @@ import com.google.common.collect.ImmutableSortedSet;
 
 public class WaterProofCartogram implements Cartogram {
 	private Transcoder xcoder;
-	private Queue<String> messageQueue;
+	private Messenger messenger;
 	private final int sideLength;
 	private final int viewRadius;
 	private final int numDivers;
@@ -88,8 +88,7 @@ public class WaterProofCartogram implements Cartogram {
 		this.movingCreatures = Lists.newArrayList();
 		this.dex = dex;
 		ticks = 0;
-		xcoder = new WaterProofTranscoder(dex.getSpeciesRanking(), sideLength);
-		messageQueue = new LinkedList<String>();
+		messenger = new WaterProofMessenger(dex, numDivers, sideLength);
 	}
 
 	@Override
@@ -99,14 +98,14 @@ public class WaterProofCartogram implements Cartogram {
 		ticks++;
 		currentLocation = myPosition;
 
-		/*
-		 * for (Observation location : playerLocations) {
-		 * location.getLocation(); location.getId(); location.getName(); }
-		 * 
-		 * for (iSnorkMessage message : incomingMessages) {
-		 * message.getLocation(); message.getMsg(); // these need to be
-		 * collected and decoded message.getSender(); }
-		 */
+		
+		 //for (Observation location : playerLocations) {
+		 //location.getLocation(); location.getId(); location.getName(); }
+		 //
+		 //messenger.addReceivedMessages(incomingMessages);
+         // update heatmap with:
+         //messenger.getDiscovered();
+		 
 
 		for (Observation observation : whatYouSee) {
 			/*
@@ -144,12 +143,7 @@ public class WaterProofCartogram implements Cartogram {
 				.orderedBy(happiness).addAll(observations).build();
 		Observation bestSeen = sortedObservations.first();
 
-		// encode
-		List<String> messagesToSend = xcoder.encode(bestSeen.getName(),
-				bestSeen.getId(), bestSeen.getLocation());
-
-		// TODO: add messages to queue
-		messageQueue.addAll(messagesToSend);
+		messenger.addOutboundMessage(bestSeen);
 	}
 
 	private Square squareFor(Point2D location) {
@@ -194,12 +188,8 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public String getMessage() {
-		// return next message in queue
-		String message = messageQueue.poll();
-		if (" ".equals(message)) {
-			return null;
-		}
-		return message;
+		//TOOD: return Messenger.getNext()
+		return "";
 	}
 
 	@Override

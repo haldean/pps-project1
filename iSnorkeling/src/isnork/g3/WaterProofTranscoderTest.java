@@ -23,9 +23,14 @@ public class WaterProofTranscoderTest {
 		speciesRanking.put(3, name);
 
 		Transcoder xcoder = new WaterProofTranscoder(speciesRanking, 41);
-		List<String> messages = xcoder.encode(name, "42", new Point2D.Double(-6.0, 4.0));
-		//System.out.println("\n\nEncoded message:\n" + Joiner.on(",").join(messages));
-		assertEquals("Should encode correctly.", "da ip", Joiner.on("").join(messages));
+		List<String> messages = null;
+		
+		for(int i=0; i<30; i++) {
+			messages = xcoder.encode(name, "1"+String.valueOf(i), new Point2D.Double(-6.0, 4.0));
+			//System.out.println(i+" Encoded message:\n" + Joiner.on(",").join(messages));	
+		}
+
+		assertEquals("Should encode correctly.", "dbdip", Joiner.on("").join(messages));
 	}
 
 	@Test
@@ -36,7 +41,7 @@ public class WaterProofTranscoderTest {
 
 		Transcoder xcoder = new WaterProofTranscoder(speciesRanking, 41);
 		xcoder.encode(name, "10", new Point2D.Double(9.0, -4.0));
-		String message = "aa sk";
+		String message = "aaask";
 		SeaLife creature = xcoder.decode(message);
 		//System.out.println("\n\n"+creature.toString()+" at "+creature.getLocation().toString()+"\n\n");
 		assertEquals("Creature name should decode to Lassie.", "Lassie", creature.getName());

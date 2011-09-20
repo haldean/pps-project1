@@ -6,5 +6,5 @@ javac -cp $CLASSPATH -sourcepath $SOURCEPATH -Werror -Xlint:all \
   sim/src/isnork/sim/GameEngine.java \
   iSnorkeling/src/isnork/g3/AwwsimPlayer.java \
   -d bin/ && \
-  java -cp $CLASSPATH:bin/ isnork.sim.GameEngine gui
+  java -Xmx1g -cp $CLASSPATH:bin/ isnork.sim.GameEngine gui
 
