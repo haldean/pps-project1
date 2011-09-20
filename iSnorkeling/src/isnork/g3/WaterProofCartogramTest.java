@@ -31,13 +31,17 @@ public class WaterProofCartogramTest {
 		Pokedex dex = EasyMock.createMock(Pokedex.class);
 		EasyMock.expect(dex.get(EasyMock.isA(String.class))).andReturn(
 				getSeaLife(true));
+    EasyMock.expect(dex.getPersonalSeenCount(EasyMock.isA(String.class)))
+        .andReturn(1).anyTimes();
+    dex.personallySawCreature("hello");
+    EasyMock.expectLastCall().once();
 		EasyMock.replay(dex);
 		return dex;
 	}
 
 	@Test
 	public void updateSucceedsOnEmptyMap() {
-		Cartogram map = new WaterProofCartogram(20, 5, 20, getPokedex());
+		Cartogram map = new WaterProofCartogram(10, 2, 10, getPokedex());
 		map.update(new Point2D.Double(0., 0.), Sets.<Observation> newHashSet(),
 				Sets.<Observation> newHashSet(),
 				Sets.<iSnorkMessage> newHashSet());
@@ -45,7 +49,7 @@ public class WaterProofCartogramTest {
 
 	@Test
 	public void updateForSingleCreature() {
-		Cartogram map = new WaterProofCartogram(20, 5, 20, getPokedex());
+		Cartogram map = new WaterProofCartogram(10, 2, 10, getPokedex());
 		Observation obs = new MockObservation(new Point2D.Double(0., 1.), 1,
 				"hello", 1., false, Direction.N);
 		map.update(new Point2D.Double(0., 0.), ImmutableSet.of(obs),

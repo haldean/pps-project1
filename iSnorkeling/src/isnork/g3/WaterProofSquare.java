@@ -44,9 +44,12 @@ public class WaterProofSquare implements Square {
 		return danger;
 	}
 
+  public void increaseExpectedHappinessBy(double happiness) {
+    this.happiness += happiness;
+  }
+
 	public void setExpectedHappiness(double happiness) {
-    throw new RuntimeException(
-        "WaterProofSquare can calculate it's own happiness, thank you.");
+    this.happiness = happiness;
 	}
 
 	public double getExpectedHappiness() {

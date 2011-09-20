@@ -45,6 +45,8 @@ public interface Square {
    */
 	double getExpectedDanger();
 
+  void increaseExpectedHappinessBy(double happiness);
+
   /**
    * Set the expected happiness value for this square. Note: this includes
    * subtracting the danger associated with this square.
