@@ -186,15 +186,15 @@ public class WaterProofCartogram implements Cartogram {
 
 	private Square squareFor(int x, int y) {
         System.out.println(x + ", " + y);
+        if (! insideBounds(x, y)) return null;
 		x += (sideLength / 2);
 		y += (sideLength / 2);
         System.out.println(x + ", " + y);
-        if (! insideBounds(x, y)) return null;
 		return mapStructure[x][y];
 	}
 
     private boolean insideBounds(int x, int y) {
-        return Math.abs(x) < sideLength / 2 && Math.abs(y) < sideLength / 2;
+        return Math.abs(x) <= sideLength / 2 && Math.abs(y) <= sideLength / 2;
     }
 
 	private void updateMovingCreatures() {
@@ -358,7 +358,10 @@ public class WaterProofCartogram implements Cartogram {
 		List<Double> intLst = Lists.newArrayListWithCapacity(8);
 		double runningSum = 0;
 		for (int i = 0; i < 8; i++) {
-			runningSum += lst.get(i).getDub();
+			double dub = lst.get(i).getDub();
+			if (dub > 0){
+				runningSum += dub;
+			}
 			intLst.add(i, runningSum);
 		}
 		
@@ -411,7 +414,13 @@ public class WaterProofCartogram implements Cartogram {
 
 	private double getExpectedHappinessForCoords(int x,
 			int y) {
-		return squareFor(x, y).getExpectedHappiness();
+		Square square = squareFor(x, y);
+		if (square == null){
+			return Double.NEGATIVE_INFINITY;
+		}
+		else{
+			return square.getExpectedHappiness();
+		}
 	}
 
 	private final static double square(double x) {
