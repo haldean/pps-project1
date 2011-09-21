@@ -96,14 +96,6 @@ public class WaterProofCartogram implements Cartogram {
 		ticks++;
 		currentLocation = myPosition;
 
-		/*
-		 * for (Observation location : playerLocations) {
-		 * location.getLocation(); location.getId(); location.getName(); }
-		 * 
-		 * for (iSnorkMessage message : incomingMessages) {
-		 * message.getLocation(); message.getMsg(); message.getSender(); }
-		 */
-
 		for (Observation observation : whatYouSee) {
 			/*
 			 * Note: this should not be happening on the diver's observations,
