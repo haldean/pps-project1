@@ -7,6 +7,7 @@ import isnork.sim.SeaLife;
 import isnork.sim.iSnorkMessage;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import java.awt.geom.Point2D;
@@ -28,14 +29,19 @@ import com.google.common.primitives.Doubles;
 import com.google.common.collect.ImmutableSortedSet;
 
 public class WaterProofCartogram implements Cartogram {
-	private Transcoder xcoder;
+	private List<CreatureRecord> movingCreatures;
 	private Messenger messenger;
+	private Point2D currentLocation;
+	private Transcoder xcoder;
+	private final Pokedex dex;
+	private final Random random;
+	private final Square[][] mapStructure;
+	private final int numDivers;
 	private final int sideLength;
 	private final int viewRadius;
-	private final int numDivers;
-	private final Pokedex dex;
-	private final Square[][] mapStructure;
+	private int ticks;
     private final Set<Integer> creaturesSeen;
+    private final Map<String, Integer> speciesInViewCount;
 
 	private final static Map<Direction, Coord> DIRECTION_MAP = ImmutableMap
 			.<Direction, Coord> builder().put(Direction.E, new Coord(1, 0))
@@ -65,10 +71,6 @@ public class WaterProofCartogram implements Cartogram {
 			.put(Direction.NE, new Coord(1, -1))
 			.put(Direction.NW, new Coord(-1, -1)).build();
 
-	private Point2D currentLocation;
-	private Random random;
-	private int ticks;
-	private List<CreatureRecord> movingCreatures;
 	private static final int MAX_TICKS_PER_ROUND = 60 * 8;
 
 	/*
@@ -94,6 +96,7 @@ public class WaterProofCartogram implements Cartogram {
 		this.random = new Random();
 		this.movingCreatures = Lists.newArrayList();
         this.creaturesSeen = Sets.newHashSet();
+        this.speciesInViewCount = Maps.newHashMap();
 		this.dex = dex;
 		ticks = 0;
 		messenger = new WaterProofMessenger(dex, numDivers, sideLength);
@@ -105,30 +108,47 @@ public class WaterProofCartogram implements Cartogram {
 			Set<iSnorkMessage> incomingMessages) {
 		ticks++;
 		currentLocation = myPosition;
+
+        for (int i=0; i<mapStructure.length; i++) {
+            for (int j=0; j<mapStructure.length; j++) {
+                mapStructure[i][j].tick();
+            }
+        }
 		
+        speciesInViewCount.clear();
+        for (Observation obs : whatYouSee) {
+            int count = speciesInViewCount.containsKey(obs.getName()) ?
+                speciesInViewCount.get(obs.getName()) + 1 : 1;
+            speciesInViewCount.put(obs.getName(), count);
+        }
+
 		messenger.addReceivedMessages(incomingMessages);
         // get discovered creatures based on received messages:
-        Set<SeaLife> discoveredCreatures = messenger.getDiscovered();
-
-		for (SeaLife creature : discoveredCreatures) {
-			if (creature.getName() == null) {
-				continue;
-			}
-
+		for (SeaLife creature : messenger.getDiscovered()) {
             seeCreature(
                     creature.getId(), creature.getName(),
                     creature, creature.getLocation());
 		}
 
+        if (currentLocation.getX() == 0 && currentLocation.getY() == 0) {
+            for (Observation obs : whatYouSee) {
+                seeCreature(obs.getId(), obs.getName(),
+                        dex.get(obs.getName()), obs.getLocation());
+            }
+        }
+
 		if (!whatYouSee.isEmpty()) {
 			communicate(whatYouSee);
 		}
 		updateMovingCreatures();
+        updateUnseenCreatures();
+
+        System.out.println(toString());
 	}
 
     public void seeCreature(
             int id, String name, SeaLifePrototype seaLife, Point2D location) {
-        if (creaturesSeen.contains(id)) {
+        if (name == null || seaLife == null || creaturesSeen.contains(id)) {
             return;
         }
         creaturesSeen.add(id);
@@ -137,6 +157,8 @@ public class WaterProofCartogram implements Cartogram {
         if (seaLife.getSpeed() > 0) {
             movingCreatures.add(new CreatureRecord(location, seaLife));
         } else {
+            System.out.println(location);
+            System.out.println(squareFor(location));
             squareFor(location).addCreature(seaLife, 1.);
         }
     }
@@ -167,6 +189,7 @@ public class WaterProofCartogram implements Cartogram {
         if (! insideBounds(x, y)) return null;
 		x += (sideLength / 2);
 		y += (sideLength / 2);
+        System.out.println(x + ", " + y);
 		return mapStructure[x][y];
 	}
 
@@ -199,6 +222,40 @@ public class WaterProofCartogram implements Cartogram {
 			}
 		}
 	}
+
+    private void updateUnseenCreatures() {
+        double expectedHappinessInFog = 0.;
+        for (SeaLifePrototype proto : dex.getAllSpecies()) {
+            double expectedCount =
+                (proto.getMaxCount() + proto.getMinCount()) / 2;
+            double difference;
+            if (! speciesInViewCount.containsKey(proto.getName())) {
+                difference = expectedCount;
+            } else {
+                difference = expectedCount - speciesInViewCount.get(proto.getName());
+            }
+
+            System.out.println(proto.getName() + " " + difference);
+            if (difference > 0) {
+                expectedHappinessInFog += difference * proto.getHappiness();
+            }
+        }
+
+        int squaresOutOfView =
+            (int) Math.pow(sideLength, 2) - (int) Math.pow(viewRadius, 2);
+        double expectedFogPerSquare = expectedHappinessInFog / squaresOutOfView;
+        for (int i=0; i<sideLength; i++) {
+            for (int j=0; j<sideLength; j++) {
+                double distanceToDiver =
+                    Math.sqrt(Math.pow(i - (currentLocation.getX() + sideLength / 2), 2) +
+                              Math.pow(j - (currentLocation.getY() + sideLength / 2), 2));
+                if (distanceToDiver > viewRadius) {
+                    mapStructure[i][j]
+                        .increaseExpectedHappinessBy(expectedFogPerSquare);
+                }
+            }
+        }
+    }
 
     private int movesToSquare(int x, int y) {
         int small = x < y ? x : y;

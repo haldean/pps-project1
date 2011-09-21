@@ -10,7 +10,7 @@ import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
 
 public class AwwsimPlayer extends Player {
-	String name;
+	String name = "g3: Awwsim Player";
 	private Direction nextMove;
 	private int numDivers;
 	private int viewRadius;

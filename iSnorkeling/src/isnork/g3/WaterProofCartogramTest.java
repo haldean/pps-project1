@@ -14,6 +14,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 public class WaterProofCartogramTest {
   private SeaLife getSeaLife(final boolean canMove) {
@@ -35,7 +36,11 @@ public class WaterProofCartogramTest {
     EasyMock.expect(dex.getSpeciesRanking())
       .andReturn(ImmutableSortedMap.of(0, "Moving Creature"));
     dex.personallySawCreature("hello");
-    EasyMock.expectLastCall().once();
+    EasyMock.expectLastCall().anyTimes();
+    EasyMock.expect(dex.getPersonalSeenCount(EasyMock.isA(String.class)))
+      .andReturn(0).anyTimes();
+    EasyMock.expect(dex.getAllSpecies()).andReturn(
+        new ArrayList<SeaLifePrototype>());
     EasyMock.replay(dex);
     return dex;
   }

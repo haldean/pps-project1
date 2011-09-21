@@ -2,6 +2,7 @@ package isnork.g3;
 
 import isnork.sim.SeaLifePrototype;
 
+import java.util.List;
 import java.util.SortedMap;
 
 public interface Pokedex {
@@ -77,4 +78,8 @@ public interface Pokedex {
 
 	public SortedMap<Integer,String> getSpeciesRanking();
 
+    /**
+     * Return a list of all species.
+     */
+    public List<SeaLifePrototype> getAllSpecies();
 }

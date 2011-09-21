@@ -2,7 +2,10 @@ package isnork.g3;
 
 import isnork.sim.SeaLifePrototype;
 
+import com.google.common.collect.Lists;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
@@ -26,6 +29,7 @@ public abstract class AbstractPokedex implements Pokedex {
 	
 	@Override
 	public SeaLifePrototype get(String name){
+    if (! map.containsKey(name)) return null;
 		return map.get(name).get();
 	}
 	
@@ -74,5 +78,14 @@ public abstract class AbstractPokedex implements Pokedex {
 	public boolean isMoving(String name){
 		return map.get(name).isMoving();
 	}
+
+  @Override
+  public List<SeaLifePrototype> getAllSpecies() {
+    List<SeaLifePrototype> allSpecies = Lists.newArrayList();
+    for (SeaLifePrototypeCounter count : map.values()) {
+      allSpecies.add(count.get());
+    }
+    return allSpecies;
+  }
 
 }

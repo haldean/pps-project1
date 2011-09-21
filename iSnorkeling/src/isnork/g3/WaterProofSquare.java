@@ -53,7 +53,7 @@ public class WaterProofSquare implements Square {
 	}
 
 	public double getExpectedHappiness() {
-		return happiness;
+		return happiness - danger;
 	}
 
   public void tick() {
