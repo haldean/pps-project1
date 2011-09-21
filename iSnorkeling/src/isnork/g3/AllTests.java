@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     PokedexTest.class,
+    PrecomputationTest.class,
     SeaLifePrototypeBuilderTest.class,
     WaterProofSquareTest.class,
     WaterProofCartogramTest.class,
