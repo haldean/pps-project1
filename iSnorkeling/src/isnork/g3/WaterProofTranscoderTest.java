@@ -42,4 +42,17 @@ public class WaterProofTranscoderTest {
 		assertEquals("Creature ID should decode to 29.", 29, creature.getId());
 		assertEquals("Creature location should decode to 9.0,-4.0.", "Point2D.Double[9.0, -4.0]", creature.getLocation().toString());
 	}
+
+    @Test public void testLocationDecoded() {
+        WaterProofTranscoder xcoder = new WaterProofTranscoder(
+                ImmutableSortedMap.<Integer, String>of(), 21);
+        for (int i=-10; i<=10; i++) {
+            for (int j=-10; j<=10; j++) {
+                Point2D point = new Point2D.Double(i,j);
+                assertEquals(point,
+                        xcoder.getUnmappedLocation(
+                            xcoder.getMappedLocation(point)));
+            }
+        }
+    }
 }

@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.Queue;
 import java.util.LinkedList;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
@@ -148,16 +149,16 @@ public class WaterProofCartogram implements Cartogram {
         if (name == null || seaLife == null || creaturesSeen.contains(id)) {
             return;
         }
-        creaturesSeen.add(id);
-        dex.personallySawCreature(name);
+
+        /* You can't get points when you're on the boat. */
+        if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
+            creaturesSeen.add(id);
+            dex.personallySawCreature(name);
+        }
 
         if (seaLife.getSpeed() > 0) {
             movingCreatures.add(new CreatureRecord(location, seaLife));
         } else {
-            System.out.println(location);
-            System.out.println(squareFor(location));
-            System.out.println("l:" + (int) location.getX() + sideLength/2 + ", " +
-                    (int) location.getY() + sideLength/2);
             squareFor(location).addCreature(seaLife, 1.);
         }
     }
@@ -180,21 +181,21 @@ public class WaterProofCartogram implements Cartogram {
         }		
 	}
 
-	private Square squareFor(Point2D location) {
+	@VisibleForTesting Square squareFor(Point2D location) {
 		return squareFor((int) location.getX(), (int) location.getY());
 	}
 
-	private Square squareFor(int x, int y) {
-        System.out.println(x + ", " + y);
+	@VisibleForTesting Square squareFor(int x, int y) {
+        if (! insideBounds(x, y)) return null;
 		x += (sideLength / 2);
 		y += (sideLength / 2);
-        System.out.println(x + ", " + y);
-        if (! insideBounds(x, y)) return null;
 		return mapStructure[x][y];
 	}
 
     private boolean insideBounds(int x, int y) {
-        return Math.abs(x) < sideLength / 2 && Math.abs(y) < sideLength / 2;
+        boolean inside =
+            Math.abs(x) <= sideLength / 2 && Math.abs(y) <= sideLength / 2;
+        return inside;
     }
 
 	private void updateMovingCreatures() {
@@ -235,7 +236,6 @@ public class WaterProofCartogram implements Cartogram {
                 difference = expectedCount - speciesInViewCount.get(proto.getName());
             }
 
-            System.out.println(proto.getName() + " " + difference);
             if (difference > 0) {
                 expectedHappinessInFog += difference * proto.getHappiness();
             }
@@ -257,27 +257,26 @@ public class WaterProofCartogram implements Cartogram {
         }
     }
 
-    private int movesToSquare(int x, int y) {
+    private int movesToSquare(double r, int x, int y) {
+        double r_delta = (r - viewRadius) / r;
+        if (r_delta < 0) return 0;
+
         int small = x < y ? x : y;
         int large = x < y ? y : x;
 
         /* Most efficient way to travel between squares is to take diagonals
          * until you are on the same row or column, then travel the rest of the
          * way along a line. */
-        return 3 * small + 2 * (large - small);
+        return (int) (r_delta * (3 * small + 2 * (large - small)));
     }
 
     private double happinessProportionOfCreature(SeaLifePrototype proto) {
         double viewCount = (double) dex.getPersonalSeenCount(proto.getName());
-        return viewCount > 3 ? 0. : 1. / viewCount;
+        return viewCount > 3 ? 0. : 1. / (1. + viewCount);
     }
 
     private void addCreatureToSquare(
             int x, int y, SeaLifePrototype proto, double certainty) {
-        /* TODO(haldean): this is dumb. Change how WPS works. */
-        squareFor(x, y).addCreature(proto, certainty);
-        squareFor(x, y).increaseExpectedHappinessBy(-proto.getHappiness());
-
         for (int dx = -viewRadius; dx <= viewRadius; dx++) {
             for (int dy = -viewRadius; dy <= viewRadius; dy++) {
                 double r = Math.sqrt(dx * dx + dy * dy);
@@ -285,13 +284,22 @@ public class WaterProofCartogram implements Cartogram {
                     Square thisSquare = squareFor(x + dx, y + dy);
                     if (thisSquare != null) {
                         double modifier =
-                            certainty * (1 / (1. + movesToSquare(x, y)));
-                        thisSquare.increaseExpectedHappinessBy(
-                                modifier * proto.getHappiness() *
-                                happinessProportionOfCreature(proto));
-                        if (r <= 1.5 && proto.isDangerous()) {
-                            thisSquare.increaseExpectedDangerBy(modifier * proto.getHappiness() * 2);
-                        }
+                            certainty * (1 / (1. + movesToSquare(r, x, y)));
+
+                        double addHappiness =
+                            modifier * proto.getHappiness() *
+                            happinessProportionOfCreature(proto);
+
+                        double addDanger = ! proto.isDangerous() || r > 1.5 ? 
+                            0 : modifier * proto.getHappiness() * 2;
+
+                        System.out.println(x+dx + ", " + (y+dy) + ", " + 
+                                proto.getName() + ": mod=" +
+                                modifier + ", hap=" + addHappiness + ", dan=" +
+                                addDanger);
+
+                        thisSquare.increaseExpectedHappinessBy(addHappiness);
+                        thisSquare.increaseExpectedDangerBy(addDanger);
                     }
                 }
             }
@@ -566,26 +574,14 @@ public class WaterProofCartogram implements Cartogram {
         numberFormat.setMaximumFractionDigits(2);
         numberFormat.setMinimumFractionDigits(2);
 
-		for (int i = 0; i < mapStructure.length; i++) {
-			for (int j = 0; j < mapStructure[i].length; j++) {
-				output.append(
-                        numberFormat.format(
-                            mapStructure[i][j].getExpectedHappiness()));
+		for (int i = 0; i < sideLength; i++) {
+			for (int j = 0; j < sideLength; j++) {
+				output.append(String.format(
+                            "%1$#10s", numberFormat.format(
+                                mapStructure[j][i].getExpectedHappiness())));
 				output.append("\t");
 			}
 			output.append("\n");
-		}
-
-		output.append("\nWe got shit at:\n");
-		for (int i = 0; i < mapStructure.length; i++) {
-			for (int j = 0; j < mapStructure[i].length; j++) {
-				if (mapStructure[i][j].getCreatures().size() > 0) {
-					output.append(i - (sideLength / 2));
-					output.append(", ");
-					output.append(j - (sideLength / 2));
-					output.append("\n");
-				}
-			}
 		}
 		return output.toString();
 	}

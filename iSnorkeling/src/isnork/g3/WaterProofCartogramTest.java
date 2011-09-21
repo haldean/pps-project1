@@ -53,7 +53,7 @@ public class WaterProofCartogramTest {
   }
 
   @Test public void updateForSingleCreature() {
-    Cartogram map = new WaterProofCartogram(20, 5, 20, getPokedex());   
+    WaterProofCartogram map = new WaterProofCartogram(11, 3, 10, getPokedex());   
     Observation obs = new MockObservation(
         new Point2D.Double(0., 1.), 1, "hello", 1., false, Direction.N);
     map.update(
