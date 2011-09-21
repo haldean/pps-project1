@@ -241,7 +241,7 @@ public class WaterProofCartogram implements Cartogram {
 		return unOptimizedHeatmapGetNextDirection();
 	}
 
-	private Direction greedyHillClimb() {
+	private Direction greedyHillClimb(double x, double y) {
 		/*
 		 * Iterate over all possible new squares you can hit next. For you to
 		 * move in a diagonal direction, you need to be 1.5* as good as ortho To
@@ -251,7 +251,7 @@ public class WaterProofCartogram implements Cartogram {
 		List<DirectionValue> lst = getExpectations((int) currentLocation.getX(),
 				(int) currentLocation.getY());
 
-		Direction dir = selectRandomProportionally(lst);
+		Direction dir = selectRandomProportionally(lst, x, y);
 		return dir;
 	}
 
@@ -287,7 +287,7 @@ public class WaterProofCartogram implements Cartogram {
 		return lst;
 	}
 	
-	private Direction selectRandomProportionally(List<DirectionValue> lst){
+	private Direction selectRandomProportionally(List<DirectionValue> lst, double x, double y){
 		List<Double> intLst = Lists.newArrayListWithCapacity(8);
 		double runningSum = 0;
 		for (int i = 0; i < 8; i++) {
@@ -297,38 +297,43 @@ public class WaterProofCartogram implements Cartogram {
 		
 //		Object val = random.nextInt(runningSum);
 		double myRand = random.nextDouble() * runningSum;
+		System.out.println(myRand);
+
 		Direction dir;
 		if (myRand < intLst.get(0)){
-			System.out.println(0);
+//			System.out.println(0);
 			dir = lst.get(0).getDir();
 		}
 		else if (myRand < intLst.get(1)){
-			System.out.println(1);
+//			System.out.println(1);
 			dir = lst.get(1).getDir();
 		}
 		else if (myRand < intLst.get(2)){
-			System.out.println(2);
+//			System.out.println(2);
 			dir = lst.get(2).getDir();
 		}
 		else if (myRand < intLst.get(3)){
-			System.out.println(3);
+//			System.out.println(3);
 			dir = lst.get(3).getDir();
 		}
 		else if (myRand < intLst.get(4)){
-			System.out.println(4);
+//			System.out.println(4);
 			dir = lst.get(4).getDir();
 		}
 		else if (myRand < intLst.get(5)){
-			System.out.println(5);
+//			System.out.println(5);
 			dir = lst.get(5).getDir();
 		}
 		else if (myRand < intLst.get(6)){
-			System.out.println(6);
+//			System.out.println(6);
 			dir = lst.get(6).getDir();
 		}
-		else {
-			System.out.println(7);
+		else if (myRand < intLst.get(7)){
+//			System.out.println(7);
 			dir = lst.get(7).getDir();
+		}
+		else{
+			dir = returnBoat(x, y);
 		}
 		return dir;
 	}
@@ -407,7 +412,7 @@ public class WaterProofCartogram implements Cartogram {
 		double x = currentLocation.getX();
 		if (Math.abs(x) < tickLeeway
 				&& Math.abs(y) < tickLeeway) {
-			return greedyHillClimb();
+			return greedyHillClimb(x, y);
 		} else {
 			return returnBoat(x, y);
 		}
