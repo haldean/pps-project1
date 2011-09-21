@@ -1,19 +1,11 @@
 package isnork.g3;
 
-import isnork.g3.SeaLifePrototypeBuilder;
-
 import isnork.sim.SeaLife;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.SortedMap;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 

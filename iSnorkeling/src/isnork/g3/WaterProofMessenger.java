@@ -23,7 +23,6 @@ public class WaterProofMessenger implements Messenger {
     private class iSnorkBuffer {
         private Point2D location = null;
         private StringBuilder message = new StringBuilder();
-        private int messageLength;
 
         public boolean hasLocation() {
             return location != null;

@@ -19,8 +19,8 @@ public class WaterProofSquare implements Square {
 
 	public void addCreature(SeaLifePrototype creature, double certainty) {
 		creatures.add(new ExpectedCreature(creature, certainty));
-    happiness += creature.getHappiness();
-    danger += creature.isDangerous() ? 2 * creature.getHappiness() : 0;
+		happiness += creature.getHappiness();
+		danger += creature.isDangerous() ? 2 * creature.getHappiness() : 0;
 	}
 
 	public Set<Square.SeaLifeExpectation> getCreatures() {
@@ -36,61 +36,65 @@ public class WaterProofSquare implements Square {
 	}
 
 	public void setExpectedDanger(double danger) {
-    throw new RuntimeException(
-        "WaterProofSquare can calculate it's own danger, thank you.");
+		throw new RuntimeException(
+				"WaterProofSquare can calculate it's own danger, thank you.");
 	}
 
 	public double getExpectedDanger() {
 		return danger;
 	}
 
-  public void increaseExpectedHappinessBy(double happiness) {
-    this.happiness += happiness;
-  }
+	public void increaseExpectedHappinessBy(double happiness) {
+		this.happiness += happiness;
+	}
 
 	public void setExpectedHappiness(double happiness) {
-    this.happiness = happiness;
+		this.happiness = happiness;
 	}
 
 	public double getExpectedHappiness() {
 		return happiness;
 	}
 
-  public void tick() {
-    danger = 0.;
-    happiness = 0.;
-    divers.clear();
+	public void tick() {
+		danger = 0.;
+		happiness = 0.;
+		divers.clear();
 
-    Square.SeaLifeExpectation creature;
-    for (Iterator<Square.SeaLifeExpectation> iter = creatures.iterator();
-         iter.hasNext();) {
-      SeaLifePrototype seaLife = iter.next().getSeaLife();
-      if (seaLife.getSpeed() > 0) {
-        iter.remove();
-      } else {
-        happiness += seaLife.getHappiness();
-        if (seaLife.isDangerous()) {
-          danger -= 2 * happiness;
-        }
-      }
-    }
-  }
+		for (Iterator<Square.SeaLifeExpectation> iter = creatures.iterator(); iter
+				.hasNext();) {
+			SeaLifePrototype seaLife = iter.next().getSeaLife();
+			if (seaLife.getSpeed() > 0) {
+				iter.remove();
+			} else {
+				happiness += seaLife.getHappiness();
+				if (seaLife.isDangerous()) {
+					danger -= 2 * happiness;
+				}
+			}
+		}
+	}
 
-  public class ExpectedCreature implements Square.SeaLifeExpectation {
-    private SeaLifePrototype creature;
-    private double certainty;
+	public class ExpectedCreature implements Square.SeaLifeExpectation {
+		private SeaLifePrototype creature;
+		private double certainty;
 
-    public ExpectedCreature(SeaLifePrototype creature, double certainty) {
-      this.creature = creature;
-      this.certainty = certainty;
-    }
+		public ExpectedCreature(SeaLifePrototype creature, double certainty) {
+			this.creature = creature;
+			this.certainty = certainty;
+		}
 
-    public SeaLifePrototype getSeaLife() {
-      return creature;
-    }
+		public SeaLifePrototype getSeaLife() {
+			return creature;
+		}
 
-    public double getCertainty() {
-      return certainty;
-    }
-  }
+		public double getCertainty() {
+			return certainty;
+		}
+	}
+
+	@Override
+	public void increaseExpectedDangerBy(double d) {
+		this.danger += d;
+	}
 }
