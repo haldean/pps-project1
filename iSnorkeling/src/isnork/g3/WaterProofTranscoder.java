@@ -22,7 +22,6 @@ public class WaterProofTranscoder implements Transcoder {
     public static int messageLength;
     private static boolean moreThan26PossiblePerSpecies;
     private HashBiMap<String,String> speciesMapping;
-    private HashBiMap<String,String> IDMapping;
     private double scale;
     private double dim;
 
@@ -37,7 +36,6 @@ public class WaterProofTranscoder implements Transcoder {
         }
 
         //TODO: get members-per-species info from Pokedex
-        IDMapping = HashBiMap.create(26 * 26);
         messageLength = 5;
         moreThan26PossiblePerSpecies = true;
 
@@ -60,11 +58,10 @@ public class WaterProofTranscoder implements Transcoder {
         StringBuilder messageBuilder = new StringBuilder();
         String mappedSpecies = getMappedSpecies(name);
         if(mappedSpecies == null) {
-            //System.out.println(name+" is not a top species");
             return null;
         }
         messageBuilder.append(mappedSpecies);
-        messageBuilder.append(getMappedID(id));
+        messageBuilder.append(IDtoAlpha(id));
         messageBuilder.append(getMappedLocation(location));
         String completeMessage = messageBuilder.toString();
 
@@ -86,10 +83,7 @@ public class WaterProofTranscoder implements Transcoder {
         recordedCreature.setName(speciesMapping.inverse().get(Character.toString(msg.charAt(0))));
 
         String idSubString = msg.substring(1,3);
-        if(!IDMapping.inverse().containsKey(idSubString)) {
-            IDMapping.put(IDfromAlpha(idSubString), idSubString);
-        }
-        recordedCreature.setId(getUnmappedID(idSubString));
+        recordedCreature.setId(IDfromAlpha(idSubString));
 
         recordedCreature.setLocation(getUnmappedLocation(msg.substring(3,5)));
 
@@ -98,21 +92,6 @@ public class WaterProofTranscoder implements Transcoder {
 
     private String getMappedSpecies(String species) {
         return speciesMapping.get(species);
-    }
-
-    private String getMappedID(String ID) {
-        if(!IDMapping.containsKey(ID)) {
-            //we haven't seen this one before
-            IDMapping.put(ID, IDtoAlpha(IDMapping.size()));
-        }
-        return IDMapping.get(ID);
-    }
-
-    private int getUnmappedID(String encodedID) {
-        if(!IDMapping.inverse().containsKey(encodedID)) {
-            IDMapping.put(IDfromAlpha(encodedID), encodedID);
-        }
-        return Integer.parseInt(IDMapping.inverse().get(encodedID));
     }
 
     //this conversion is from 2010:g1
@@ -129,7 +108,9 @@ public class WaterProofTranscoder implements Transcoder {
         return new Point2D.Double(x, y);
     }
 
-    private String IDtoAlpha(int num) {
+    private String IDtoAlpha(String n) {
+        int num = Integer.parseInt(n);
+        num = num % 676;
         StringBuilder encodedAlpha = new StringBuilder();
         do {
             int rem = num % 26;
@@ -147,7 +128,7 @@ public class WaterProofTranscoder implements Transcoder {
         return encodedAlpha.toString();
     }
 
-    private String IDfromAlpha(String encodedID) {
-        return String.valueOf((encodedID.charAt(0) - 'a') * 26 + (encodedID.charAt(1) - 'a'));
+    private int IDfromAlpha(String encodedID) {
+        return (encodedID.charAt(0) - 'a') * 26 + (encodedID.charAt(1) - 'a');
     }
 }

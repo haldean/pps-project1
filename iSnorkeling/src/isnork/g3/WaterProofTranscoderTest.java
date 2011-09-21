@@ -22,9 +22,7 @@ public class WaterProofTranscoderTest {
 		Transcoder xcoder = new WaterProofTranscoder(speciesRanking, 41);
 		List<String> messages = null;
 		
-		for(int i=0; i<30; i++) {
-			messages = xcoder.encode(name, "1"+String.valueOf(i), new Point2D.Double(-6.0, 4.0));
-		}
+		messages = xcoder.encode(name, "29", new Point2D.Double(-6.0, 4.0));
 
 		assertEquals("Should encode correctly.", "dbdip", Joiner.on("").join(messages));
 	}
@@ -37,11 +35,11 @@ public class WaterProofTranscoderTest {
 
 		Transcoder xcoder = new WaterProofTranscoder(speciesRanking, 41);
 		xcoder.encode(name, "10", new Point2D.Double(9.0, -4.0));
-		String message = "aaask";
+		String message = "abdsk";
 		SeaLife creature = xcoder.decode(message);
 		//System.out.println("\n\n"+creature.toString()+" at "+creature.getLocation().toString()+"\n\n");
 		assertEquals("Creature name should decode to Lassie.", "Lassie", creature.getName());
-		assertEquals("Creature ID should decode to 10.", 10, creature.getId());
+		assertEquals("Creature ID should decode to 29.", 29, creature.getId());
 		assertEquals("Creature location should decode to 9.0,-4.0.", "Point2D.Double[9.0, -4.0]", creature.getLocation().toString());
 	}
 }
