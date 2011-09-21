@@ -7,9 +7,11 @@ import isnork.sim.SeaLife;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 
-import com.google.common.collect.Maps;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableSortedMap;
 
 import static org.junit.Assert.*;
 
@@ -19,24 +21,28 @@ public class WaterProofTranscoderTest {
 	@Test
 	public void testEncode() {
 		String name = "Mysterious";
-		Map<Integer, String> speciesRanking = Maps.newHashMap();
-		speciesRanking.put(3, name);
+		SortedMap<Integer, String> speciesRanking =
+            ImmutableSortedMap.of(3, name, 2, "Herp", 1, "Derp", 0, "Durrrr");
 
 		Transcoder xcoder = new WaterProofTranscoder(speciesRanking, 41);
-		List<String> messages = xcoder.encode(name, "42", new Point2D.Double(-6.0, 4.0));
-		//System.out.println("\n\nEncoded message:\n" + Joiner.on(",").join(messages));
-		assertEquals("Should encode correctly.", "da ip", Joiner.on("").join(messages));
+		List<String> messages = null;
+		
+		for(int i=0; i<30; i++) {
+			messages = xcoder.encode(name, "1"+String.valueOf(i), new Point2D.Double(-6.0, 4.0));
+		}
+
+		assertEquals("Should encode correctly.", "dbdip", Joiner.on("").join(messages));
 	}
 
 	@Test
 	public void testDecode() {
 		String name = "Lassie";
-		Map<Integer, String> speciesRanking = Maps.newHashMap();
-		speciesRanking.put(0, name);
+		SortedMap<Integer, String> speciesRanking =
+            ImmutableSortedMap.of(0, name);
 
 		Transcoder xcoder = new WaterProofTranscoder(speciesRanking, 41);
 		xcoder.encode(name, "10", new Point2D.Double(9.0, -4.0));
-		String message = "aa sk";
+		String message = "aaask";
 		SeaLife creature = xcoder.decode(message);
 		//System.out.println("\n\n"+creature.toString()+" at "+creature.getLocation().toString()+"\n\n");
 		assertEquals("Creature name should decode to Lassie.", "Lassie", creature.getName());

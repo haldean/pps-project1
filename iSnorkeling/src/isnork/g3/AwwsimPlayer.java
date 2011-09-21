@@ -32,9 +32,10 @@ public class AwwsimPlayer extends Player {
 			int penalty, int d, int r, int n) {
 		int mapWidth = d * 2 + 1;
 		dex = new WaterProofPokedex(seaLifePossibilities);
-		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
 		viewRadius = r;
 		numDivers = n;
+
+		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
 
 		// TODO add these back in when we need them
 		// commented them out because they were triggering warnings on
@@ -53,14 +54,13 @@ public class AwwsimPlayer extends Player {
 	public String tick(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<iSnorkMessage> incomingMessages,
 			Set<Observation> playerLocations) {
-    try {
-      System.out.println("carto update is go");
-      carto.update(myPosition, whatYouSee, playerLocations, incomingMessages);
-      System.out.println("carto update is done");
-      nextMove = carto.getNextDirection();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+		try {
+			carto.update(myPosition, whatYouSee, playerLocations,
+					incomingMessages);
+			nextMove = carto.getNextDirection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return carto.getMessage();
 	}
 

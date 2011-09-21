@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedMap;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -19,105 +20,142 @@ import com.google.common.collect.Lists;
 /**
  * En/decodes information about an observed creature into a series of 
  * one-character messages, ready to be transmitted by the iSnork.
- * Info included: species, ID, and location of the creature. 6 bits total.
+ * Info included: species, ID, and location of the creature. 4 or 5 bits total.
  * 
- * Species: 1 bit  (26 values)
- * ID:      2 bits (676 values)
- * Loc:     2 bits (676 values)
+ * Species: 1 bit       (26 values)
+ * ID:      1 or 2 bits (26 or 676 values)
+ * Loc:     2 bits      (676 values)
  */
 public class WaterProofTranscoder implements Transcoder {
-	public static final int messageLength = 5;
-	private HashBiMap<String,String> speciesMapping;
-	private HashBiMap<String,String> IDMapping;
-	private double scale;
-	private double dim;
+    public static int messageLength;
+    private static boolean moreThan26PossiblePerSpecies;
+    private HashBiMap<String,String> speciesMapping;
+    private HashBiMap<String,String> IDMapping;
+    private double scale;
+    private double dim;
 
-	public WaterProofTranscoder(Map<Integer, String> speciesRanking, int sideLength) {
-		speciesMapping = HashBiMap.create(26);
-		for(int i=0; i<26; i++) {
-			speciesMapping.put(speciesRanking.get(i), Character.toString((char) (i + 'a')));
-		}
+    public WaterProofTranscoder(
+            SortedMap<Integer, String> speciesRanking, int sideLength) {
+        speciesMapping = HashBiMap.create(26);
+        int i=0;
+        for (String speciesName : speciesRanking.values()) {
+            speciesMapping.put(
+                    speciesName, Character.toString((char) (i + 'a')));
+            i++;
+        }
 
-		IDMapping = HashBiMap.create(676);
-		scale = Math.min(26.0 / sideLength, 1);
-		dim = (sideLength - 1) / 2.0;
-	}
+        //TODO: get members-per-species info from Pokedex
+        IDMapping = HashBiMap.create(26 * 26);
+        messageLength = 5;
+        moreThan26PossiblePerSpecies = true;
 
-	@Override
-	public List<String> encode(String name, String id, Point2D.Double location) {
-		StringBuilder messageBuilder = new StringBuilder();
-		messageBuilder.append(getMappedSpecies(name));
-		messageBuilder.append(getMappedID(id));
-		messageBuilder.append(getMappedLocation(location));
-		String completeMessage = messageBuilder.toString();
+        scale = Math.min(26.0 / sideLength, 1);
+        dim = (sideLength - 1) / 2.0;
+    }
 
-		List<String> messages = Lists.newArrayListWithCapacity(5);
-		for(int i=0; i<5; i++) {
-			messages.add(Character.toString(completeMessage.charAt(i)));
-		}
-		return messages;
-	}
+    @Override
+    public int getMessageLength() {
+        return messageLength;
+    }
 
-	@Override
-	public SeaLife decode(String msg) {
-		if(msg.length() != 5) {
-			throw new IllegalStateException("The message to decode must be 5 characters long.");
-		}
+    @Override
+    public List<String> encode(String name, int id, Point2D location) {
+        return encode(name, String.valueOf(id), location);
+    }
 
-		SeaLife recordedCreature = new SeaLife(new SeaLifePrototypeBuilder("foo").create());
-		recordedCreature.setName(speciesMapping.inverse().get(Character.toString(msg.charAt(0))));
+    @Override
+    public List<String> encode(String name, String id, Point2D location) {
+        StringBuilder messageBuilder = new StringBuilder();
+        String mappedSpecies = getMappedSpecies(name);
+        if(mappedSpecies == null) {
+            //System.out.println(name+" is not a top species");
+            return null;
+        }
+        messageBuilder.append(mappedSpecies);
+        messageBuilder.append(getMappedID(id));
+        messageBuilder.append(getMappedLocation(location));
+        String completeMessage = messageBuilder.toString();
 
-		String idSubString = msg.substring(1,3);
-		if(!IDMapping.inverse().containsKey(idSubString)) {
-			IDMapping.put(IDfromAlpha(idSubString), idSubString);
-		}
-		recordedCreature.setId(Integer.parseInt(IDMapping.inverse().get(idSubString)));
+        List<String> messages = Lists.newArrayListWithCapacity(5);
+        for(int i=0; i<5; i++) {
+            messages.add(Character.toString(completeMessage.charAt(i)));
+        }
+        return messages;
+    }
 
-		recordedCreature.setLocation(getUnmappedLocation(msg.substring(3,5)));
+    @Override
+    public SeaLife decode(String msg) {
+        if(msg.length() != messageLength) {
+            throw new IllegalStateException("The message to decode must be "
+                +messageLength+" characters long.");
+        }
 
-		return recordedCreature;
-	}
+        SeaLife recordedCreature = new SeaLife(new SeaLifePrototypeBuilder("foo").create());
+        recordedCreature.setName(speciesMapping.inverse().get(Character.toString(msg.charAt(0))));
 
-	private String getMappedSpecies(String species) {
-		return speciesMapping.get(species);
-	}
+        String idSubString = msg.substring(1,3);
+        if(!IDMapping.inverse().containsKey(idSubString)) {
+            IDMapping.put(IDfromAlpha(idSubString), idSubString);
+        }
+        recordedCreature.setId(getUnmappedID(idSubString));
 
-	private String getMappedID(String ID) {
-		if(!IDMapping.containsKey(ID)) {
-			//we haven't seen this one before
-			IDMapping.put(ID, IDtoAlpha(IDMapping.size()));
-		}
-		return IDMapping.get(ID);
-	}
+        recordedCreature.setLocation(getUnmappedLocation(msg.substring(3,5)));
 
-	//this conversion is from 2010:g1
-	private String getMappedLocation(Point2D location) {
-		char x = (char)(scale * (location.getX() + dim) + 'a');
-		char y = (char)(scale * (location.getY() + dim) + 'a');
-		return Character.toString(x) + Character.toString(y);
-	}
+        return recordedCreature;
+    }
 
-	//this conversion is from 2010:g1
-	private Point2D.Double getUnmappedLocation(String encodedLocation) {
-		double x = Math.ceil((double)(encodedLocation.charAt(0) - 'a') / scale - dim);
-		double y = Math.ceil((double)(encodedLocation.charAt(1) - 'a') / scale - dim);
-		return new Point2D.Double(x, y);
-	}
+    private String getMappedSpecies(String species) {
+        return speciesMapping.get(species);
+    }
 
-	private String IDtoAlpha(int num) {
-		String encodedAlpha = "";
-		do {
-			int rem = num % 26;
-			encodedAlpha = (char)(rem + 'a') + encodedAlpha;
-			num = (num - rem) / 26;
-		} while(num > 0);
-		if(encodedAlpha.length() == 1) {
-			encodedAlpha += " ";
-		}
-		return encodedAlpha;
-	}
+    private String getMappedID(String ID) {
+        if(!IDMapping.containsKey(ID)) {
+            //we haven't seen this one before
+            IDMapping.put(ID, IDtoAlpha(IDMapping.size()));
+        }
+        return IDMapping.get(ID);
+    }
 
-	private String IDfromAlpha(String encodedID) {
-		return String.valueOf((encodedID.charAt(0) - 'a') * 26 + (encodedID.charAt(1) - 'a'));
-	}
+    private int getUnmappedID(String encodedID) {
+        if(!IDMapping.inverse().containsKey(encodedID)) {
+            IDMapping.put(IDfromAlpha(encodedID), encodedID);
+        }
+        return Integer.parseInt(IDMapping.inverse().get(encodedID));
+    }
+
+    //this conversion is from 2010:g1
+    private String getMappedLocation(Point2D location) {
+        char x = (char)(scale * (location.getX() + dim) + 'a');
+        char y = (char)(scale * (location.getY() + dim) + 'a');
+        return Character.toString(x) + Character.toString(y);
+    }
+
+    //this conversion is from 2010:g1
+    private Point2D getUnmappedLocation(String encodedLocation) {
+        double x = Math.ceil((double)(encodedLocation.charAt(0) - 'a') / scale - dim);
+        double y = Math.ceil((double)(encodedLocation.charAt(1) - 'a') / scale - dim);
+        return new Point2D.Double(x, y);
+    }
+
+    private String IDtoAlpha(int num) {
+        StringBuilder encodedAlpha = new StringBuilder();
+        do {
+            int rem = num % 26;
+            encodedAlpha.insert(0, (char)(rem + 'a'));
+            num = (num - rem) / 26;
+        } while(num > 0);
+        
+        if(moreThan26PossiblePerSpecies) {
+            //pad to two digits
+            if(encodedAlpha.length() == 1) {
+                encodedAlpha.insert(0, "a");
+            }
+        }
+        
+        return encodedAlpha.toString();
+    }
+
+    private String IDfromAlpha(String encodedID) {
+        return String.valueOf((encodedID.charAt(0) - 'a') * 26 + (encodedID.charAt(1) - 'a'));
+    }
 }

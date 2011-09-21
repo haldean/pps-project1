@@ -8,6 +8,8 @@ import org.junit.runners.Suite;
     PokedexTest.class,
     SeaLifePrototypeBuilderTest.class,
     WaterProofSquareTest.class,
-    WaterProofCartogramTest.class
+    WaterProofCartogramTest.class,
+    WaterProofTranscoderTest.class,
+    WaterProofMessengerTest.class
     })
 public class AllTests {}

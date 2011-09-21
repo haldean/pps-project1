@@ -2,6 +2,8 @@ package isnork.g3;
 
 import isnork.sim.SeaLifePrototype;
 
+import java.util.SortedMap;
+
 public interface Pokedex {
 
 	/**
@@ -72,5 +74,7 @@ public interface Pokedex {
 	 * @return
 	 */
 	public int getPersonalSeenCount(String name);
+
+	public SortedMap<Integer,String> getSpeciesRanking();
 
 }
