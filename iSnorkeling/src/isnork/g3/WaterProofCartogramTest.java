@@ -40,7 +40,7 @@ public class WaterProofCartogramTest {
     EasyMock.expect(dex.getPersonalSeenCount(EasyMock.isA(String.class)))
       .andReturn(0).anyTimes();
     EasyMock.expect(dex.getAllSpecies()).andReturn(
-        new ArrayList<SeaLifePrototype>());
+        new ArrayList<SeaLifePrototype>()).anyTimes();
     EasyMock.replay(dex);
     return dex;
   }
