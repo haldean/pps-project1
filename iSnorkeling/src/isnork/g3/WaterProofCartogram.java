@@ -389,18 +389,80 @@ public class WaterProofCartogram implements Cartogram {
 
 		for (Entry<Direction, Coord> entry : orthoDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
-					getExpectedHappinessForCoords(entry.getValue().move(
-							x, y)) * 3.0));
+					getExpectedHappinessInArcOrtho(entry.getValue().move(
+							x, y), entry.getKey()) * 3.0));
 		}
 
 		for (Entry<Direction, Coord> entry : diagDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
-					getExpectedHappinessForCoords(entry.getValue().move(
-							x, y)) * 2.0));
+					getExpectedHappinessInArcDiag(entry.getValue().move(
+							x, y), entry.getKey()) * 2.0));
 		}
 		return lst;
 	}
+		
+	private double getExpectedHappinessInArcDiag(Coord coord, Direction direction){
+		Coord directionVector = DIRECTION_MAP.get(direction);
+		int maxX = directionVector.getX() * sideLength / 2;
+		int maxY = directionVector.getY() * sideLength / 2;
+
+		double runningSum = 0;
+		
+		int minX = coord.getX();
+		int minY = coord.getY();
+		for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
+			for (int y = minY; y != maxY + 1 ; y += directionVector.getY()){
+				runningSum += getExpectedHappinessForCoords(x, y);
+			}			
+		}
+		
+		return runningSum / ((maxX - minX) * (maxY - minY));
+	}
+
 	
+	private double getExpectedHappinessInArcOrtho(Coord coord, Direction direction){
+		Coord directionVector = DIRECTION_MAP.get(direction);
+		
+		
+		double runningSum = 0;
+		
+		int maxX = directionVector.getX() * sideLength / 2;
+		int maxY = directionVector.getY() * sideLength / 2;
+		
+		
+		int minX = coord.getX();
+		int minY = coord.getY();
+
+		if (directionVector.getX() != 0){
+			
+			for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
+				int numTraveled = x - minX;
+				for (int y = minY - numTraveled; y != maxY + numTraveled + directionVector.getY(); 
+					y += directionVector.getY()){
+					if (y >= -sideLength / 2 && y <= sideLength / 2){
+						runningSum += getExpectedHappinessForCoords(x, y);
+					}
+				}
+			}
+			
+		}
+		else{
+			
+			for (int y = minY; y != maxY + directionVector.getY() ; y += directionVector.getY()){
+				int numTraveled = y- minY;
+				for (int x = minX - numTraveled; x != maxX + numTraveled + directionVector.getX(); 
+					x += directionVector.getX()){
+					if (x >= -sideLength / 2 && x <= sideLength / 2){
+						runningSum += getExpectedHappinessForCoords(x, y);
+					}
+				}
+			}
+			
+		}
+		
+		return runningSum / ((maxX - minX) * (maxY - minY));
+	}
+
 	private Direction selectRandomProportionally(List<DirectionValue> lst, double x, double y){
 		List<Double> intLst = Lists.newArrayListWithCapacity(8);
 		double runningSum = 0;
