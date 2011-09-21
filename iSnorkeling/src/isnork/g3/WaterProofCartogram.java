@@ -2,12 +2,9 @@ package isnork.g3;
 
 import isnork.sim.GameObject.Direction;
 import isnork.sim.Observation;
-import isnork.sim.SeaLifePrototype;
 import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 import java.awt.geom.Point2D;
 import java.text.NumberFormat;
@@ -17,22 +14,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
-import java.util.Queue;
-import java.util.LinkedList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
-import com.google.common.collect.ImmutableSortedSet;
 
 public class WaterProofCartogram implements Cartogram {
-	private Transcoder xcoder;
 	private Messenger messenger;
 	private final int sideLength;
 	private final int viewRadius;
-	private final int numDivers;
 	private final Pokedex dex;
 	private final Square[][] mapStructure;
     private final Set<Integer> creaturesSeen;
@@ -77,13 +71,10 @@ public class WaterProofCartogram implements Cartogram {
 	 */
 	private static final double MAX_DECAY = 0.25;
 
-	private static final double DANGER_RADIUS = 2;
-
 	public WaterProofCartogram(int mapWidth, int viewRadius, int numDivers,
 			Pokedex dex) {
 		this.sideLength = mapWidth;
 		this.viewRadius = viewRadius;
-		this.numDivers = numDivers;
 		this.mapStructure = new WaterProofSquare[sideLength][sideLength];
 		for (int i = 0; i < sideLength; i++) {
 			for (int j = 0; j < sideLength; j++) {
@@ -103,6 +94,7 @@ public class WaterProofCartogram implements Cartogram {
 	public void update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
+		System.out.println(this.toString());
 		ticks++;
 		currentLocation = myPosition;
 		
@@ -226,11 +218,14 @@ public class WaterProofCartogram implements Cartogram {
                 if (Math.sqrt(dx * dx + dy * dy) <= viewRadius) {
                     Square thisSquare = squareFor(x + dx, y + dy);
                     if (thisSquare != null) {
-                        double expectedHappiness =
-                            proto.getHappiness() * certainty *
-                            (1 / (1. + movesToSquare(x, y))) *
-                            happinessProportionOfCreature(proto);
-                        thisSquare.increaseExpectedHappinessBy(expectedHappiness);
+                        double modifier =
+                            certainty *
+                            (1 / (1. + movesToSquare(x, y)));
+                        thisSquare.increaseExpectedHappinessBy(modifier * proto.getHappiness() *
+                                happinessProportionOfCreature(proto));
+                        if (proto.isDangerous()){
+                            thisSquare.increaseExpectedDangerBy(modifier * proto.getHappiness() * 2);
+                        }
                     }
                 }
             }
@@ -254,26 +249,26 @@ public class WaterProofCartogram implements Cartogram {
 		 * stay in the same square, you only need to be .5 * as good as ortho
 		 */
 
-		List<DirectionValue> lst = getExpectations(currentLocation.getX(),
-				currentLocation.getY());
+		List<DirectionValue> lst = getExpectations((int) currentLocation.getX(),
+				(int) currentLocation.getY());
 
-		Direction dir = getMaxDirection(lst);
+		Direction dir = selectRandomProportionally(lst);
 		return dir;
 	}
 
-	private Direction getMaxDirection(List<DirectionValue> lst) {
-		DirectionValue max = lst.get(0);
+//	private Direction getMaxDirection(List<DirectionValue> lst) {
+//		DirectionValue max = lst.get(0);
+//
+//		for (DirectionValue dv : lst) {
+//			if (dv.getDub() > max.getDub()) {
+//				max = dv;
+//			}
+//		}
+//
+//		return max.getDir();
+//	}
 
-		for (DirectionValue dv : lst) {
-			if (dv.getDub() > max.getDub()) {
-				max = dv;
-			}
-		}
-
-		return max.getDir();
-	}
-
-	private List<DirectionValue> getExpectations(double x, double y) {
+	private List<DirectionValue> getExpectations(int x, int y) {
 		List<DirectionValue> lst = Lists.newArrayListWithCapacity(8);
 
 		lst.add(new DirectionValue(Direction.STAYPUT,
@@ -282,59 +277,62 @@ public class WaterProofCartogram implements Cartogram {
 		for (Entry<Direction, Coord> entry : orthoDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
 					getExpectedHappinessForCoords(entry.getValue().move(
-							(int) x, (int) y)) * 3.0));
+							x, y)) * 3.0));
 		}
 
 		for (Entry<Direction, Coord> entry : diagDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
 					getExpectedHappinessForCoords(entry.getValue().move(
-							(int) x, (int) y)) * 2.0));
+							x, y)) * 2.0));
 		}
 		return lst;
+	}
+	
+	private Direction selectRandomProportionally(List<DirectionValue> lst){
+		List<Double> intLst = Lists.newArrayListWithCapacity(8);
+		double runningSum = 0;
+		for (int i = 0; i < 8; i++) {
+			runningSum += lst.get(i).getDub();
+			intLst.add(i, runningSum);
+		}
+		
+//		Object val = random.nextInt(runningSum);
+		double myRand = random.nextDouble() * runningSum;
+		Direction dir;
+		if (myRand < intLst.get(0)){
+			dir = lst.get(0).getDir();
+		}
+		else if (myRand < intLst.get(1)){
+			dir = lst.get(1).getDir();
+		}
+		else if (myRand < intLst.get(2)){
+			dir = lst.get(2).getDir();
+		}
+		else if (myRand < intLst.get(3)){
+			dir = lst.get(3).getDir();
+		}
+		else if (myRand < intLst.get(4)){
+			dir = lst.get(4).getDir();
+		}
+		else if (myRand < intLst.get(5)){
+			dir = lst.get(5).getDir();
+		}
+		else if (myRand < intLst.get(6)){
+			dir = lst.get(6).getDir();
+		}
+		else {
+			dir = lst.get(7).getDir();
+		}
+		return dir;
 	}
 
 	private double getExpectedHappinessForCoords(Coord coord) {
 		return getExpectedHappinessForCoords(coord.getX(), coord.getY());
 	}
 
-	private double getExpectedHappinessForCoords(double unadjustedX,
-			double unadjustedY) {
-		if (unadjustedX == 0 && unadjustedY == 0) {
-			return 0;
-		}
-
-		if (isInvalidCoords(unadjustedX, unadjustedY)) {
-			return Double.MIN_VALUE;
-		}
-
-		double x = unadjustedX + sideLength / 2;
-		double y = unadjustedY + sideLength / 2;
-
-		int minX = (int) x - viewRadius;
-		minX = ((minX > 0) ? minX : 0);
-
-		int minY = (int) y - viewRadius;
-		minY = ((minY > 0) ? minY : 0);
-
-		int maxX = (int) x + viewRadius;
-		maxX = ((maxX < sideLength) ? maxX : sideLength);
-
-		int maxY = (int) y + viewRadius;
-		maxY = ((maxY < sideLength) ? maxY : sideLength);
-
-		double expectedHappiness = 0.0;
-		for (int xCoord = minX; xCoord < maxX; xCoord++) {
-			for (int yCoord = minY; yCoord < maxY; yCoord++) {
-				double sqrt = Math.sqrt(square((xCoord - x)
-						+ square(yCoord - y)));
-
-				if (sqrt < viewRadius) {
-					expectedHappiness += mapStructure[xCoord][yCoord]
-							.getExpectedHappiness();
-				}
-			}
-		}
-		return expectedHappiness;
+	private double getExpectedHappinessForCoords(int x,
+			int y) {
+		return squareFor(x, y).getExpectedHappiness();
 	}
 
 	private final static double square(double x) {

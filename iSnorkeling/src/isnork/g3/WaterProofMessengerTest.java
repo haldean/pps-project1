@@ -1,24 +1,18 @@
 package isnork.g3;
 
-import isnork.sim.SeaLife;
-import isnork.sim.SeaLifePrototype;
-import isnork.sim.iSnorkMessage;
+import static org.junit.Assert.assertEquals;
 import isnork.sim.Observation;
+import isnork.sim.SeaLife;
+import isnork.sim.iSnorkMessage;
 
 import java.awt.geom.Point2D;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.ImmutableSortedMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-import com.google.common.base.Joiner;
-
-import static org.junit.Assert.*;
 import org.easymock.EasyMock;
 import org.junit.Test;
+
+import com.google.common.collect.ImmutableSortedMap;
+import com.google.common.collect.Sets;
 
 public class WaterProofMessengerTest {
     private WaterProofMessenger msgr;
