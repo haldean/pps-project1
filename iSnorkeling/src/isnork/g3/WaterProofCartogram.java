@@ -235,7 +235,7 @@ public class WaterProofCartogram implements Cartogram {
                 difference = expectedCount - speciesInViewCount.get(proto.getName());
             }
 
-            System.out.println(proto.getName() + " " + difference);
+            //System.out.println(proto.getName() + " " + difference);
             if (difference > 0) {
                 expectedHappinessInFog += difference * proto.getHappiness();
             }
@@ -367,7 +367,7 @@ public class WaterProofCartogram implements Cartogram {
 		
 //		Object val = random.nextInt(runningSum);
 		double myRand = random.nextDouble() * runningSum;
-		System.out.println(myRand);
+		//System.out.println(myRand);
 
 		Direction dir;
 		if (myRand < intLst.get(0)){
@@ -483,7 +483,7 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	private Direction unOptimizedHeatmapGetNextDirection() {
-		int tickLeeway = MAX_TICKS_PER_ROUND - 3 * ticks;
+		int tickLeeway = MAX_TICKS_PER_ROUND - 1 * ticks;
 		double y = currentLocation.getY();
 		double x = currentLocation.getX();
 		if (Math.abs(x) < tickLeeway
@@ -579,12 +579,13 @@ public class WaterProofCartogram implements Cartogram {
 			for (int j = 0; j < mapStructure[i].length; j++) {
 				output.append(
                         numberFormat.format(
-                            mapStructure[i][j].getExpectedHappiness()));
+                            mapStructure[j][i].getExpectedHappiness()));
 				output.append("\t");
 			}
 			output.append("\n");
 		}
 
+		/*
 		output.append("\nWe got shit at:\n");
 		for (int i = 0; i < mapStructure.length; i++) {
 			for (int j = 0; j < mapStructure[i].length; j++) {
@@ -596,6 +597,7 @@ public class WaterProofCartogram implements Cartogram {
 				}
 			}
 		}
+		*/
 		return output.toString();
 	}
 
