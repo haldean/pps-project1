@@ -193,9 +193,7 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
     private boolean insideBounds(int x, int y) {
-        boolean inside =
-            Math.abs(x) <= sideLength / 2 && Math.abs(y) <= sideLength / 2;
-        return inside;
+        return Math.abs(x) <= sideLength / 2 && Math.abs(y) <= sideLength / 2;
     }
 
 	private void updateMovingCreatures() {
@@ -368,13 +366,16 @@ public class WaterProofCartogram implements Cartogram {
 		List<Double> intLst = Lists.newArrayListWithCapacity(8);
 		double runningSum = 0;
 		for (int i = 0; i < 8; i++) {
-			runningSum += lst.get(i).getDub();
+			double dub = lst.get(i).getDub();
+			if (dub > 0){
+				runningSum += dub;
+			}
 			intLst.add(i, runningSum);
 		}
 		
 //		Object val = random.nextInt(runningSum);
 		double myRand = random.nextDouble() * runningSum;
-		System.out.println(myRand);
+		//System.out.println(myRand);
 
 		Direction dir;
 		if (myRand < intLst.get(0)){
@@ -421,7 +422,13 @@ public class WaterProofCartogram implements Cartogram {
 
 	private double getExpectedHappinessForCoords(int x,
 			int y) {
-		return squareFor(x, y).getExpectedHappiness();
+		Square square = squareFor(x, y);
+		if (square == null){
+			return Double.NEGATIVE_INFINITY;
+		}
+		else{
+			return square.getExpectedHappiness();
+		}
 	}
 
 	private final static double square(double x) {
@@ -585,6 +592,20 @@ public class WaterProofCartogram implements Cartogram {
 			}
 			output.append("\n");
 		}
+
+		/*
+		output.append("\nWe got shit at:\n");
+		for (int i = 0; i < mapStructure.length; i++) {
+			for (int j = 0; j < mapStructure[i].length; j++) {
+				if (mapStructure[i][j].getCreatures().size() > 0) {
+					output.append(i - (sideLength / 2));
+					output.append(", ");
+					output.append(j - (sideLength / 2));
+					output.append("\n");
+				}
+			}
+		}
+		*/
 		return output.toString();
 	}
 

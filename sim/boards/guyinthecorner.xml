@@ -1,37 +1,27 @@
-#!/usr/bin/env python
-
-print """
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.6.0_26" class="java.beans.XMLDecoder"> 
-"""
 
-for i in range(300):
-  dangerous = random.choice([True, False])
-  filename = dangerous and "shark.png" or "treasure.png"
-  happiness = 2
-  print """
  <object class="isnork.sim.SeaLifePrototype"> 
   <void property="dangerous"> 
-   <boolean>%s</boolean> 
+   <boolean>False</boolean> 
   </void> 
   <void property="filename"> 
-   <string>%s.jpg</string> 
+   <string>forever_alone.jpg</string> 
   </void> 
   <void property="happiness"> 
-   <int>%d</int> 
+   <int>1000</int> 
   </void> 
   <void property="maxCount"> 
    <int>1</int> 
   </void> 
   <void property="minCount"> 
-   <int>2</int> 
-  </void> 
-  <void property="name"> 
-   <string>Thing %d</string> 
-  </void> 
-  <void property="speed"> 
    <int>1</int> 
   </void> 
- </object> 
-  """ % (dangerous, filename, happiness, i)
+  <void property="name"> 
+   <string>Guy</string> 
+  </void> 
+  <void property="speed"> 
+   <int>0</int> 
+  </void> 
+ </object>
 </java> 
