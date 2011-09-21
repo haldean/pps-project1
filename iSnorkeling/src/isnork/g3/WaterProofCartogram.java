@@ -156,6 +156,8 @@ public class WaterProofCartogram implements Cartogram {
         } else {
             System.out.println(location);
             System.out.println(squareFor(location));
+            System.out.println("l:" + (int) location.getX() + sideLength/2 + ", " +
+                    (int) location.getY() + sideLength/2);
             squareFor(location).addCreature(seaLife, 1.);
         }
     }
@@ -183,10 +185,11 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	private Square squareFor(int x, int y) {
-        if (! insideBounds(x, y)) return null;
+        System.out.println(x + ", " + y);
 		x += (sideLength / 2);
 		y += (sideLength / 2);
         System.out.println(x + ", " + y);
+        if (! insideBounds(x, y)) return null;
 		return mapStructure[x][y];
 	}
 
@@ -277,15 +280,16 @@ public class WaterProofCartogram implements Cartogram {
 
         for (int dx = -viewRadius; dx <= viewRadius; dx++) {
             for (int dy = -viewRadius; dy <= viewRadius; dy++) {
-                if (Math.sqrt(dx * dx + dy * dy) <= viewRadius) {
+                double r = Math.sqrt(dx * dx + dy * dy);
+                if (r <= viewRadius) {
                     Square thisSquare = squareFor(x + dx, y + dy);
                     if (thisSquare != null) {
                         double modifier =
-                            certainty *
-                            (1 / (1. + movesToSquare(x, y)));
-                        thisSquare.increaseExpectedHappinessBy(modifier * proto.getHappiness() *
+                            certainty * (1 / (1. + movesToSquare(x, y)));
+                        thisSquare.increaseExpectedHappinessBy(
+                                modifier * proto.getHappiness() *
                                 happinessProportionOfCreature(proto));
-                        if (proto.isDangerous()){
+                        if (r <= 1.5 && proto.isDangerous()) {
                             thisSquare.increaseExpectedDangerBy(modifier * proto.getHappiness() * 2);
                         }
                     }
