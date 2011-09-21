@@ -71,20 +71,17 @@ public class WaterProofMessenger implements Messenger {
         for(iSnorkMessage in : incomingMessages) {
             iSnorkBuffer msgBuffer = receivedMessages.get(in.getSender());
             if(msgBuffer == null) {
-                System.out.println("msg from "+in.getSender()+" is null");
+                continue;
             }
-            assert(msgBuffer != null);
             if(!msgBuffer.hasLocation()) {
                 msgBuffer.setLocation(in.getLocation());
             }
-            //System.out.println("rcvd msg: "+in.getMsg());
             msgBuffer.add(in.getMsg());
             
             if(msgBuffer.isComplete()) {
                 discovered.add(xcoder.decode(msgBuffer.getMessage()));
             }
         }
-        //System.out.println("\nreceived: "+receivedMessages.toString());
     }
 
     @Override
