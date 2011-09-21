@@ -1,21 +1,16 @@
 package isnork.g3;
 
-import isnork.g3.WaterProofTranscoder;
-
+import static org.junit.Assert.assertEquals;
 import isnork.sim.SeaLife;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Maps;
-import com.google.common.collect.ImmutableSortedMap;
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableSortedMap;
 
 public class WaterProofTranscoderTest {
 	@Test

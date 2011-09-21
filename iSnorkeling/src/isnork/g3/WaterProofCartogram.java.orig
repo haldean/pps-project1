@@ -2,14 +2,17 @@ package isnork.g3;
 
 import isnork.sim.GameObject.Direction;
 import isnork.sim.Observation;
-import isnork.sim.SeaLifePrototype;
 import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
 
+<<<<<<< HEAD
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+=======
+>>>>>>> 2d6c0dbcb1dfd69e27e5709bb6cc212ea37f2dd8
 import java.awt.geom.Point2D;
 import java.text.NumberFormat;
 import java.util.Iterator;
@@ -18,8 +21,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
-import java.util.Queue;
-import java.util.LinkedList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -30,13 +31,20 @@ import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
 
 public class WaterProofCartogram implements Cartogram {
+<<<<<<< HEAD
 	private List<CreatureRecord> movingCreatures;
 	private Messenger messenger;
 	private Point2D currentLocation;
 	private Transcoder xcoder;
+=======
+	private Messenger messenger;
+	private final int sideLength;
+	private final int viewRadius;
+>>>>>>> 2d6c0dbcb1dfd69e27e5709bb6cc212ea37f2dd8
 	private final Pokedex dex;
 	private final Random random;
 	private final Square[][] mapStructure;
+	private final int numDivers;
 	private final int sideLength;
 	private final int viewRadius;
 	private int ticks;
