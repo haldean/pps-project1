@@ -6,6 +6,7 @@ import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.awt.geom.Point2D;
 import java.text.NumberFormat;
@@ -25,6 +26,8 @@ public class WaterProofCartogram implements Cartogram {
 	private final int numDivers;
 	private final Pokedex dex;
 	private final Square[][] mapStructure;
+    private final Set<Integer> creaturesSeen;
+
 	private final static Map<Direction, Coord> DIRECTION_MAP = ImmutableMap
 			.<Direction, Coord> builder().put(Direction.E, new Coord(1, 0))
 			.put(Direction.W, new Coord(-1, 0))
@@ -81,6 +84,7 @@ public class WaterProofCartogram implements Cartogram {
 
 		this.random = new Random();
 		this.movingCreatures = Lists.newArrayList();
+        this.creaturesSeen = Sets.newHashSet();
 		this.dex = dex;
 		ticks = 0;
 	}
@@ -89,7 +93,6 @@ public class WaterProofCartogram implements Cartogram {
 	public void update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
-		System.out.println("start update");
 		ticks++;
 		currentLocation = myPosition;
 
@@ -108,23 +111,28 @@ public class WaterProofCartogram implements Cartogram {
 			 * how to properly update the map. TODO(haldean, hans): make this
 			 * work with comm stuff.
 			 */
-			if (observation.getName() == null) {
-				continue;
-			}
-			SeaLifePrototype seaLife = dex.get(observation.getName());
-            dex.personallySawCreature(observation.getName());
-
-			if (seaLife.getSpeed() > 0) {
-				movingCreatures.add(new CreatureRecord(observation
-						.getLocation(), seaLife));
-			} else {
-				squareFor(observation.getLocation()).addCreature(seaLife, 1.);
-			}
+            seeCreature(
+                    observation.getId(), observation.getName(),
+                    dex.get(observation.getName()), observation.getLocation());
 		}
 
 		updateMovingCreatures();
-		System.out.println(this.toString());
 	}
+
+    public void seeCreature(
+            int id, String name, SeaLifePrototype seaLife, Point2D location) {
+        if (creaturesSeen.contains(id)) {
+            return;
+        }
+        creaturesSeen.add(id);
+        dex.personallySawCreature(name);
+
+        if (seaLife.getSpeed() > 0) {
+            movingCreatures.add(new CreatureRecord(location, seaLife));
+        } else {
+            squareFor(location).addCreature(seaLife, 1.);
+        }
+    }
 
 	private Square squareFor(Point2D location) {
 		return squareFor((int) location.getX(), (int) location.getY());
