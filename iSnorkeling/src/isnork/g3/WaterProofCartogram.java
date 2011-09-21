@@ -207,7 +207,8 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
     private boolean insideBounds(int x, int y) {
-        return Math.abs(x) <= sideLength / 2 && Math.abs(y) <= sideLength / 2;
+        return x <= sideLength / 2 && y <= sideLength / 2
+        	&& x >= -sideLength / 2 && y >= -sideLength / 2;
     }
 
     private void updateEdgeAtStart() {
@@ -229,7 +230,6 @@ public class WaterProofCartogram implements Cartogram {
 				.hasNext();) {
 			CreatureRecord record = iter.next();
             if (creaturesOnMap.contains(record.id)) {
-                //System.out.println("Duplicate record");
                 continue;
             }
             creaturesOnMap.add(record.id);
@@ -382,14 +382,14 @@ public class WaterProofCartogram implements Cartogram {
 
 		for (Entry<Direction, Coord> entry : orthoDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
-					getExpectedHappinessForCoords(entry.getValue().move(
-							x, y)) * 3.0));
+					getExpectedHappinessInArcOrtho(entry.getValue().move(
+							x, y), entry.getKey()) * 3.0 - 100 * getExpectedDangerForCoords(x, y)));
 		}
 
 		for (Entry<Direction, Coord> entry : diagDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
-					getExpectedHappinessForCoords(entry.getValue().move(
-							x, y)) * 2.0));
+					getExpectedHappinessInArcDiag(entry.getValue().move(
+							x, y), entry.getKey()) * 2.0 - 100 * getExpectedDangerForCoords(x, y)));
 		}
 		return lst;
 	}
@@ -411,7 +411,7 @@ public class WaterProofCartogram implements Cartogram {
 			}
 			
 			double retVal = runningSum / ((maxX - minX) * (maxY - minY));
-			System.out.println(retVal);
+//			System.out.println(retVal);
 			return retVal;
 		}
 		catch (Exception e){
@@ -464,8 +464,9 @@ public class WaterProofCartogram implements Cartogram {
 			}
 			
 			//TODO mnakamura fix this shit
-			double retVal = runningSum / (square(sideLength) / 4);
-			System.out.println(retVal);
+			double div = (maxX != 0) ? square(maxX - minX) : square(maxY - minY);
+			double retVal = runningSum / div;
+//			System.out.println(retVal);
 			return retVal;
 		}
 		catch (Exception e){
@@ -547,45 +548,15 @@ public class WaterProofCartogram implements Cartogram {
 		return x * x;
 	}
 
-	private double getExpectedDangerForCoords(double unadjustedX,
-			double unadjustedY) {
-		if (unadjustedX == 0 && unadjustedY == 0) {
-			return 0;
+	private double getExpectedDangerForCoords(int x,
+			int y) {
+		Square square = squareFor(x, y);
+		if (square == null){
+			return Double.NEGATIVE_INFINITY;
 		}
-
-		if (isInvalidCoords(unadjustedX, unadjustedY)) {
-			return Double.MIN_VALUE;
+		else{
+			return square.getExpectedHappiness();
 		}
-
-		double x = unadjustedX + sideLength / 2;
-		double y = unadjustedY + sideLength / 2;
-
-		int minX = (int) x - viewRadius;
-		minX = ((minX > 0) ? minX : 0);
-
-		int minY = (int) y - viewRadius;
-		minY = ((minY > 0) ? minY : 0);
-
-		int maxX = (int) x + viewRadius;
-		maxX = ((maxX < sideLength) ? maxX : sideLength);
-
-		int maxY = (int) y + viewRadius;
-		maxY = ((maxY < sideLength) ? maxY : sideLength);
-
-		double expectedDanger = 0.0;
-		for (int xCoord = minX; xCoord < maxX; xCoord++) {
-			for (int yCoord = minY; yCoord < maxY; yCoord++) {
-				double sqrt = Math.sqrt(square((xCoord - x)
-						+ square(yCoord - y)));
-
-				if (sqrt < viewRadius) {
-					expectedDanger += mapStructure[xCoord][yCoord]
-							.getExpectedDanger();
-				}
-			}
-		}
-
-		return expectedDanger;
 	}
 
 	private boolean isInvalidCoords(double x, double y) {
@@ -603,7 +574,7 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	private Direction unOptimizedHeatmapGetNextDirection() {
-		int tickLeeway = MAX_TICKS_PER_ROUND - 3 * ticks;
+		int tickLeeway = MAX_TICKS_PER_ROUND - 8 * ticks / 7 ;
 		double y = currentLocation.getY();
 		double x = currentLocation.getX();
 		if (Math.abs(x) < tickLeeway
