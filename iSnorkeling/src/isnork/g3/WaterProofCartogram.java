@@ -42,6 +42,7 @@ public class WaterProofCartogram implements Cartogram {
 	private final int viewRadius;
 	private int ticks;
     private final Set<Integer> creaturesSeen;
+    private final Set<Integer> creaturesOnMap;
     private final Map<String, Integer> speciesInViewCount;
 
 	private final static Map<Direction, Coord> DIRECTION_MAP = ImmutableMap
@@ -94,6 +95,7 @@ public class WaterProofCartogram implements Cartogram {
 		this.random = new Random();
 		this.movingCreatures = Lists.newArrayList();
         this.creaturesSeen = Sets.newHashSet();
+        this.creaturesOnMap = Sets.newHashSet();
         this.speciesInViewCount = Maps.newHashMap();
 		this.dex = dex;
 		ticks = 0;
@@ -122,44 +124,49 @@ public class WaterProofCartogram implements Cartogram {
 
 		messenger.addReceivedMessages(incomingMessages);
         // get discovered creatures based on received messages:
+        for (Observation obs : whatYouSee) {
+            /* This is a diver. */
+            if (obs.getName() == null) continue;
+
+            if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
+                dex.personallySawCreature(obs.getName());
+            }
+
+            seeCreature(obs.getId(), obs.getName(),
+                    dex.get(obs.getName()), obs.getLocation());
+        }
+
 		for (SeaLife creature : messenger.getDiscovered()) {
             seeCreature(
                     creature.getId(), creature.getName(),
                     creature, creature.getLocation());
 		}
 
-        if (currentLocation.getX() == 0 && currentLocation.getY() == 0) {
-            for (Observation obs : whatYouSee) {
-                seeCreature(obs.getId(), obs.getName(),
-                        dex.get(obs.getName()), obs.getLocation());
-            }
-        }
-
 		if (!whatYouSee.isEmpty()) {
 			communicate(whatYouSee);
 		}
 		updateMovingCreatures();
         updateUnseenCreatures();
+        updateEdgeAtStart();
+        squareFor(0, 0).setExpectedHappiness(0);
 
-        //System.out.println(toString());
+        System.out.println(toString());
 	}
 
     public void seeCreature(
             int id, String name, SeaLifePrototype seaLife, Point2D location) {
-        if (name == null || seaLife == null || creaturesSeen.contains(id)) {
+        if (name == null || seaLife == null) {
             return;
         }
 
-        /* You can't get points when you're on the boat. */
-        if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
-            creaturesSeen.add(id);
-            dex.personallySawCreature(name);
-        }
-
         if (seaLife.getSpeed() > 0) {
-            movingCreatures.add(new CreatureRecord(location, seaLife));
+            movingCreatures.add(new CreatureRecord(id, location, seaLife));
         } else {
             squareFor(location).addCreature(seaLife, 1.);
+        }
+
+        if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
+            creaturesSeen.add(id);
         }
     }
 
@@ -196,10 +203,29 @@ public class WaterProofCartogram implements Cartogram {
         return Math.abs(x) <= sideLength / 2 && Math.abs(y) <= sideLength / 2;
     }
 
+    private void updateEdgeAtStart() {
+        for (int i=0; i<sideLength; i++) {
+            mapStructure[i][0].increaseExpectedHappinessBy(100. * (1. / ticks));
+            mapStructure[i][sideLength-1]
+                .increaseExpectedHappinessBy(100. * (1. / ticks));
+        }
+        for (int j=1; j<sideLength-1; j++) {
+            mapStructure[0][j].increaseExpectedHappinessBy(100. * (1. / ticks));
+            mapStructure[sideLength-1][j]
+                .increaseExpectedHappinessBy(100. * (1. / ticks));
+        }
+    }
+
 	private void updateMovingCreatures() {
+        creaturesOnMap.clear();
 		for (Iterator<CreatureRecord> iter = movingCreatures.iterator(); iter
 				.hasNext();) {
 			CreatureRecord record = iter.next();
+            if (creaturesOnMap.contains(record.id)) {
+                System.out.println("Duplicate record");
+                continue;
+            }
+            creaturesOnMap.add(record.id);
 
 			int r = (ticks - record.confirmedAt) / 2;
 			double certainty = 1 / (r + 1.);
@@ -215,7 +241,8 @@ public class WaterProofCartogram implements Cartogram {
 				for (int dy = -r; dy <= r; dy++) {
 					if (insideBounds(x + dx, y + dy) &&
                             Math.sqrt(dx * dx + dy * dy) <= r) {
-                        addCreatureToSquare(x + dx, y + dy, record.seaLife, certainty);
+                        addCreatureToSquare(record.id, x + dx, y + dy,
+                                record.seaLife, certainty);
 					}
 				}
 			}
@@ -274,7 +301,7 @@ public class WaterProofCartogram implements Cartogram {
     }
 
     private void addCreatureToSquare(
-            int x, int y, SeaLifePrototype proto, double certainty) {
+            int id, int x, int y, SeaLifePrototype proto, double certainty) {
         for (int dx = -viewRadius; dx <= viewRadius; dx++) {
             for (int dy = -viewRadius; dy <= viewRadius; dy++) {
                 double r = Math.sqrt(dx * dx + dy * dy);
@@ -284,19 +311,17 @@ public class WaterProofCartogram implements Cartogram {
                         double modifier =
                             certainty * (1 / (1. + movesToSquare(r, x, y)));
 
-                        double addHappiness =
+                        double addHappiness = creaturesSeen.contains(id) ? 0 :
                             modifier * proto.getHappiness() *
                             happinessProportionOfCreature(proto);
 
                         double addDanger = ! proto.isDangerous() || r > 1.5 ? 
                             0 : modifier * proto.getHappiness() * 2;
 
-                        /*
                         System.out.println(x+dx + ", " + (y+dy) + ", " + 
                                 proto.getName() + ": mod=" +
                                 modifier + ", hap=" + addHappiness + ", dan=" +
                                 addDanger);
-                                */
 
                         thisSquare.increaseExpectedHappinessBy(addHappiness);
                         thisSquare.increaseExpectedDangerBy(addDanger);
@@ -610,11 +635,14 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	private class CreatureRecord {
+        public final int id;
 		public final Point2D location;
 		public final SeaLifePrototype seaLife;
 		public final int confirmedAt;
 
-		public CreatureRecord(Point2D location, SeaLifePrototype seaLife) {
+		public CreatureRecord(
+                int id, Point2D location, SeaLifePrototype seaLife) {
+            this.id = id;
 			this.location = location;
 			this.seaLife = seaLife;
 			this.confirmedAt = ticks;
