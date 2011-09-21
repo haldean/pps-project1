@@ -94,7 +94,6 @@ public class WaterProofCartogram implements Cartogram {
 	public void update(Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
-		System.out.println(this.toString());
 		ticks++;
 		currentLocation = myPosition;
 		
@@ -300,27 +299,35 @@ public class WaterProofCartogram implements Cartogram {
 		double myRand = random.nextDouble() * runningSum;
 		Direction dir;
 		if (myRand < intLst.get(0)){
+			System.out.println(0);
 			dir = lst.get(0).getDir();
 		}
 		else if (myRand < intLst.get(1)){
+			System.out.println(1);
 			dir = lst.get(1).getDir();
 		}
 		else if (myRand < intLst.get(2)){
+			System.out.println(2);
 			dir = lst.get(2).getDir();
 		}
 		else if (myRand < intLst.get(3)){
+			System.out.println(3);
 			dir = lst.get(3).getDir();
 		}
 		else if (myRand < intLst.get(4)){
+			System.out.println(4);
 			dir = lst.get(4).getDir();
 		}
 		else if (myRand < intLst.get(5)){
+			System.out.println(5);
 			dir = lst.get(5).getDir();
 		}
 		else if (myRand < intLst.get(6)){
+			System.out.println(6);
 			dir = lst.get(6).getDir();
 		}
 		else {
+			System.out.println(7);
 			dir = lst.get(7).getDir();
 		}
 		return dir;
@@ -402,7 +409,6 @@ public class WaterProofCartogram implements Cartogram {
 				&& Math.abs(y) < tickLeeway) {
 			return greedyHillClimb();
 		} else {
-//			System.out.println("RETURN");
 			return returnBoat(x, y);
 		}
 	}
