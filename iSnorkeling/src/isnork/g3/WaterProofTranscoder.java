@@ -105,7 +105,9 @@ public class WaterProofTranscoder implements Transcoder {
     private Point2D getUnmappedLocation(String encodedLocation) {
         double x = Math.ceil((double)(encodedLocation.charAt(0) - 'a') / scale - dim);
         double y = Math.ceil((double)(encodedLocation.charAt(1) - 'a') / scale - dim);
-        return new Point2D.Double(x, y);
+        Point2D.Double loc = new Point2D.Double(x, y);
+        System.out.println(loc.toString());
+        return loc;
     }
 
     private String IDtoAlpha(String n) {

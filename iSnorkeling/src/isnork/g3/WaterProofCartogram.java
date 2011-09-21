@@ -154,10 +154,10 @@ public class WaterProofCartogram implements Cartogram {
         if (seaLife.getSpeed() > 0) {
             movingCreatures.add(new CreatureRecord(location, seaLife));
         } else {
-            System.out.println(location);
-            System.out.println(squareFor(location));
-            System.out.println("l:" + (int) location.getX() + sideLength/2 + ", " +
-                    (int) location.getY() + sideLength/2);
+            //System.out.println(location);
+            //System.out.println(squareFor(location));
+            //System.out.println("l:" + (int) (location.getX() + sideLength/2) + ", " +
+            //        (int) (location.getY() + sideLength/2));
             squareFor(location).addCreature(seaLife, 1.);
         }
     }
@@ -185,11 +185,11 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	private Square squareFor(int x, int y) {
-        System.out.println(x + ", " + y);
+        if (! insideBounds(x, y)) return null;
+        //System.out.println(x + ", " + y);
 		x += (sideLength / 2);
 		y += (sideLength / 2);
-        System.out.println(x + ", " + y);
-        if (! insideBounds(x, y)) return null;
+        //System.out.println(x + ", " + y);
 		return mapStructure[x][y];
 	}
 
