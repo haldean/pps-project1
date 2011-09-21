@@ -2,8 +2,8 @@ package isnork.g3;
 
 import isnork.sim.GameObject.Direction;
 import isnork.sim.Observation;
-import isnork.sim.SeaLifePrototype;
 import isnork.sim.SeaLife;
+import isnork.sim.SeaLifePrototype;
 import isnork.sim.iSnorkMessage;
 
 import java.awt.geom.Point2D;
@@ -14,8 +14,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
-import java.util.Queue;
-import java.util.LinkedList;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Predicate;
@@ -24,8 +22,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
 import com.google.common.primitives.Doubles;
 
 public class WaterProofCartogram implements Cartogram {
@@ -131,7 +129,8 @@ public class WaterProofCartogram implements Cartogram {
 
         for (Observation obs : whatYouSee) {
             /* This is a diver. */
-            if (obs.getId() <= 0) continue;
+            if (obs.getId() <= 0 || obs == null || obs.getName() == null || 
+            		obs.getName().equals("g3: Awwsim Player")) continue;
 
             if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
                 dex.personallySawCreature(obs.getName());
@@ -156,7 +155,6 @@ public class WaterProofCartogram implements Cartogram {
         updateEdgeAtStart();
         squareFor(0, 0).setExpectedHappiness(0);
 
-        //System.out.println(toString());
 	}
 
     public void seeCreature(
@@ -327,11 +325,6 @@ public class WaterProofCartogram implements Cartogram {
                         double addDanger = ! proto.isDangerous() || r > 1.5 ? 
                             0 : modifier * proto.getHappiness() * 2;
 
-                        //System.out.println(x+dx + ", " + (y+dy) + ", " + 
-                        //        proto.getName() + ": mod=" +
-                        //        modifier + ", hap=" + addHappiness + ", dan=" +
-                        //        addDanger);
-
                         thisSquare.increaseExpectedHappinessBy(addHappiness);
                         thisSquare.increaseExpectedDangerBy(addDanger);
                     }
@@ -389,78 +382,96 @@ public class WaterProofCartogram implements Cartogram {
 
 		for (Entry<Direction, Coord> entry : orthoDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
-					getExpectedHappinessInArcOrtho(entry.getValue().move(
-							x, y), entry.getKey()) * 3.0));
+					getExpectedHappinessForCoords(entry.getValue().move(
+							x, y)) * 3.0));
 		}
 
 		for (Entry<Direction, Coord> entry : diagDirectionMap.entrySet()) {
 			lst.add(new DirectionValue(entry.getKey(),
-					getExpectedHappinessInArcDiag(entry.getValue().move(
-							x, y), entry.getKey()) * 2.0));
+					getExpectedHappinessForCoords(entry.getValue().move(
+							x, y)) * 2.0));
 		}
 		return lst;
 	}
 		
 	private double getExpectedHappinessInArcDiag(Coord coord, Direction direction){
-		Coord directionVector = DIRECTION_MAP.get(direction);
-		int maxX = directionVector.getX() * sideLength / 2;
-		int maxY = directionVector.getY() * sideLength / 2;
-
-		double runningSum = 0;
-		
-		int minX = coord.getX();
-		int minY = coord.getY();
-		for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
-			for (int y = minY; y != maxY + 1 ; y += directionVector.getY()){
-				runningSum += getExpectedHappinessForCoords(x, y);
-			}			
+		try {
+			Coord directionVector = DIRECTION_MAP.get(direction);
+			int maxX = directionVector.getX() * sideLength / 2;
+			int maxY = directionVector.getY() * sideLength / 2;
+	
+			double runningSum = 0;
+			
+			int minX = coord.getX();
+			int minY = coord.getY();
+			for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
+				for (int y = minY; y != maxY + 1 ; y += directionVector.getY()){
+					runningSum += getExpectedHappinessForCoords(x, y);
+				}			
+			}
+			
+			double retVal = runningSum / ((maxX - minX) * (maxY - minY));
+			System.out.println(retVal);
+			return retVal;
 		}
-		
-		return runningSum / ((maxX - minX) * (maxY - minY));
+		catch (Exception e){
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	
 	private double getExpectedHappinessInArcOrtho(Coord coord, Direction direction){
-		Coord directionVector = DIRECTION_MAP.get(direction);
-		
-		
-		double runningSum = 0;
-		
-		int maxX = directionVector.getX() * sideLength / 2;
-		int maxY = directionVector.getY() * sideLength / 2;
-		
-		
-		int minX = coord.getX();
-		int minY = coord.getY();
-
-		if (directionVector.getX() != 0){
+		try {
+			Coord directionVector = DIRECTION_MAP.get(direction);
 			
-			for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
-				int numTraveled = x - minX;
-				for (int y = minY - numTraveled; y != maxY + numTraveled + directionVector.getY(); 
-					y += directionVector.getY()){
-					if (y >= -sideLength / 2 && y <= sideLength / 2){
-						runningSum += getExpectedHappinessForCoords(x, y);
+			
+			double runningSum = 0;
+			
+			int maxX = directionVector.getX() * sideLength / 2;
+			int maxY = directionVector.getY() * sideLength / 2;
+			
+			
+			int minX = coord.getX();
+			int minY = coord.getY();
+	
+			if (directionVector.getX() != 0){
+				for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
+					int numTraveled = x - minX;
+					for (int y = - numTraveled; y != numTraveled + directionVector.getX(); 
+						y += directionVector.getX()){
+						if (y >= -sideLength / 2 && y <= sideLength / 2){
+							runningSum += getExpectedHappinessForCoords(x, y);
+						}
 					}
 				}
+				
 			}
-			
-		}
-		else{
-			
-			for (int y = minY; y != maxY + directionVector.getY() ; y += directionVector.getY()){
-				int numTraveled = y- minY;
-				for (int x = minX - numTraveled; x != maxX + numTraveled + directionVector.getX(); 
-					x += directionVector.getX()){
-					if (x >= -sideLength / 2 && x <= sideLength / 2){
-						runningSum += getExpectedHappinessForCoords(x, y);
+			else{
+				
+				for (int y = minY; y != maxY + directionVector.getY() ; y += directionVector.getY()){
+					int numTraveled = y- minY;
+					for (int x = -numTraveled; x != numTraveled + directionVector.getY(); 
+						x += directionVector.getY()){
+	//					System.out.println(x);
+	//					System.out.println(y);
+						if (x >= -sideLength / 2 && x <= sideLength / 2){
+							runningSum += getExpectedHappinessForCoords(x, y);
+						}
 					}
 				}
+				
 			}
 			
+			//TODO mnakamura fix this shit
+			double retVal = runningSum / (square(sideLength) / 4);
+			System.out.println(retVal);
+			return retVal;
 		}
-		
-		return runningSum / ((maxX - minX) * (maxY - minY));
+		catch (Exception e){
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	private Direction selectRandomProportionally(List<DirectionValue> lst, double x, double y){
