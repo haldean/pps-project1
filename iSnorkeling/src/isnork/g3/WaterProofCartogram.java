@@ -141,7 +141,7 @@ public class WaterProofCartogram implements Cartogram {
 		updateMovingCreatures();
         updateUnseenCreatures();
 
-        System.out.println(toString());
+        //System.out.println(toString());
 	}
 
     public void seeCreature(
@@ -293,10 +293,12 @@ public class WaterProofCartogram implements Cartogram {
                         double addDanger = ! proto.isDangerous() || r > 1.5 ? 
                             0 : modifier * proto.getHappiness() * 2;
 
+                        /*
                         System.out.println(x+dx + ", " + (y+dy) + ", " + 
                                 proto.getName() + ": mod=" +
                                 modifier + ", hap=" + addHappiness + ", dan=" +
                                 addDanger);
+                                */
 
                         thisSquare.increaseExpectedHappinessBy(addHappiness);
                         thisSquare.increaseExpectedDangerBy(addDanger);
