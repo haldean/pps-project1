@@ -6,10 +6,6 @@ import isnork.sim.SeaLifePrototype;
 import isnork.sim.SeaLife;
 import isnork.sim.iSnorkMessage;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
 import java.awt.geom.Point2D;
 import java.text.NumberFormat;
 import java.util.Iterator;
@@ -22,12 +18,14 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Ordering;
 import com.google.common.primitives.Doubles;
 
 public class WaterProofCartogram implements Cartogram {
@@ -103,7 +101,7 @@ public class WaterProofCartogram implements Cartogram {
 	}
 
 	@Override
-	public void update(Point2D myPosition, Set<Observation> whatYouSee,
+	public void update(final Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
 		ticks++;
@@ -122,11 +120,18 @@ public class WaterProofCartogram implements Cartogram {
             speciesInViewCount.put(obs.getName(), count);
         }
 
-		messenger.addReceivedMessages(incomingMessages);
-        // get discovered creatures based on received messages:
+        Predicate<iSnorkMessage> isNotFromMyLocation = new Predicate<iSnorkMessage>() {
+        	@Override
+        	public boolean apply(iSnorkMessage msg) {
+        		return !myPosition.equals(msg.getLocation());
+        	}
+        };
+        
+		messenger.addReceivedMessages(Sets.filter(incomingMessages, isNotFromMyLocation));
+
         for (Observation obs : whatYouSee) {
             /* This is a diver. */
-            if (obs.getName() == null) continue;
+            if (obs.getId() <= 0) continue;
 
             if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
                 dex.personallySawCreature(obs.getName());
@@ -136,6 +141,7 @@ public class WaterProofCartogram implements Cartogram {
                     dex.get(obs.getName()), obs.getLocation());
         }
 
+        // get discovered creatures based on received messages:
 		for (SeaLife creature : messenger.getDiscovered()) {
             seeCreature(
                     creature.getId(), creature.getName(),
@@ -150,7 +156,7 @@ public class WaterProofCartogram implements Cartogram {
         updateEdgeAtStart();
         squareFor(0, 0).setExpectedHappiness(0);
 
-        System.out.println(toString());
+        //System.out.println(toString());
 	}
 
     public void seeCreature(
@@ -159,10 +165,14 @@ public class WaterProofCartogram implements Cartogram {
             return;
         }
 
+        SeaLifePrototype seaLifeProto = new SeaLifePrototypeBuilder().name(name).
+        	happiness(dex.getHappiness(name)).dangerous(seaLife.isDangerous()).
+        	moving(seaLife.getSpeed() > 0 ? true : false).create();
+
         if (seaLife.getSpeed() > 0) {
-            movingCreatures.add(new CreatureRecord(id, location, seaLife));
+            movingCreatures.add(new CreatureRecord(id, location, seaLifeProto));
         } else {
-            squareFor(location).addCreature(seaLife, 1.);
+            squareFor(location).addCreature(seaLifeProto, 1.);
         }
 
         if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
@@ -183,7 +193,6 @@ public class WaterProofCartogram implements Cartogram {
 
         //do not observe other divers
         if(bestSeen.getId() > 0) {
-            //System.out.println("bestSeen: "+bestSeen.getName()+" "+bestSeen.getId()+" "+bestSeen.getLocation());
             messenger.addOutboundMessage(bestSeen);
         }		
 	}
@@ -222,7 +231,7 @@ public class WaterProofCartogram implements Cartogram {
 				.hasNext();) {
 			CreatureRecord record = iter.next();
             if (creaturesOnMap.contains(record.id)) {
-                System.out.println("Duplicate record");
+                //System.out.println("Duplicate record");
                 continue;
             }
             creaturesOnMap.add(record.id);
@@ -318,10 +327,10 @@ public class WaterProofCartogram implements Cartogram {
                         double addDanger = ! proto.isDangerous() || r > 1.5 ? 
                             0 : modifier * proto.getHappiness() * 2;
 
-                        System.out.println(x+dx + ", " + (y+dy) + ", " + 
-                                proto.getName() + ": mod=" +
-                                modifier + ", hap=" + addHappiness + ", dan=" +
-                                addDanger);
+                        //System.out.println(x+dx + ", " + (y+dy) + ", " + 
+                        //        proto.getName() + ": mod=" +
+                        //        modifier + ", hap=" + addHappiness + ", dan=" +
+                        //        addDanger);
 
                         thisSquare.increaseExpectedHappinessBy(addHappiness);
                         thisSquare.increaseExpectedDangerBy(addDanger);
@@ -338,7 +347,12 @@ public class WaterProofCartogram implements Cartogram {
 
 	@Override
 	public Direction getNextDirection() {
-		return unOptimizedHeatmapGetNextDirection();
+		Direction nextDir = unOptimizedHeatmapGetNextDirection();
+		//double danger = getExpectedDangerForCoords(DIRECTION_MAP.get(
+		//	nextDir).move((int) currentLocation.getX(), (int) currentLocation.getY()));
+		//if(danger > 0.0)
+		//	return Direction.STAYPUT;
+		return nextDir;
 	}
 
 	private Direction greedyHillClimb(double x, double y) {
@@ -607,13 +621,13 @@ public class WaterProofCartogram implements Cartogram {
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         numberFormat.setMaximumFractionDigits(2);
         numberFormat.setMinimumFractionDigits(2);
-
+        
 		for (int i = 0; i < sideLength; i++) {
 			for (int j = 0; j < sideLength; j++) {
 				output.append(String.format(
                             "%1$#10s", numberFormat.format(
                                 mapStructure[j][i].getExpectedHappiness())));
-				output.append("\t");
+				output.append(" ");
 			}
 			output.append("\n");
 		}

@@ -7,6 +7,7 @@ import isnork.sim.iSnorkMessage;
 import java.awt.geom.Point2D;
 import java.util.Map;
 import java.util.Set;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,9 @@ import com.google.common.collect.Sets;
 
 public class WaterProofMessenger implements Messenger {
     private Transcoder xcoder;
-    private Queue<String> outboundMessages;
+    private Pokedex dex;
+    private PriorityQueue<OutboundMessage> outboundMessages;
+    private OutboundMessage current;
     private Map<Integer,iSnorkBuffer> receivedMessages;
     private Set<SeaLife> discovered;
 
@@ -55,8 +58,9 @@ public class WaterProofMessenger implements Messenger {
     }
 
     public WaterProofMessenger(Pokedex dex, int numDivers, int sideLength) {
+        this.dex = dex;
         xcoder = new WaterProofTranscoder(dex.getSpeciesRanking(), sideLength);
-        outboundMessages = new LinkedList<String>();
+        outboundMessages = new PriorityQueue<OutboundMessage>();
         receivedMessages = Maps.newHashMap();
         for(int i=0; i<numDivers; i++) {
             receivedMessages.put(-i, new iSnorkBuffer());
@@ -85,12 +89,16 @@ public class WaterProofMessenger implements Messenger {
 
     @Override
     public void addOutboundMessage(Observation seen) {
-        List<String> messagesToSend = xcoder.encode(seen.getName(), seen.getId(), seen.getLocation());
-        if(messagesToSend == null) {
-            return;
+        String name = seen.getName();
+        List<String> encoded = xcoder.encode(name, seen.getId(), seen.getLocation());
+        if(encoded == null) {
+           return;
         }
         //System.out.println("to send: "+messagesToSend.toString());
-        outboundMessages.addAll(messagesToSend);
+        OutboundMessage newOutbound = new OutboundMessage(encoded, dex.getHappiness(name));
+        if(!outboundMessages.contains(newOutbound)) {
+            outboundMessages.add(newOutbound);
+        }
     }
 
     @Override
@@ -104,8 +112,54 @@ public class WaterProofMessenger implements Messenger {
     @Override
     public String sendNext() {
         // return next message-char in queue
-        String msg = outboundMessages.poll();
+        if(outboundMessages.size() != 0 && current == null) {
+            current = outboundMessages.peek();
+        }
+        if(current == null) {
+            return null;
+        }
+        //System.out.println("outbound: "+outboundMessages);
+        //System.out.println("current: "+current);
+        String msg = current.characters.poll();
+        if(current.characters.size() == 0) {
+            outboundMessages.remove(current);
+            current = outboundMessages.peek();
+        }
         //System.out.println("next: "+msg);
         return msg;
+    }
+
+    private class OutboundMessage implements Comparable {
+        public double happiness;
+        public Queue<String> characters;
+
+        public OutboundMessage(List<String> chars, int happiness) {
+            this.happiness = (double) happiness;
+            this.characters = new LinkedList<String>();
+            this.characters.addAll(chars);
+        }
+
+        @Override
+        public int compareTo(Object other) {
+            return Double.compare(this.happiness, ((OutboundMessage) other).happiness);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if(this.characters.size() == WaterProofTranscoder.messageLength
+                && ((OutboundMessage) other).characters.size() == this.characters.size()) {
+                return this.toString().substring(0,9).equals(other.toString().substring(0,9));
+            }
+            return this.toString().equals(other.toString());
+        }
+
+        @Override
+        public int hashCode() {
+            return this.toString().hashCode();
+        }
+
+        public String toString() {
+            return characters.toString()+":"+happiness;
+        }
     }
 }

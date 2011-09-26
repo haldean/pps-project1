@@ -26,6 +26,7 @@ public class WaterProofMessengerTest {
         EasyMock.expect(dex.get(EasyMock.isA(String.class)))
             .andReturn(new SeaLife(new SeaLifePrototypeBuilder("charmander").create()));
         EasyMock.expect(dex.getSpeciesRanking()).andReturn(ImmutableSortedMap.of(0, "charmander"));
+        EasyMock.expect(dex.getHappiness("charmander")).andReturn(0);
         EasyMock.replay(dex);
         return dex;
     }
