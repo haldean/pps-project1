@@ -103,59 +103,64 @@ public class WaterProofCartogram implements Cartogram {
 	public void update(final Point2D myPosition, Set<Observation> whatYouSee,
 			Set<Observation> playerLocations,
 			Set<iSnorkMessage> incomingMessages) {
-		ticks++;
-		currentLocation = myPosition;
+		try{
+			ticks++;
+			currentLocation = myPosition;
+	
+	        for (int i=0; i<mapStructure.length; i++) {
+	            for (int j=0; j<mapStructure.length; j++) {
+	                mapStructure[i][j].tick();
+	            }
+	        }
+			
+	        speciesInViewCount.clear();
+	        for (Observation obs : whatYouSee) {
+	            int count = speciesInViewCount.containsKey(obs.getName()) ?
+	                speciesInViewCount.get(obs.getName()) + 1 : 1;
+	            speciesInViewCount.put(obs.getName(), count);
+	        }
+	
+	        Predicate<iSnorkMessage> isNotFromMyLocation = new Predicate<iSnorkMessage>() {
+	        	@Override
+	        	public boolean apply(iSnorkMessage msg) {
+	        		return !myPosition.equals(msg.getLocation());
+	        	}
+	        };
+	        
+			messenger.addReceivedMessages(Sets.filter(incomingMessages, isNotFromMyLocation));
+	
+	        for (Observation obs : whatYouSee) {
+	            /* This is a diver. */
+	            if (obs.getId() <= 0 || obs == null || obs.getName() == null || 
+	            		obs.getName().equals("g3: Awwsim Player")) continue;
+	
+	            if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
+	                dex.personallySawCreature(obs.getName(), obs.getId());
+	            }
+	
+	            seeCreature(obs.getId(), obs.getName(),
+	                    dex.get(obs.getName()), obs.getLocation());
+	        }
+	
+	        // get discovered creatures based on received messages:
+			for (SeaLife creature : messenger.getDiscovered()) {
+	            seeCreature(
+	                    creature.getId(), creature.getName(),
+	                    creature, creature.getLocation());
+			}
+			
+			if (!whatYouSee.isEmpty()) {
+				communicate(whatYouSee);
+			}
 
-        for (int i=0; i<mapStructure.length; i++) {
-            for (int j=0; j<mapStructure.length; j++) {
-                mapStructure[i][j].tick();
-            }
-        }
-		
-        speciesInViewCount.clear();
-
-        for (Observation obs : whatYouSee) {
-            int count = speciesInViewCount.containsKey(obs.getName()) ?
-                speciesInViewCount.get(obs.getName()) + 1 : 1;
-            speciesInViewCount.put(obs.getName(), count);
-        }
-
-        Predicate<iSnorkMessage> isNotFromMyLocation = new Predicate<iSnorkMessage>() {
-        	@Override
-        	public boolean apply(iSnorkMessage msg) {
-        		return !myPosition.equals(msg.getLocation());
-        	}
-        };
-        
-		messenger.addReceivedMessages(Sets.filter(incomingMessages, isNotFromMyLocation));
-
-        for (Observation obs : whatYouSee) {
-            /* This is a diver. */
-            if (obs.getId() <= 0 || obs == null || obs.getName() == null || 
-            		obs.getName().equals("g3: Awwsim Player")) continue;
-
-            if (currentLocation.getX() != 0 || currentLocation.getY() != 0) {
-                dex.personallySawCreature(obs.getName(), obs.getId());
-            }
-
-            seeCreature(obs.getId(), obs.getName(),
-                    dex.get(obs.getName()), obs.getLocation());
-        }
-
-        // get discovered creatures based on received messages:
-		for (SeaLife creature : messenger.getDiscovered()) {
-            seeCreature(
-                    creature.getId(), creature.getName(),
-                    creature, creature.getLocation());
+			updateMovingCreatures();
+			updateUnseenCreatures();
+			updateEdgeAtStart();
+	        squareFor(0, 0).setExpectedHappiness(0);
 		}
-		
-		if (!whatYouSee.isEmpty()) {
-			communicate(whatYouSee);
+		catch (Exception e){
+			e.printStackTrace();
 		}
-		updateMovingCreatures();
-        updateUnseenCreatures();
-        updateEdgeAtStart();
-        squareFor(0, 0).setExpectedHappiness(0);
 
 	}
 
@@ -353,22 +358,23 @@ public class WaterProofCartogram implements Cartogram {
             }
         }
         
-        for (int dx = -DANGER_RADIUS; dx <= DANGER_RADIUS; dx++) {
-            for (int dy = -DANGER_RADIUS; dy <= DANGER_RADIUS; dy++) {
-                double r = Math.sqrt(dx * dx + dy * dy);
-                if (r <= DANGER_RADIUS) {
-                    Square thisSquare = squareFor(x + dx, y + dy);
-                    if (thisSquare != null) {
-                        double modifier =
-                            certainty * (1 / (1. + movesToSquare(r, x, y)));
-
-                        double addDanger = ! proto.isDangerous() || r > 1.5 ? 
-                            0 : modifier * proto.getHappiness() * 2;
-                        
-                        thisSquare.increaseExpectedDangerBy(addDanger);
-                    }
-                }
-            }
+        if (proto.isDangerous()){
+	        for (int dx = -DANGER_RADIUS; dx <= DANGER_RADIUS; dx++) {
+	            for (int dy = -DANGER_RADIUS; dy <= DANGER_RADIUS; dy++) {
+	                double r = Math.sqrt(dx * dx + dy * dy);
+	                if (r <= DANGER_RADIUS) {
+	                    Square thisSquare = squareFor(x + dx, y + dy);
+	                    if (thisSquare != null) {
+	                        double modifier =
+	                            certainty * (1 / (1. + movesToSquare(r, x, y)));
+	
+	                            double addDanger = modifier * proto.getHappiness() * 2;
+	                        
+	                        thisSquare.increaseExpectedDangerBy(addDanger);
+	                    }
+	                }
+	            }
+	        }
         }
 
     }
@@ -394,7 +400,7 @@ public class WaterProofCartogram implements Cartogram {
 		 * move in a diagonal direction, you need to be 1.5* as good as ortho To
 		 * stay in the same square, you only need to be .5 * as good as ortho
 		 */
-		
+
 		List<DirectionValue> localLst = getLocalExpectations((int) currentLocation.getX(),
 				(int) currentLocation.getY());
 
@@ -407,7 +413,6 @@ public class WaterProofCartogram implements Cartogram {
 					localLst.get(i).getDub() + globalLst.get(i).getDub()));
 		}
 		
-
 		Direction dir = selectRandomProportionally(newLst, x, y);
 		return dir;
 	}
@@ -441,6 +446,7 @@ public class WaterProofCartogram implements Cartogram {
 					getExpectedHappinessInArcDiag(entry.getValue().move(
 							x, y), entry.getKey()) * 2.0));
 		}
+
 		return lst;
 	}
 
@@ -477,7 +483,7 @@ public class WaterProofCartogram implements Cartogram {
 			
 			double runningAmounts = 0;
 			for (int x = minX; x != maxX + directionVector.getX() ; x += directionVector.getX()){
-				for (int y = minY; y != maxY + 1 ; y += directionVector.getY()){
+				for (int y = minY; y != maxY + directionVector.getY() ; y += directionVector.getY()){
 					double diff = (Math.abs(minX - directionVector.getX() * x) + 
 							(Math.abs(minY - directionVector.getY() * y)));
 					runningSum += getExpectedHappinessForCoords(x, y) / diff;
@@ -517,8 +523,8 @@ public class WaterProofCartogram implements Cartogram {
 					int numTraveled = x - minX;
 					for (int y = - numTraveled; y != numTraveled + directionVector.getX(); 
 						y += directionVector.getX()){
-						double diff = (Math.abs(x) + Math.abs(y));
-
+						double diff = Math.sqrt(square(x) + square(y));
+						
 						if (y >= -sideLength / 2 && y <= sideLength / 2){
 							runningSum += getExpectedHappinessForCoords(x, y) / diff;
 							runningAmount += 1. / diff;
@@ -533,7 +539,7 @@ public class WaterProofCartogram implements Cartogram {
 					int numTraveled = y- minY;
 					for (int x = -numTraveled; x != numTraveled + directionVector.getY(); 
 						x += directionVector.getY()){
-						double diff = (Math.abs(x) + (Math.abs(y)));
+						double diff = Math.sqrt(square(x) + square(y));
 
 	//					System.out.println(x);
 	//					System.out.println(y);
@@ -548,7 +554,7 @@ public class WaterProofCartogram implements Cartogram {
 			
 			//TODO mnakamura fix this shit
 //			double div = (maxX != 0) ? square(maxX - minX) : square(maxY - minY);
-			double retVal = runningSum / (runningAmount * 3);
+			double retVal = runningSum / runningAmount;
 //			System.out.println(retVal);
 			return retVal;
 		}

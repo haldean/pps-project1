@@ -61,6 +61,7 @@ public class AwwsimPlayer extends Player {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return carto.getMessage();
 	}
 
