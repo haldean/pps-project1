@@ -394,11 +394,21 @@ public class WaterProofCartogram implements Cartogram {
 		 * move in a diagonal direction, you need to be 1.5* as good as ortho To
 		 * stay in the same square, you only need to be .5 * as good as ortho
 		 */
-
-		List<DirectionValue> lst = getExpectations((int) currentLocation.getX(),
+		
+		List<DirectionValue> localLst = getLocalExpectations((int) currentLocation.getX(),
 				(int) currentLocation.getY());
 
-		Direction dir = selectRandomProportionally(lst, x, y);
+		List<DirectionValue> globalLst = getExpectations((int) currentLocation.getX(),
+				(int) currentLocation.getY());
+
+		List<DirectionValue> newLst = Lists.newArrayListWithCapacity(localLst.size());
+		for (int i = 0; i < localLst.size(); i++){
+			newLst.add(i, new DirectionValue(localLst.get(i).getDir(), 
+					localLst.get(i).getDub() + globalLst.get(i).getDub()));
+		}
+		
+
+		Direction dir = selectRandomProportionally(newLst, x, y);
 		return dir;
 	}
 
@@ -433,7 +443,27 @@ public class WaterProofCartogram implements Cartogram {
 		}
 		return lst;
 	}
-		
+
+	private List<DirectionValue> getLocalExpectations(int x, int y) {
+		List<DirectionValue> lst = Lists.newArrayListWithCapacity(8);
+
+		lst.add(new DirectionValue(Direction.STAYPUT,
+				getExpectedHappinessForCoords(x, y) * 6.0));
+
+		for (Entry<Direction, Coord> entry : orthoDirectionMap.entrySet()) {
+			lst.add(new DirectionValue(entry.getKey(),
+					getExpectedHappinessForCoords(entry.getValue().move(
+							x, y)) * 3.0));
+		}
+
+		for (Entry<Direction, Coord> entry : diagDirectionMap.entrySet()) {
+			lst.add(new DirectionValue(entry.getKey(),
+					getExpectedHappinessForCoords(entry.getValue().move(
+							x, y)) * 2.0));
+		}
+		return lst;
+	}
+
 	private double getExpectedHappinessInArcDiag(Coord coord, Direction direction){
 		try {
 			Coord directionVector = DIRECTION_MAP.get(direction);
@@ -518,7 +548,7 @@ public class WaterProofCartogram implements Cartogram {
 			
 			//TODO mnakamura fix this shit
 //			double div = (maxX != 0) ? square(maxX - minX) : square(maxY - minY);
-			double retVal = runningSum / runningAmount;
+			double retVal = runningSum / (runningAmount * 3);
 //			System.out.println(retVal);
 			return retVal;
 		}
