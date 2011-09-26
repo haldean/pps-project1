@@ -391,7 +391,7 @@ public Player getCurPlayer() {
   @SuppressWarnings("unchecked")
 	public static final void main(String[] args) {
 		
-		if (args.length < 1 || args.length > 7) {
+		if (args.length < 1 || args.length > 9) {
 			printUsage();
 			System.exit(-1);
 		}
@@ -457,6 +457,8 @@ public Player getCurPlayer() {
 			new GUI(engine);
 		} else if (args[0].equalsIgnoreCase("tournament")) {
 			// runTournament(args, engine);
+		} else if (args[0].equalsIgnoreCase("trials")){
+			runTrials(args); //["trials", R, D, Divers, Seed, Player, # trials, board, output file]
 		} else {
 			printUsage();
 			System.exit(-1);
@@ -642,5 +644,74 @@ public Player getCurPlayer() {
             GameEngine.println ("Cannot connect to database server");
         }
 
+	}
+
+	  @SuppressWarnings("unchecked")
+	public static void runTrials(String[] args){
+		  FileWriter fw = null;
+		  try {
+			fw = new FileWriter(args[8]);
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		for(int i = 0; i < Integer.valueOf(args[6]); i++)
+		{
+			Class<Player> p = null;
+			try {
+				p = (Class<Player>) Class.forName(args[5]);
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			GameEngine engine = new GameEngine();
+			long start = System.currentTimeMillis();
+			Text t = new Text(engine);
+			engine.getConfig().setPlayerClass(p);
+			engine.getConfig().setSelectedBoard(new File("boards/"+args[7]));
+			engine.getConfig().setR(Integer.valueOf(args[1]));
+			engine.getConfig().setD(Integer.valueOf(args[2]));
+			engine.getConfig().setNumDivers(Integer.valueOf(args[3]));
+			engine.getConfig().setRandomSeed((Long.valueOf(args[4]) == 0 ? start : Long.valueOf(args[4])));
+			try
+			{
+				TournamentRunner tr = new TournamentRunner(t);
+				Thread th = new Thread(tr);
+				th.start();
+				th.join(500000);
+				if(th.isAlive())
+				{
+					th.interrupt();
+					engine.exceptioned = true;
+					System.err.println("Exception in Tournament ");
+				}
+			}
+			catch(Exception e)
+			{
+				engine.exceptioned = true;
+				System.err.println("Exception in Tournament ");
+				e.printStackTrace();
+			}
+				int invalid;
+				if(engine.getDsq() > 0)
+					invalid = engine.getDsq();
+				else
+					invalid = 0;
+				double score = engine.getScores();
+				if(engine.exceptioned)
+					score = -1;
+				long time = System.currentTimeMillis() - start;
+				time = time/1000;
+
+				try {
+					fw.write("Running player " + args[5] + " on board " + args[7] + " with score " + score
+							+ " and DSQ " + invalid + " with seed " + start + " and took " + time);
+					fw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+			engine = null;
+			System.gc();
+		}
 	}
 }
