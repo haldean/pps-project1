@@ -35,7 +35,7 @@ public class WaterProofCartogramTest {
       .andReturn(getSeaLife(true));
     EasyMock.expect(dex.getSpeciesRanking())
       .andReturn(ImmutableSortedMap.of(0, "Moving Creature"));
-    dex.personallySawCreature("hello");
+    dex.personallySawCreature("hello", 0);
     EasyMock.expectLastCall().anyTimes();
     EasyMock.expect(dex.getHappiness("hello")).andReturn(10);
     EasyMock.expect(dex.getPersonalSeenCount(EasyMock.isA(String.class)))

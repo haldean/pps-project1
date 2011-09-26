@@ -109,7 +109,7 @@ public class PokedexTest {
 		}
 		
 		for (int index = 0; index < captures; index++){
-			dex.personallySawCreature("charmander");
+			dex.personallySawCreature("charmander", 0);
 		}
 		
 		assertTrue((num + captures == dex.getSeenCount("charmander")));
@@ -134,11 +134,11 @@ public class PokedexTest {
 		}
 		
 		for (int index = 0; index < captures; index++){
-			dex.personallySawCreature("charmander");
+			dex.personallySawCreature("charmander", 0);
 		}
 		
 		for (int index = 0; index < captures / 2; index++){
-			dex.personallySawCreature("squirtle");
+			dex.personallySawCreature("squirtle", 1);
 		}
 		
 		assertTrue((num + captures == dex.getSeenCount("charmander")));

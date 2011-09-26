@@ -1,13 +1,16 @@
 package isnork.g3;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import isnork.sim.SeaLife;
 import isnork.sim.SeaLifePrototype;
 
-import com.google.common.collect.Lists;
-import static org.junit.Assert.*;
+import java.util.List;
+
 import org.junit.Test;
 
-import java.util.List;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class WaterProofSquareTest {
   private SeaLife getSeaLife(final boolean canMove) {
@@ -27,10 +30,11 @@ public class WaterProofSquareTest {
     for (int i=0; i<10; i++) {
       creatures.add(getSeaLife(i % 2 == 0));
     }
-
-    Square testSquare = new WaterProofSquare();
+    
+    Square testSquare = new WaterProofSquare(
+    		new WaterProofPokedex(Sets.<SeaLifePrototype>newHashSet(creatures)));
     for (SeaLife creature : creatures) {
-      testSquare.addCreature(creature, 1.);
+      testSquare.addCreature(creature, 1., 0);
     }
 
     assertEquals(
