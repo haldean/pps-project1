@@ -143,6 +143,8 @@ public class WaterProofCartogram implements Cartogram {
 
         // get discovered creatures based on received messages:
 		for (SeaLife creature : messenger.getDiscovered()) {
+			if(squareFor(creature.getLocation()) == null)
+        		System.out.println("null: "+creature);
             seeCreature(
                     creature.getId(), creature.getName(),
                     creature, creature.getLocation());
