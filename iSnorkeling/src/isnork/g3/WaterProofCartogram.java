@@ -306,6 +306,10 @@ public class WaterProofCartogram implements Cartogram {
         int squaresOutOfView =
             (int) Math.pow(sideLength, 2) - (int) Math.pow(viewRadius, 2);
         double expectedFogPerSquare = expectedHappinessInFog / squaresOutOfView;
+        if(squaresOutOfView <= 0)
+        	expectedFogPerSquare = 0;
+        if(squaresOutOfView <= 0)
+        	expectedFogPerSquare = 0;
         for (int i=0; i<sideLength; i++) {
             for (int j=0; j<sideLength; j++) {
                 double distanceToDiver =
@@ -692,7 +696,7 @@ public class WaterProofCartogram implements Cartogram {
 				&& Math.abs(y) < tickLeeway) {
 			return greedyHillClimb(x, y);
 		} else {
-			System.out.println(toString());
+			//System.out.println(toString());
 			return returnBoat(x, y);
 		}
 	}

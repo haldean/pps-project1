@@ -15,6 +15,6 @@ public interface Precomputation {
 	public abstract double movingToStationaryDangerousRatio();
 
 	//maximum score for a diver assuming a diver sees every single creature, with no danger penalties 
-	public abstract int naiveHighScore();
+	public abstract double naiveHighScore();
 
 }

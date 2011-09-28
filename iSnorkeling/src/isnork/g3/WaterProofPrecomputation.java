@@ -1,5 +1,6 @@
 package isnork.g3;
 
+import java.awt.print.Printable;
 import java.util.SortedMap;
 
 public class WaterProofPrecomputation implements Precomputation {
@@ -76,17 +77,17 @@ public class WaterProofPrecomputation implements Precomputation {
 	 * @see isnork.g3.Precomputation#naiveHighScore()
 	 */
     @Override
-	public int naiveHighScore(){
-    	int score = 0;
+	public double naiveHighScore(){
+    	double score = 0;
     	for(String name : speciesRanking.values()){
-    		int average = (dex.getMaxCount(name) + dex.getMinCount(name)) / 2;
+    		int average = Math.max((dex.getMaxCount(name) + dex.getMinCount(name)) / 2, 0);
     		int max = Math.min(average, 3);
     		int happiness = dex.getHappiness(name);
     		switch (max){
     		case 0: score += happiness / 2; break;
     		case 1: score += happiness; break;
-    		case 2: score += ((Double) (happiness * 1.5)).intValue(); break;
-    		case 3: score += ((Double) (happiness * 1.75)).intValue(); break;
+    		case 2: score += (happiness * 1.5); break;
+    		case 3: score += (happiness * 1.75); break;
     		default: break;
     		}
     	}

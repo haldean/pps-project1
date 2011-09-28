@@ -36,6 +36,9 @@ public class AwwsimPlayer extends Player {
 		numDivers = n;
 
 		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
+		WaterProofPrecomputation precomp = new WaterProofPrecomputation(mapWidth, r, dex);
+		System.out.println(precomp.naiveHighScore());
+		
 
 		// TODO add these back in when we need them
 		// commented them out because they were triggering warnings on
