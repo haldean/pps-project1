@@ -61,7 +61,7 @@ public interface Pokedex {
 	 * if you also receive happiness points for it
 	 * @param name
 	 */
-	public void personallySawCreature(String name);
+	public void personallySawCreature(String name, int id);
 
 	/**
 	 * Fetches the number of times the given species has been seen
@@ -75,6 +75,13 @@ public interface Pokedex {
 	 * @return
 	 */
 	public int getPersonalSeenCount(String name);
+	
+	/**
+	 * Fetches whether the id has been seen before.
+	 * @param id of a sealife
+	 * @return whether it has personally been seen before
+	 */
+	public boolean isPersonallySeen(int id);
 
 	public SortedMap<Integer,String> getSpeciesRanking();
 

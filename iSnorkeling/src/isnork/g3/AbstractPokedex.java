@@ -3,6 +3,7 @@ package isnork.g3;
 import isnork.sim.SeaLifePrototype;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +20,11 @@ import com.google.common.collect.Maps;
 public abstract class AbstractPokedex implements Pokedex {
 
 	private final HashMap<String, SeaLifePrototypeCounter> map;
+	private final Set<Integer> set;
 
 	public AbstractPokedex(Set<SeaLifePrototype> species) {
 		map = Maps.newHashMap();
+		set = Sets.newHashSet();
 		for (SeaLifePrototype specie : species) {
 			map.put(specie.getName(), new SeaLifePrototypeCounter(specie));
 		}
@@ -64,9 +67,10 @@ public abstract class AbstractPokedex implements Pokedex {
 	}
 	
 	@Override
-	public void personallySawCreature(String name){
+	public void personallySawCreature(String name, int id){
 		map.get(name).sawCreature();
 		map.get(name).captured();
+		set.add(id);
 	}
 
 	@Override
@@ -86,6 +90,16 @@ public abstract class AbstractPokedex implements Pokedex {
       allSpecies.add(count.get());
     }
     return allSpecies;
+  }
+  
+  @Override
+  public boolean isPersonallySeen(int id){
+	  if (set.contains(id)){
+		  return true;
+	  }
+	  else{
+		  return false;
+	  }
   }
 
 }

@@ -8,6 +8,7 @@ import isnork.sim.SeaLifePrototype;
 public interface Square {
 	public interface SeaLifeExpectation {
 		SeaLifePrototype getSeaLife();
+		int getId();
 
 		double getCertainty();
 	}
@@ -21,7 +22,7 @@ public interface Square {
 	 *            from 0 to 1. Stationary creatures should have a certainty of
 	 *            1.
 	 */
-	void addCreature(SeaLifePrototype creature, double certainty);
+	void addCreature(SeaLifePrototype creature, double certainty, int id);
 
 	/**
 	 * Get the creatures thought to be on this square, along with the certainty
