@@ -38,6 +38,7 @@ public class AwwsimPlayer extends Player {
 		carto = new WaterProofCartogram(mapWidth, viewRadius, numDivers, dex);
 		WaterProofPrecomputation precomp = new WaterProofPrecomputation(mapWidth, r, dex);
 		System.out.println(precomp.naiveHighScore());
+		System.out.println(precomp.creatureDensity()*precomp.dangerousToTotalRatio()*precomp.movingToStationaryDangerousRatio());
 		
 
 		// TODO add these back in when we need them

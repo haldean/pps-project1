@@ -308,8 +308,7 @@ public class WaterProofCartogram implements Cartogram {
         double expectedFogPerSquare = expectedHappinessInFog / squaresOutOfView;
         if(squaresOutOfView <= 0)
         	expectedFogPerSquare = 0;
-        if(squaresOutOfView <= 0)
-        	expectedFogPerSquare = 0;
+
         for (int i=0; i<sideLength; i++) {
             for (int j=0; j<sideLength; j++) {
                 double distanceToDiver =

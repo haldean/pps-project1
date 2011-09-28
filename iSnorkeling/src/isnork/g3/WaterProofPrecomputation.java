@@ -70,7 +70,7 @@ public class WaterProofPrecomputation implements Precomputation {
         			stationary += average;
     		}
     	}
-    	return (1.0 * moving) / stationary;
+    	return Math.min(1., (1.0 * moving) / stationary);
     }
     
     /* (non-Javadoc)

@@ -51,7 +51,8 @@ public class PrecomputationTest {
 		assertTrue(precomp.topToMedianHappinessRatio() == 1.5);
 		assertTrue(precomp.dangerousToTotalRatio() == (9.0/14));
 		assertTrue(precomp.movingToStationaryDangerousRatio() == (2.0 / 7));
-		assertTrue(precomp.naiveHighScore() == 70);
+		double naiveHighScore = precomp.naiveHighScore();
+		assertTrue(naiveHighScore == 71.75);
 		
 		
 	}
