@@ -37,6 +37,7 @@ public class WaterProofCartogram implements Cartogram {
 	private final int sideLength;
 	private final int viewRadius;
 	private int ticks;
+	private final Precomputation precomp;
     private final Set<Integer> creaturesSeen;
     private final Set<Integer> creaturesOnMap;
     private final Map<String, Integer> speciesInViewCount;
@@ -95,6 +96,7 @@ public class WaterProofCartogram implements Cartogram {
         this.creaturesOnMap = Sets.newHashSet();
         this.speciesInViewCount = Maps.newHashMap();
 		this.dex = dex;
+		this.precomp = new WaterProofPrecomputation(numDivers, viewRadius, dex);
 		ticks = 0;
 		messenger = new WaterProofMessenger(dex, numDivers, sideLength);
 	}
@@ -154,7 +156,7 @@ public class WaterProofCartogram implements Cartogram {
 			updateEdgeAtStart();
 	        squareFor(0, 0).setExpectedHappiness(0);
 	        
-	        System.out.println(toString());
+	        //System.out.println(toString());
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -434,7 +436,10 @@ public class WaterProofCartogram implements Cartogram {
 		List<DirectionValue> newLst = Lists.newArrayListWithCapacity(localLst.size());
 		for (int i = 0; i < localLst.size(); i++){
 			newLst.add(i, new DirectionValue(localLst.get(i).getDir(), 
-					localLst.get(i).getDub() + globalLst.get(i).getDub()));
+					localLst.get(i).getDub() + Math.max(.25, (1. - 10 * (.1 - Math.min(.1, precomp.creatureDensity() * 
+							precomp.dangerousToTotalRatio() * 
+							precomp.movingToStationaryDangerousRatio()
+							)))) * globalLst.get(i).getDub()));
 		}
 		
 		Direction dir = selectRandomProportionally(newLst, x, y);
