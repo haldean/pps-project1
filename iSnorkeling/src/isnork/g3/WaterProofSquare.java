@@ -86,7 +86,7 @@ public class WaterProofSquare implements Square {
 		}
 	}
 
-	private double getModifier(int count) {
+	public static double getModifier(int count) {
 		switch (count){
 		case 0:
 			return 1.0;

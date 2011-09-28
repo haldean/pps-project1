@@ -143,11 +143,7 @@ public class WaterProofCartogram implements Cartogram {
 	        }
 	
 	        // get discovered creatures based on received messages:
-			for (SeaLife creature : messenger.getDiscovered()) {
-	            seeCreature(
-	                    creature.getId(), creature.getName(),
-	                    creature, creature.getLocation());
-			}
+			receiveMessages();
 			
 			if (!whatYouSee.isEmpty()) {
 				communicate(whatYouSee);
@@ -157,11 +153,21 @@ public class WaterProofCartogram implements Cartogram {
 			updateUnseenCreatures();
 			updateEdgeAtStart();
 	        squareFor(0, 0).setExpectedHappiness(0);
+	        
+	        System.out.println(toString());
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
 
+	}
+
+	private void receiveMessages() {
+		for (SeaLife creature : messenger.getDiscovered()) {
+		    seeCreature(
+		            creature.getId(), creature.getName(),
+		            creature, creature.getLocation());
+		}
 	}
 
     private String toDangerString() {
@@ -242,16 +248,19 @@ public class WaterProofCartogram implements Cartogram {
     }
 
     private void updateEdgeAtStart() {
-        for (int i=0; i<sideLength; i++) {
-            mapStructure[i][0].increaseExpectedHappinessBy(100. * (1. / ticks));
-            mapStructure[i][sideLength-1]
-                .increaseExpectedHappinessBy(100. * (1. / ticks));
-        }
-        for (int j=1; j<sideLength-1; j++) {
-            mapStructure[0][j].increaseExpectedHappinessBy(100. * (1. / ticks));
-            mapStructure[sideLength-1][j]
-                .increaseExpectedHappinessBy(100. * (1. / ticks));
-        }
+    	if (ticks < 100){
+	        for (int i=0; i<sideLength; i++) {
+	            mapStructure[i][0].increaseExpectedHappinessBy(100. * (1. / ticks));
+	            mapStructure[i][sideLength-1]
+	                .increaseExpectedHappinessBy(100. * (1. / ticks));
+	        }
+	
+	        for (int j=1; j<sideLength-1; j++) {
+	            mapStructure[0][j].increaseExpectedHappinessBy(100. * (1. / ticks));
+	            mapStructure[sideLength-1][j]
+	                .increaseExpectedHappinessBy(100. * (1. / ticks));
+	        }
+    	}
     }
 
 	private void updateMovingCreatures() {
@@ -299,7 +308,9 @@ public class WaterProofCartogram implements Cartogram {
             }
 
             if (difference > 0) {
-                expectedHappinessInFog += difference * proto.getHappiness();
+                expectedHappinessInFog += difference * WaterProofSquare.getModifier(
+                		dex.getPersonalSeenCount(
+                				proto.getName())) * proto.getHappiness();
             }
         }
 
@@ -354,8 +365,15 @@ public class WaterProofCartogram implements Cartogram {
                         double addHappiness = creaturesSeen.contains(id) ? 0 :
                             modifier * proto.getHappiness() *
                             happinessProportionOfCreature(proto);
+                        
+//                        if (addHappiness != 0){
+//                        	System.out.println(addHappiness);
+//                        }
 
-                        thisSquare.increaseExpectedHappinessBy(addHappiness);
+                        thisSquare.increaseExpectedHappinessBy(
+                        		WaterProofSquare.getModifier(
+                        				dex.getPersonalSeenCount(
+                        						proto.getName())) * addHappiness);
                     }
                 }
             }
@@ -665,6 +683,10 @@ public class WaterProofCartogram implements Cartogram {
 
 	private double getExpectedDangerForCoords(int x, int y) {
 		Square square = squareFor(x, y);
+		if (x == 0 && y == 0){
+			return 0;
+		}
+		
 		if (square == null) {
 			return Double.NEGATIVE_INFINITY;
 		}
