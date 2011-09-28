@@ -157,7 +157,6 @@ public class WaterProofCartogram implements Cartogram {
 			updateUnseenCreatures();
 			updateEdgeAtStart();
 	        squareFor(0, 0).setExpectedHappiness(0);
-	        //System.out.println(toString());
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -491,6 +490,11 @@ public class WaterProofCartogram implements Cartogram {
 				for (int y = minY; y != maxY + directionVector.getY() ; y += directionVector.getY()){
 					double diff = (Math.abs(minX - directionVector.getX() * x) + 
 							(Math.abs(minY - directionVector.getY() * y)));
+					
+					if (diff == 0){
+						diff = 1;
+					}
+					
 					runningSum += getExpectedHappinessForCoords(x, y) / diff;
 					runningAmounts += 1. / diff;
 				}
@@ -533,6 +537,10 @@ public class WaterProofCartogram implements Cartogram {
 						y += directionVector.getX()){
 						double diff = Math.sqrt(square(x) + square(y));
 						
+						if (diff == 0){
+							diff = 1;
+						}
+						
 						if (y >= -sideLength / 2 && y <= sideLength / 2){
 							runningSum += getExpectedHappinessForCoords(x, y) / diff;
 							runningAmount += 1. / diff;
@@ -549,6 +557,10 @@ public class WaterProofCartogram implements Cartogram {
 						x += directionVector.getY()){
 						double diff = Math.sqrt(square(x) + square(y));
 
+						if (diff == 0){
+							diff = 1;
+						}
+						
 	//					System.out.println(x);
 	//					System.out.println(y);
 						if (x >= -sideLength / 2 && x <= sideLength / 2){
