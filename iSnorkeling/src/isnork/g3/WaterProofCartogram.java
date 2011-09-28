@@ -366,11 +366,12 @@ public class WaterProofCartogram implements Cartogram {
 	                if (r <= DANGER_RADIUS) {
 	                    Square thisSquare = squareFor(x + dx, y + dy);
 	                    if (thisSquare != null) {
-	                        double modifier =
-	                            certainty * (1 / (1. + movesToSquare(r, x, y)));
+	                    	double moving_modifier = 1;
 	                        if(proto.getSpeed() > 0) {
-	                        	modifier *= 5;
+	                        	moving_modifier = 6;
 	                        }
+	                        	double modifier =
+	                            	certainty * (moving_modifier / (1. + movesToSquare(r, x, y)));
 	
 	                            double addDanger = modifier * proto.getHappiness() * 2;
 	                        
@@ -380,7 +381,6 @@ public class WaterProofCartogram implements Cartogram {
 	            }
 	        }
         }
-
     }
 
 	@Override
@@ -680,6 +680,7 @@ public class WaterProofCartogram implements Cartogram {
 				&& Math.abs(y) < tickLeeway) {
 			return greedyHillClimb(x, y);
 		} else {
+			System.out.println(toString());
 			return returnBoat(x, y);
 		}
 	}

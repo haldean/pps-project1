@@ -20,8 +20,12 @@ public class WaterProofPokedex extends AbstractPokedex {
 
 		Ordering<SeaLifePrototype> happiness = new Ordering<SeaLifePrototype>() {
 			public int compare(SeaLifePrototype left, SeaLifePrototype right) {
-				return Doubles.compare(left.getHappinessD(),
-						right.getHappinessD());
+				double left_happiness = left.getHappinessD();
+				double right_happiness = right.getHappinessD();
+				if (left_happiness != right_happiness) {
+					return Doubles.compare(left_happiness, right_happiness);
+				}
+				return -1;
 			}
 		};
 		ImmutableSortedSet<SeaLifePrototype> sortedSpecies = ImmutableSortedSet
