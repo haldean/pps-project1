@@ -157,6 +157,7 @@ public class WaterProofCartogram implements Cartogram {
 			updateUnseenCreatures();
 			updateEdgeAtStart();
 	        squareFor(0, 0).setExpectedHappiness(0);
+	        System.out.println(toString());
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -366,7 +367,7 @@ public class WaterProofCartogram implements Cartogram {
 	                    Square thisSquare = squareFor(x + dx, y + dy);
 	                    if (thisSquare != null) {
 	                        double modifier =
-	                            certainty * (1 / (1. + movesToSquare(r, x, y)));
+	                            certainty * (6 / (1. + movesToSquare(r, x, y)));
 	
 	                            double addDanger = modifier * proto.getHappiness() * 2;
 	                        
