@@ -467,6 +467,7 @@ public class WaterProofCartogram implements Cartogram {
 					getExpectedHappinessForCoords(entry.getValue().move(
 							x, y)) * 2.0));
 		}
+		
 		return lst;
 	}
 
@@ -491,6 +492,9 @@ public class WaterProofCartogram implements Cartogram {
 				}
 			}
 			
+			if (runningAmounts == 0){
+				return 0;
+			}
 			double retVal = runningSum / runningAmounts;
 //			System.out.println(retVal);
 			return retVal;
@@ -552,8 +556,11 @@ public class WaterProofCartogram implements Cartogram {
 				
 			}
 			
-			//TODO mnakamura fix this shit
 //			double div = (maxX != 0) ? square(maxX - minX) : square(maxY - minY);
+			if (runningAmount == 0){
+				return 0;
+			}
+
 			double retVal = runningSum / runningAmount;
 //			System.out.println(retVal);
 			return retVal;
@@ -766,7 +773,7 @@ public class WaterProofCartogram implements Cartogram {
 		}
 
 		/*
-		output.append("\nWe got shit at:\n");
+		output.append("\nWe got stuff at:\n");
 		for (int i = 0; i < mapStructure.length; i++) {
 			for (int j = 0; j < mapStructure[i].length; j++) {
 				if (mapStructure[i][j].getCreatures().size() > 0) {
